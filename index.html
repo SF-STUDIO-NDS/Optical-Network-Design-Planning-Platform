@@ -122,6 +122,128 @@
 .light tr.total-row td { background: var(--blue-bg) !important; border-top: 2px solid var(--blue-bd); }
 .light .svc-none { background: rgba(0,0,0,.03); }
 
+
+/* ── PHYSICAL IMPAIRMENT PANEL ──────────────────────────────────────────── */
+.phys-panel {
+  background: var(--surface); border: 1px solid var(--bd);
+  border-radius: var(--radius); padding: 18px 20px; margin-top: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.phys-section-title {
+  font-size: 11px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--txt3); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--bd);
+  display: flex; align-items: center; gap: 10px;
+}
+.phys-section-title::after { content:''; flex:1; height:1px; background:var(--bd); }
+.phys-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.phys-card {
+  border-radius: 8px; padding: 12px 16px; border: 1px solid var(--bd);
+  position: relative; overflow: hidden;
+}
+.phys-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.phys-card.ok::before   { background: linear-gradient(90deg,var(--green2),#34d399); }
+.phys-card.warn::before { background: linear-gradient(90deg,var(--amber2),#fbbf24); }
+.phys-card.err::before  { background: linear-gradient(90deg,var(--red),#f87171); }
+.phys-card.info::before { background: linear-gradient(90deg,var(--blue),#38BDF8); }
+.phys-card.ok   { background: var(--green-bg); }
+.phys-card.warn { background: var(--amber-bg); }
+.phys-card.err  { background: rgba(248,113,113,.08); }
+.phys-card.info { background: var(--blue-bg); }
+.phys-label  { font-size: 10px; font-weight: 700; color: var(--txt3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+.phys-num    { font-size: 22px; font-weight: 800; font-family: 'Segoe UI Semibold','Segoe UI',Consolas,monospace; }
+.phys-unit   { font-size: 11px; color: var(--txt3); }
+.phys-status { font-size: 11px; font-weight: 700; margin-top: 4px; }
+.phys-card.ok   .phys-num { color: var(--green2); }
+.phys-card.warn .phys-num { color: var(--amber2); }
+.phys-card.err  .phys-num { color: var(--red);    }
+.phys-card.info .phys-num { color: var(--blue2);  }
+.phys-card.ok   .phys-status { color: var(--green2); }
+.phys-card.warn .phys-status { color: var(--amber2); }
+.phys-card.err  .phys-status { color: var(--red);    }
+.phys-card.info .phys-status { color: var(--blue2);  }
+.phys-divider { width:100%; height:1px; background:var(--bd); margin:12px 0; }
+.phys-mod-banner {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface2); border: 1px solid var(--bd);
+  border-radius: 8px; padding: 10px 16px; margin-bottom: 12px;
+  font-size: 12px; color: var(--txt2);
+}
+.phys-mod-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+}
+.phys-osnr-rows { display: flex; flex-direction: column; gap: 6px; }
+.phys-osnr-row  {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface2); border: 1px solid var(--bd);
+  border-radius: 6px; padding: 7px 12px; font-size: 12px;
+}
+.phys-osnr-row-label { color: var(--txt3); font-weight: 600; min-width: 80px; }
+.phys-osnr-row-val   { font-weight: 800; font-family: 'Segoe UI Semibold','Segoe UI',Consolas,monospace; font-size: 13px; }
+.phys-osnr-row-bar   { flex:1; height:6px; background:var(--surface3); border-radius:3px; overflow:hidden; }
+.phys-osnr-row-fill  { height:100%; border-radius:3px; transition:width .4s, background .4s; }
+
+/* ── PHYSICAL IMPAIRMENT PANEL ──────────────────────────────────────────── */
+.phys-panel {
+  background: var(--surface); border: 1px solid var(--bd);
+  border-radius: var(--radius); padding: 18px 20px; margin-top: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.phys-section-title {
+  font-size: 11px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--txt3); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--bd);
+  display: flex; align-items: center; gap: 8px;
+}
+.phys-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 10px; margin-bottom: 0; }
+.phys-card {
+  border-radius: 8px; padding: 12px 16px; border: 1px solid var(--bd);
+  position: relative; overflow: hidden;
+}
+.phys-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.phys-card.ok::before   { background: linear-gradient(90deg,var(--green2),#34d399); }
+.phys-card.warn::before { background: linear-gradient(90deg,var(--amber2),#fbbf24); }
+.phys-card.err::before  { background: linear-gradient(90deg,var(--red),#f87171); }
+.phys-card.info::before { background: linear-gradient(90deg,var(--blue),#38BDF8); }
+.phys-card.ok   { background: var(--green-bg); }
+.phys-card.warn { background: var(--amber-bg); }
+.phys-card.err  { background: rgba(248,113,113,.08); }
+.phys-card.info { background: var(--blue-bg); }
+.phys-label  { font-size: 10px; font-weight: 700; color: var(--txt3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+.phys-num    { font-size: 22px; font-weight: 800; font-family: 'Segoe UI Semibold','Segoe UI',Consolas,monospace; }
+.phys-unit   { font-size: 11px; color: var(--txt3); }
+.phys-status { font-size: 11px; font-weight: 700; margin-top: 4px; }
+.phys-card.ok   .phys-num { color: var(--green2); }
+.phys-card.warn .phys-num { color: var(--amber2); }
+.phys-card.err  .phys-num { color: var(--red);    }
+.phys-card.info .phys-num { color: var(--blue2);  }
+.phys-card.ok   .phys-status { color: var(--green2); }
+.phys-card.warn .phys-status { color: var(--amber2); }
+.phys-card.err  .phys-status { color: var(--red);    }
+.phys-card.info .phys-status { color: var(--blue2);  }
+.phys-divider { width:100%; height:1px; background:var(--bd); margin:14px 0; }
+.phys-mod-banner {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface2); border: 1px solid var(--bd);
+  border-radius: 8px; padding: 10px 16px; margin-bottom: 12px;
+  font-size: 12px; color: var(--txt2);
+}
+.phys-mod-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  border-radius: 20px; padding: 3px 11px;
+  font-size: 11px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase;
+}
+.phys-osnr-rows { display: flex; flex-direction: column; gap: 5px; margin-bottom: 0; }
+.phys-osnr-row  {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface2); border: 1px solid var(--bd);
+  border-radius: 6px; padding: 7px 12px; font-size: 12px;
+}
+.phys-osnr-label { color: var(--txt3); font-weight: 600; min-width: 96px; }
+.phys-osnr-val   { font-weight: 800; font-family: 'Segoe UI Semibold','Segoe UI',Consolas,monospace; font-size: 13px; min-width: 60px; text-align: right; }
+.phys-osnr-bar   { flex:1; height:6px; background:var(--surface3); border-radius:3px; overflow:hidden; }
+.phys-osnr-fill  { height:100%; border-radius:3px; transition:width .4s ease, background .4s ease; }
+
 /* ── THEME TOGGLE ───────────────────────────── */
 .theme-toggle {
   display: flex; align-items: center; gap: 6px;
@@ -1243,8 +1365,17 @@ footer {
           <option value="100">100 GHz</option>
         </select>
       </div>
+      <div class="lb-field">
+        <div class="lb-label">Fiber Type</div>
+        <select class="lb-input" id="ft1" onchange="calcSpan1()">
+          <option value="G652D" selected>G.652D — Standard SMF (17 ps/nm/km)</option>
+          <option value="G654E">G.654E — Ultra-low loss (20 ps/nm/km)</option>
+          <option value="G655">G.655 — NZDSF (4.5 ps/nm/km)</option>
+        </select>
+      </div>
     </div>
     <div class="lb-results" id="lbr1"></div>
+    <div class="phys-panel" id="phys1"></div>
   </div>
 
   <div class="sec mb"><div class="sec-dot"></div>Cost Summary — Cards Only</div>
@@ -1529,8 +1660,17 @@ footer {
           <option value="100">100 GHz</option>
         </select>
       </div>
+      <div class="lb-field">
+        <div class="lb-label">Fiber Type</div>
+        <select class="lb-input" id="ft2" onchange="calcSpan2()">
+          <option value="G652D" selected>G.652D — Standard SMF (17 ps/nm/km)</option>
+          <option value="G654E">G.654E — Ultra-low loss (20 ps/nm/km)</option>
+          <option value="G655">G.655 — NZDSF (4.5 ps/nm/km)</option>
+        </select>
+      </div>
     </div>
     <div class="lb-results" id="lbr2"></div>
+    <div class="phys-panel" id="phys2"></div>
   </div>
 
   <div class="sec mb"><div class="sec-dot"></div>Cost Summary — Cards Only</div>
@@ -1662,8 +1802,17 @@ footer {
           <option value="100">100 GHz</option>
         </select>
       </div>
+      <div class="lb-field">
+        <div class="lb-label">Fiber Type</div>
+        <select class="lb-input" id="ft3" onchange="calcSpan3()">
+          <option value="G652D" selected>G.652D — Standard SMF (17 ps/nm/km)</option>
+          <option value="G654E">G.654E — Ultra-low loss (20 ps/nm/km)</option>
+          <option value="G655">G.655 — NZDSF (4.5 ps/nm/km)</option>
+        </select>
+      </div>
     </div>
     <div class="lb-results" id="lbr3"></div>
+    <div class="phys-panel" id="phys3"></div>
   </div>
 
   <div class="sec mb"><div class="sec-dot"></div>Cost Summary — Cards Only</div>
@@ -1951,8 +2100,17 @@ footer {
           <option value="100">100 GHz</option>
         </select>
       </div>
+      <div class="lb-field">
+        <div class="lb-label">Fiber Type</div>
+        <select class="lb-input" id="ft4" onchange="calcSpan4()">
+          <option value="G652D" selected>G.652D — Standard SMF (17 ps/nm/km)</option>
+          <option value="G654E">G.654E — Ultra-low loss (20 ps/nm/km)</option>
+          <option value="G655">G.655 — NZDSF (4.5 ps/nm/km)</option>
+        </select>
+      </div>
     </div>
     <div class="lb-results" id="lbr4"></div>
+    <div class="phys-panel" id="phys4"></div>
   </div>
 
   <div class="sec mb"><div class="sec-dot"></div>Cost Summary — Cards Only</div>
@@ -2280,8 +2438,17 @@ footer {
           <option value="100">100 GHz</option>
         </select>
       </div>
+      <div class="lb-field">
+        <div class="lb-label">Fiber Type</div>
+        <select class="lb-input" id="ft5" onchange="calcSpan5()">
+          <option value="G652D" selected>G.652D — Standard SMF (17 ps/nm/km)</option>
+          <option value="G654E">G.654E — Ultra-low loss (20 ps/nm/km)</option>
+          <option value="G655">G.655 — NZDSF (4.5 ps/nm/km)</option>
+        </select>
+      </div>
     </div>
     <div class="lb-results" id="lbr5"></div>
+    <div class="phys-panel" id="phys5"></div>
   </div>
 
   <div class="sec mb"><div class="sec-dot"></div>Cost Summary — Cards Only</div>
@@ -4653,6 +4820,15 @@ function toggleTheme(){
 function fmDb(v){ return (v>=0?'+':'')+v.toFixed(2)+' dB'; }
 function fmDbm(v){ return (v>=0?'+':'')+v.toFixed(1)+' dBm'; }
 
+/* ─────────────────────────────────────────────────────────────────────
+   calcSpanGeneric  — Span Loss, Link Budget, OSNR, CD & PMD Engine
+   New parameters:
+   • Fiber type selector  : ft{opt}   (G652D / G654E / G655)
+   • Modulation auto-detect from line board (TNS7 → 100G DP-QPSK, TNS3 → 400G DP-16QAM)
+   OSNR: accumulated per-span ASE model (correct for variable-length spans)
+   CD  : D × L   accumulated  (ps/nm)
+   PMD : PMD_coeff × √L  via RSS  (ps)
+───────────────────────────────────────────────────────────────────── */
 function calcSpanGeneric(opt, spanIds, protSpanIds){
   const lc  = parseFloat(g('lc'+opt)?.value)||0.20;
   const cl  = parseFloat(g('cl'+opt)?.value)||1.0;
@@ -4662,7 +4838,31 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
   const nf  = parseFloat(g('lbnf'+opt)?.value)||5;
   const na  = parseInt(g('lbna'+opt)?.value)||0;
   const cs  = parseInt(g('lbcs'+opt)?.value)||50;
+  const ft  = g('ft'+opt)?.value || 'G652D';
 
+  /* ── Fiber type parameters ─────────────────────────────────── */
+  const FIBER = {
+    G652D: { D:17.0,  pmd:0.10, name:'G.652D  Standard SMF',          lossTyp:0.20 },
+    G654E: { D:20.0,  pmd:0.06, name:'G.654E  Ultra-low-loss SMF',     lossTyp:0.17 },
+    G655:  { D:4.5,   pmd:0.06, name:'G.655  NZDSF',                   lossTyp:0.21 },
+  };
+  const fiber = FIBER[ft] || FIBER.G652D;
+
+  /* ── Modulation / OSNR requirement from line board ─────────── */
+  const optPfx = {1:'a1',2:'b1',3:'c1',4:'d1',5:'e1'}[opt]||'a1';
+  const lbGen  = LB[gv(optPfx+'-slbw')]?.gen || 'TNS7';
+  const is400G = (lbGen === 'TNS3');
+  const modLabel     = is400G ? '400G DP-16QAM' : '100G DP-QPSK';
+  const osnrReqDB    = is400G ? 21.0 : 14.0;   // min acceptable OSNR (0.1nm ref BW)
+  const osnrReqLabel = is400G ? '21 dB (DP-16QAM)' : '14 dB (DP-QPSK)';
+  // CD tolerance — modern coherent DSP with software CD compensation
+  const cdWarn = is400G ? 45000 : 60000;   // ps/nm
+  const cdErr  = is400G ? 60000 : 80000;   // ps/nm
+  // PMD tolerance
+  const pmdWarn = is400G ? 12 : 22;  // ps
+  const pmdErr  = is400G ? 18 : 30;  // ps
+
+  /* ── Span loss calculation ─────────────────────────────────── */
   function buildSpanResults(ids, resultElId){
     let spans = ids.map(id=>{ const el=g(id); return el?parseFloat(el.value)||0:0; });
     let totalKm = spans.reduce((a,b)=>a+b,0);
@@ -4694,35 +4894,74 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
     return { spans, totalKm, totalPathLoss };
   }
 
-  // Main path
   const main = buildSpanResults(spanIds, 'sr'+opt);
+  if(protSpanIds && protSpanIds.length > 0) buildSpanResults(protSpanIds, 'sr'+opt+'p');
 
-  // Protection path (if exists)
-  if(protSpanIds && protSpanIds.length > 0){
-    buildSpanResults(protSpanIds, 'sr'+opt+'p');
-  }
-
-  // Link budget based on main path
-  let ampGainTotal  = na * ag;
-  let rxPower       = txP - main.totalPathLoss + ampGainTotal;
-  let margin        = rxPower - rxS;
-
-  const hv = -58;
-  let osnr_linear;
-  if(na > 0){
-    osnr_linear = (txP + ag) - nf - hv - 10*Math.log10(na);
-  } else {
-    osnr_linear = txP - main.totalPathLoss - nf - hv;
-  }
+  /* ── Link Budget ───────────────────────────────────────────── */
+  let ampGainTotal = na * ag;
+  let rxPower      = txP - main.totalPathLoss + ampGainTotal;
+  let margin       = rxPower - rxS;
 
   const bwPerCh = cs === 50 ? 100 : 200;
-  const maxCh   = cs === 50 ? 96 : 48;
+  const maxCh   = cs === 50 ? 96  : 48;
 
-  let marginCls = margin>=3?'ok':margin>=0?'warn':'err';
-  let osnrCls   = osnr_linear>=20?'ok':osnr_linear>=15?'warn':'err';
+  let marginCls    = margin>=3?'ok':margin>=0?'warn':'err';
   let marginStatus = margin>=6?'✅ Excellent':margin>=3?'✅ Adequate':margin>=0?'⚠️ Marginal':'❌ Insufficient';
-  let osnrStatus   = osnr_linear>=22?'✅ Excellent':osnr_linear>=18?'✅ Adequate':osnr_linear>=15?'⚠️ Marginal':'❌ Insufficient';
 
+  /* ── Accumulated OSNR  (per-span ASE model) ────────────────────
+     Each EDFA adds ASE: P_ASE = NF × G × h×ν×Bref
+     h×ν×Bref @ 1550nm, Bref=12.5GHz ≈ −58 dBm
+     OSNR contribution of amp i:
+       osnr_i(dB) = P_out_i(dBm) − NF(dB) − (−58)
+       where P_out_i = txP − span_loss_i + ag
+     Accumulated ASE (RSS in linear):
+       1/OSNR_acc = Σ(1/OSNR_i)  
+  ─────────────────────────────────────────────────────────────── */
+  const hv_dBm = -58;  // 10*log10(h×ν×Bref) dBm
+  let osnrAccInvLin = 0;
+  let spanOsnrRows = '';
+  main.spans.forEach((km, i) => {
+    if(km <= 0) return;
+    const spanLoss = km * lc + cl;
+    const pOut     = txP - spanLoss + ag;   // amp output power (dBm) for this span
+    const osnrI_dB = pOut - nf - hv_dBm;    // = pOut - nf + 58
+    const osnrI_lin = Math.pow(10, osnrI_dB/10);
+    osnrAccInvLin += 1 / osnrI_lin;
+    const pct = Math.min(100, Math.max(0, (osnrI_dB/30)*100));
+    const rowCol = osnrI_dB>=osnrReqDB+4?'#10b981':osnrI_dB>=osnrReqDB?'#f59e0b':'#ef4444';
+    spanOsnrRows += `<div class="phys-osnr-row">
+      <span class="phys-osnr-label">Span ${i+1}</span>
+      <span class="phys-osnr-val" style="color:${rowCol}">${osnrI_dB.toFixed(1)} dB</span>
+      <div class="phys-osnr-bar"><div class="phys-osnr-fill" style="width:${pct}%;background:${rowCol}"></div></div>
+      <span style="font-size:11px;color:var(--txt3);min-width:50px;text-align:right">${km}km · ${spanLoss.toFixed(1)}dB</span>
+    </div>`;
+  });
+
+  let osnrAcc_dB;
+  if(osnrAccInvLin > 0){
+    osnrAcc_dB = 10 * Math.log10(1/osnrAccInvLin);
+  } else {
+    // Fallback to single-span estimate when no amps defined
+    osnrAcc_dB = txP - main.totalPathLoss - nf - hv_dBm;
+  }
+  const osnrMargin = osnrAcc_dB - osnrReqDB;
+  const osnrCls    = osnrMargin>=3?'ok':osnrMargin>=0?'warn':'err';
+  const osnrStatus = osnrMargin>=6?'✅ Excellent':osnrMargin>=3?'✅ Adequate':osnrMargin>=0?'⚠️ Marginal':'❌ Insufficient';
+
+  /* ── CD & PMD (main working path only) ────────────────────────
+     CD total = D × total_km   (ps/nm, sign = positive for standard SMF)
+     PMD total = √(Σ PMD_coeff² × L_i)  = PMD_coeff × √total_km  (RSS)
+  ─────────────────────────────────────────────────────────────── */
+  const totalCD  = fiber.D * main.totalKm;        // ps/nm
+  const totalPMD = fiber.pmd * Math.sqrt(main.totalKm); // ps
+
+  const cdCls    = totalCD>=cdErr?'err':totalCD>=cdWarn?'warn':'ok';
+  const cdStatus = totalCD>=cdErr?'❌ Exceeds Tolerance':totalCD>=cdWarn?'⚠️ High — Check DSP Spec':'✅ Within DSP Tolerance';
+
+  const pmdCls    = totalPMD>=pmdErr?'err':totalPMD>=pmdWarn?'warn':'ok';
+  const pmdStatus = totalPMD>=pmdErr?'❌ Exceeds Tolerance':totalPMD>=pmdWarn?'⚠️ High — Monitor':'✅ Within Tolerance';
+
+  /* ── Render Link Budget result cards ──────────────────────────── */
   const lbrEl = g('lbr'+opt);
   if(lbrEl) lbrEl.innerHTML = `
     <div class="lb-result-card ${marginCls}">
@@ -4736,8 +4975,8 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
       <div class="lb-result-status">${marginStatus}</div>
     </div>
     <div class="lb-result-card ${osnrCls}">
-      <div class="lb-result-label">Est. OSNR</div>
-      <div class="lb-result-num">${osnr_linear.toFixed(1)}<span class="lb-result-unit"> dB</span></div>
+      <div class="lb-result-label">OSNR Accumulated</div>
+      <div class="lb-result-num">${osnrAcc_dB.toFixed(1)}<span class="lb-result-unit"> dB</span></div>
       <div class="lb-result-status">${osnrStatus}</div>
     </div>
     <div class="lb-result-card ok">
@@ -4755,6 +4994,86 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
       <div class="lb-result-num">${ampGainTotal.toFixed(0)}<span class="lb-result-unit"> dB</span></div>
       <div class="lb-result-status">ℹ️ ${na} × ${ag} dB</div>
     </div>`;
+
+  /* ── Render OSNR Detail + CD/PMD Physical Impairment Panel ──── */
+  const physEl = g('phys'+opt);
+  if(!physEl) return;
+
+  const modBgCol  = is400G ? 'rgba(245,158,11,.12)' : 'rgba(56,189,248,.10)';
+  const modBdCol  = is400G ? 'rgba(245,158,11,.35)' : 'rgba(56,189,248,.30)';
+  const modTxtCol = is400G ? '#f59e0b'               : '#38BDF8';
+
+  physEl.innerHTML = `
+  <!-- ── OSNR Detail Section ──────────────────────────────── -->
+  <div class="phys-section-title">📡 OSNR — Accumulated ASE Model · ${modLabel}</div>
+
+  <div class="phys-mod-banner">
+    <span class="phys-mod-badge" style="background:${modBgCol};border:1px solid ${modBdCol};color:${modTxtCol}">
+      ${modLabel}
+    </span>
+    <span>Required OSNR: <strong style="color:${modTxtCol}">${osnrReqLabel}</strong></span>
+    <span style="margin-left:auto;color:var(--txt3);font-size:11px">Fiber: ${fiber.name} · D=${fiber.D} ps/nm/km</span>
+  </div>
+
+  <!-- Per-span OSNR rows -->
+  ${spanOsnrRows ? `<div class="phys-osnr-rows" style="margin-bottom:12px">${spanOsnrRows}</div>` : ''}
+
+  <!-- Summary cards -->
+  <div class="phys-grid" style="margin-bottom:0">
+    <div class="phys-card ${osnrCls}">
+      <div class="phys-label">Accumulated OSNR</div>
+      <div class="phys-num">${osnrAcc_dB.toFixed(1)}<span class="phys-unit"> dB</span></div>
+      <div class="phys-status">${osnrStatus}</div>
+    </div>
+    <div class="phys-card info">
+      <div class="phys-label">Required OSNR</div>
+      <div class="phys-num">${osnrReqDB.toFixed(1)}<span class="phys-unit"> dB</span></div>
+      <div class="phys-status">ℹ️ ${modLabel}</div>
+    </div>
+    <div class="phys-card ${osnrMargin>=3?'ok':osnrMargin>=0?'warn':'err'}">
+      <div class="phys-label">OSNR Margin</div>
+      <div class="phys-num">${osnrMargin.toFixed(1)}<span class="phys-unit"> dB</span></div>
+      <div class="phys-status">${osnrMargin>=6?'✅ Excellent':osnrMargin>=3?'✅ Good':osnrMargin>=0?'⚠️ Marginal':'❌ Insufficient'}</div>
+    </div>
+  </div>
+
+  <div class="phys-divider"></div>
+
+  <!-- ── Chromatic Dispersion & PMD Section ───────────────── -->
+  <div class="phys-section-title" style="margin-top:0">📐 Chromatic Dispersion (CD) &amp; PMD — ${fiber.name}</div>
+
+  <div class="phys-grid">
+    <div class="phys-card ${cdCls}">
+      <div class="phys-label">Total CD</div>
+      <div class="phys-num" style="font-size:${totalCD>9999?18:22}px">${Math.round(totalCD).toLocaleString()}<span class="phys-unit"> ps/nm</span></div>
+      <div class="phys-status">${cdStatus}</div>
+    </div>
+    <div class="phys-card info">
+      <div class="phys-label">CD Coefficient</div>
+      <div class="phys-num">${fiber.D}<span class="phys-unit"> ps/nm/km</span></div>
+      <div class="phys-status">ℹ️ ${main.totalKm} km × ${fiber.D}</div>
+    </div>
+    <div class="phys-card info">
+      <div class="phys-label">DSP CD Tolerance</div>
+      <div class="phys-num" style="font-size:18px">&plusmn;${cdWarn.toLocaleString()}<span class="phys-unit"> ps/nm</span></div>
+      <div class="phys-status">ℹ️ ${modLabel}</div>
+    </div>
+    <div class="phys-card ${pmdCls}">
+      <div class="phys-label">Total PMD</div>
+      <div class="phys-num">${totalPMD.toFixed(2)}<span class="phys-unit"> ps</span></div>
+      <div class="phys-status">${pmdStatus}</div>
+    </div>
+    <div class="phys-card info">
+      <div class="phys-label">PMD Coefficient</div>
+      <div class="phys-num">${fiber.pmd}<span class="phys-unit"> ps/√km</span></div>
+      <div class="phys-status">ℹ️ ${fiber.name.split(' ')[0]}</div>
+    </div>
+    <div class="phys-card info">
+      <div class="phys-label">PMD Tolerance</div>
+      <div class="phys-num">${pmdWarn}<span class="phys-unit"> ps</span></div>
+      <div class="phys-status">ℹ️ ${modLabel}</div>
+    </div>
+  </div>`;
 }
 
 function calcSpan1(){ calcSpanGeneric(1,['sp1a1','sp1b1'],['sp1a1p','sp1b1p']); }
@@ -4942,7 +5261,7 @@ function updateWdmSummary(){
       <div class="guide-header-icon">📖</div>
       <div>
         <div class="guide-header-title">คู่มือการใช้งาน — Optical Network Design & Planning Platform</div>
-        <div class="guide-header-sub">v4.0 · 100G / 400G / 800G Coherent · DP-QPSK · C-Band · ITU-T G.694.1 / G.709</div>
+        <div class="guide-header-sub">v4.1 · 100G / 400G / 800G Coherent · DP-QPSK · DP-16QAM · OSNR Engine · CD & PMD · C-Band</div>
       </div>
       <button class="guide-close" onclick="closeGuide()">✕</button>
     </div>
@@ -4953,7 +5272,7 @@ function updateWdmSummary(){
         <div class="guide-section-title"><span class="guide-section-icon">🔭</span>ภาพรวมแพลตฟอร์ม</div>
         <div class="guide-card-desc" style="font-size:13px;line-height:1.7;color:var(--txt2)">
           แพลตฟอร์มนี้ใช้สำหรับ <strong style="color:var(--txt)">ออกแบบและวางแผนโครงข่าย Optical Fiber</strong> ระบบ Coherent WDM แบบ 100G/400G/800G รองรับโทโพโลยีหลากหลายรูปแบบพร้อม Regenerator และเส้นทาง Protection
-          โดยแต่ละ Option Tab แสดงผลการคำนวณ Span Loss, Link Budget, Bill of Materials และ Topology Diagram แบบ Real-time
+          โดยแต่ละ Option Tab แสดงผลการคำนวณ Span Loss, Link Budget, <strong style="color:var(--txt)">Accumulated OSNR, Chromatic Dispersion (CD), PMD</strong>, Bill of Materials และ Topology Diagram แบบ Real-time
         </div>
         <div class="guide-tip">
           <strong>💡 เริ่มต้นใช้งาน:</strong> เลือก Tab Option ที่ต้องการ → กรอก Configuration (Site Name, Distance, อุปกรณ์) → กดปุ่ม <strong>Calculate</strong> เพื่อดูผลลัพธ์ทันที
@@ -5027,6 +5346,14 @@ function updateWdmSummary(){
             <div class="guide-card-desc">คำนวณ Total Path Loss, Amplifier Gain, Power Budget และสรุปผลว่า Feasible หรือไม่</div>
           </div>
           <div class="guide-card">
+            <div class="guide-card-name">📡 OSNR Accumulated</div>
+            <div class="guide-card-desc">คำนวณ Accumulated OSNR แบบ Per-span ASE Model เปรียบเทียบกับ Required OSNR ตาม Modulation Format (100G DP-QPSK vs 400G DP-16QAM) พร้อม OSNR Margin ต่อ Span</div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-card-name">📐 CD &amp; PMD Tracking</div>
+            <div class="guide-card-desc">คำนวณ Total Chromatic Dispersion (ps/nm) และ PMD สะสม (RSS) ตาม Fiber Type (G.652D / G.654E / G.655) แสดง Warning เมื่อเกิน DSP Tolerance ของ Modulation ที่เลือก</div>
+          </div>
+          <div class="guide-card">
             <div class="guide-card-name">🧾 Bill of Materials</div>
             <div class="guide-card-desc">สรุปรายการอุปกรณ์ทั้งหมด พร้อมราคาประมาณการต่อ Unit และ Total Cost</div>
           </div>
@@ -5076,7 +5403,7 @@ function updateWdmSummary(){
 
     </div>
     <div class="guide-footer">
-      <span>Optical Network Design & Planning Platform · v4.0</span>
+      <span>Optical Network Design & Planning Platform · v4.1</span>
       <button class="guide-footer-close" onclick="closeGuide()">ปิดคู่มือ</button>
     </div>
   </div>
