@@ -703,6 +703,123 @@ footer {
   display: flex; justify-content: space-between; align-items: center;
 }
 .footer-logo { font-weight: 500; color: var(--txt2); }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — TABLET  (≤ 1024px)
+══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .cfg-opt2 { grid-template-columns: repeat(3,1fr); }
+  .cost-grid { grid-template-columns: repeat(3,1fr); }
+  .h-badge { display: none; }
+  #clk { display: none; }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — MOBILE  (≤ 768px)
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Header ── */
+  header { height: auto; min-height: 56px; padding: 8px 12px; flex-wrap: wrap; gap: 6px; }
+  .h-left { gap: 10px; }
+  .h-icon { width: 36px; height: 36px; border-radius: 9px; }
+  .h-icon svg { width: 20px; height: 20px; }
+  .h-title { font-size: 13px; letter-spacing: 0; }
+  .h-sub { font-size: 10px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; max-width: 220px; }
+  .h-right { gap: 8px; }
+  .h-pill { font-size: 11px; padding: 4px 8px; gap: 4px; }
+  .h-pill span:last-child { display: none; }
+  .h-badge, #clk { display: none; }
+  .theme-toggle span:not(.theme-toggle-icon) { display: none; }
+  .theme-toggle { padding: 5px 9px; }
+
+  /* ── Tabbar ── */
+  .tabbar { top: 56px; padding: 0 8px; gap: 0; }
+  .tab { padding: 0 12px; height: 46px; font-size: 12px; gap: 5px; }
+  .tab-badge { font-size: 9px; padding: 1px 5px; }
+  .tabbar-divider { margin: 0 4px; }
+
+  /* ── Main ── */
+  main { padding: 14px 10px; }
+
+  /* ── Section header ── */
+  .sec { font-size: 11px; letter-spacing: 1.5px; }
+
+  /* ── Config grids ── */
+  .cfg-card { padding: 12px; }
+  .cfg-opt1 { grid-template-columns: 1fr 1fr; }
+  .cfg-opt2 { grid-template-columns: 1fr 1fr; }
+
+  /* ── Cost tiles ── */
+  .cost-grid { grid-template-columns: 1fr; gap: 10px; }
+  .cost-tile { padding: 14px 16px; }
+  .cost-lbl { font-size: 11px; }
+
+  /* ── BOM Table ── */
+  .bom-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); }
+  .bom-wrap table { min-width: 680px; }
+  th { font-size: 10px; padding: 9px 10px; }
+  td { padding: 8px 10px; }
+  .n, .pno { font-size: 12px; }
+  .qty-cell, .usd-cell, .tot-cell { font-size: 12px; }
+  .bdg { font-size: 11px; padding: 2px 6px; }
+
+  /* ── Span panel ── */
+  .span-panel { padding: 12px 14px; }
+  .span-grid { gap: 8px; }
+  .span-item { min-width: 110px; }
+  .span-input { width: 70px; font-size: 12px; }
+  .span-result-tile { min-width: 95px; padding: 8px 10px; }
+  .span-result-val { font-size: 16px; }
+
+  /* ── Link budget ── */
+  .lb-panel { padding: 12px 14px; }
+  .lb-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .lb-results { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .lb-result-card { padding: 10px 12px; }
+  .lb-result-num { font-size: 18px; }
+
+  /* ── Spec cards ── */
+  .spec-cards { grid-template-columns: 1fr; }
+
+  /* ── Diagram canvas ── */
+  .diag-box { padding: 10px; }
+  .diag-box canvas { width: 100% !important; height: auto !important; }
+
+  /* ── WDM canvas ── */
+  #wdm-canvas-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .wdm-legend-row { gap: 6px; }
+  .wdm-legend-item { font-size: 11px; }
+  #wdm-assignment-grid { grid-template-columns: repeat(2,1fr) !important; }
+
+  /* ── Touch-friendly inputs ── */
+  select, .span-input, .lb-input, .site-name-input {
+    min-height: 40px;
+    font-size: 14px !important;
+  }
+  input[type="number"], input[type="text"] {
+    min-height: 38px;
+  }
+
+  /* ── Footer ── */
+  footer { flex-direction: column; gap: 6px; text-align: center; font-size: 11px; padding: 10px 14px; }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE  (≤ 480px)
+══════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .h-sub { display: none; }
+  .h-title { font-size: 12px; }
+  .tab { padding: 0 8px; font-size: 11px; height: 42px; }
+  .cfg-opt1 { grid-template-columns: 1fr; }
+  .cfg-opt2 { grid-template-columns: 1fr; }
+  .lb-grid { grid-template-columns: 1fr; }
+  .lb-results { grid-template-columns: 1fr; }
+  .span-result-tile { min-width: 80px; }
+  #wdm-assignment-grid { grid-template-columns: 1fr !important; }
+  .cost-val { font-size: 20px; }
+}
 </style>
 </head>
 <body>
@@ -3113,14 +3230,18 @@ function drawLegend(ctx,x,y){
   T(ctx,'λ Protection Path', x+70, y+56, K.teal2, 11, 'left', false);
 }
 
-function cW(id){ return Math.max(g(id)?.closest('.diag-box')?.clientWidth-40||920,920); }
+function cW(id){
+  const containerW = g(id)?.closest('.diag-box')?.clientWidth - 40 || 920;
+  const isMobile = window.innerWidth <= 768;
+  return isMobile ? Math.max(containerW, 480) : Math.max(containerW, 920);
+}
 
 /* ══════════════════════════════════════════════════
    DRAW OPTION 1
 ══════════════════════════════════════════════════ */
 function draw1(){
   const cv=g('c1'); if(!cv) return;
-  const W=cW('c1'), H=520;
+  const _mob=window.innerWidth<=768; const W=cW('c1'), H=_mob?320:520;
   cv.width=W; cv.height=H;
   const ctx=cv.getContext('2d');
   drawBg(ctx,W,H);
@@ -3218,7 +3339,7 @@ function draw1(){
 ══════════════════════════════════════════════════ */
 function draw2(){
   const cv=g('c2'); if(!cv) return;
-  const W=Math.max(cW('c2'),1200), H=520;
+  const _mob=window.innerWidth<=768; const W=Math.max(cW('c2'),_mob?480:1200), H=_mob?360:520;
   cv.width=W; cv.height=H;
   const ctx=cv.getContext('2d');
   drawBg(ctx,W,H);
@@ -3880,7 +4001,7 @@ function validate5() {
 /* ══════════════ ORCHESTRATION ══════════════ */
 function draw3(){
   const cv=g('c3'); if(!cv) return;
-  const W=cW('c3'), H=420;
+  const _mob=window.innerWidth<=768; const W=cW('c3'), H=_mob?280:420;
   cv.width=W; cv.height=H;
   const ctx=cv.getContext('2d');
   drawBg(ctx,W,H);
@@ -3927,7 +4048,7 @@ function draw3(){
 
 function draw4(){
   const cv=g('c4'); if(!cv) return;
-  const W=Math.max(cW('c4'),1400), H=520;
+  const _mob=window.innerWidth<=768; const W=Math.max(cW('c4'),_mob?480:1400), H=_mob?360:520;
   cv.width=W; cv.height=H;
   const ctx=cv.getContext('2d');
   drawBg(ctx,W,H);
@@ -4025,7 +4146,7 @@ function draw4(){
 
 function draw5(){
   const cv=g('c5'); if(!cv) return;
-  const W=Math.max(cW('c5'),1600), H=520;
+  const _mob=window.innerWidth<=768; const W=Math.max(cW('c5'),_mob?480:1600), H=_mob?360:520;
   cv.width=W; cv.height=H;
   const ctx=cv.getContext('2d');
   drawBg(ctx,W,H);
