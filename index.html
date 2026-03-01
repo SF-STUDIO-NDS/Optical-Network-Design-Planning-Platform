@@ -354,6 +354,8 @@
 }
 .lb-input:focus { border-color: var(--blue2); box-shadow: 0 0 0 3px rgba(56,189,248,.12); }
 .lb-results { display: grid; grid-template-columns: repeat(auto-fill,minmax(150px,1fr)); gap: 10px; }
+.lb-input-wrap { display: flex; align-items: center; gap: 6px; }
+.lb-unit { font-size: 12px; color: var(--txt3); font-weight: 500; white-space: nowrap; }
 .lb-result-card {
   border-radius: 8px; padding: 12px 16px; border: 1px solid var(--bd);
   position: relative; overflow: hidden;
@@ -552,6 +554,15 @@ select {
 select option { color: #ffffff; background: var(--surface); font-weight: 600; }
 select:focus { border-color: var(--blue2); box-shadow: 0 0 0 3px rgba(56,189,248,.15); }
 select:hover:not(:focus) { border-color: var(--blue-bd); }
+select.val-err  { border-color: var(--red)   !important; box-shadow: 0 0 0 3px rgba(248,113,113,.18) !important; }
+select.val-warn { border-color: var(--amber) !important; box-shadow: 0 0 0 3px rgba(251,191,36,.18)  !important; }
+select.val-ok   { border-color: var(--green) !important; box-shadow: 0 0 0 3px rgba(52,211,153,.15)  !important; }
+input.val-err   { border-color: var(--red)   !important; box-shadow: 0 0 0 3px rgba(248,113,113,.18) !important; }
+input.val-warn  { border-color: var(--amber) !important; box-shadow: 0 0 0 3px rgba(251,191,36,.18)  !important; }
+
+/* ── keyboard focus ring (WCAG 2.4.7) ── */
+:focus-visible { outline: 2px solid var(--blue2); outline-offset: 2px; border-radius: 3px; }
+button:focus-visible, .tab:focus-visible { outline: 2px solid var(--blue2); outline-offset: 3px; border-radius: 5px; }
 
 /* ══ SITE NAME INPUT ═════════════════════ */
 .site-name-input {
@@ -576,6 +587,7 @@ select:hover:not(:focus) { border-color: var(--blue-bd); }
   box-shadow: var(--shadow-sm);
 }
 .diag-box canvas { display: block; max-width: 100%; margin: 0 auto; }
+.canvas-scroll-hint { display: none; text-align: center; font-size: 11px; color: var(--txt3); padding: 4px 0 8px; letter-spacing: .5px; }
 
 /* ══ COST TILES ══════════════════════════ */
 .cost-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
@@ -885,11 +897,16 @@ footer {
 /* ══════════════════════════════════════════
    RESPONSIVE — TABLET  (≤ 1024px)
 ══════════════════════════════════════════ */
+/* ── BOM sticky header (all viewports) ── */
+.bom-wrap thead tr th { position: sticky; top: 0; z-index: 2; background: var(--surface); box-shadow: 0 1px 0 var(--bd); }
+
 @media (max-width: 1024px) {
+  .cfg-opt1 { grid-template-columns: repeat(2,1fr); }
   .cfg-opt2 { grid-template-columns: repeat(3,1fr); }
   .cost-grid { grid-template-columns: repeat(3,1fr); }
   .h-badge { display: none; }
   #clk { display: none; }
+  .canvas-scroll-hint { display: block; }
 }
 
 /* ══════════════════════════════════════════
@@ -1219,6 +1236,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 1</div>
   <div id="svc1"></div>
   <div class="diag-box"><button class="export-btn" onclick="exportPNG('c1','Option1-Topology')">⬇ Export PNG</button><canvas id="c1"></canvas></div>
+  <div class="canvas-scroll-hint">← หมุนอุปกรณ์หรือขยายหน้าจอเพื่อดู Topology แบบเต็ม →</div>
 
 
   <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 1</div>
@@ -1296,11 +1314,11 @@ footer {
   <div class="span-panel">
     <div class="span-panel-title">📊 Link Budget Calculator</div>
     <div class="lb-grid">
-      <div class="lb-field"><div class="lb-label">Tx Power (Line Out)</div><input type="number" class="lb-input" id="lbtx1" value="0" step="0.5" oninput="calcSpan1()"> </div>
-      <div class="lb-field"><div class="lb-label">Rx Sensitivity</div><input type="number" class="lb-input" id="lbrx1" value="-28" step="0.5" oninput="calcSpan1()"></div>
-      <div class="lb-field"><div class="lb-label">EDFA Gain / Amp</div><input type="number" class="lb-input" id="lbag1" value="22" min="0" max="40" step="0.5" oninput="calcSpan1()"></div>
-      <div class="lb-field"><div class="lb-label">Noise Figure (NF)</div><input type="number" class="lb-input" id="lbnf1" value="5" min="3" max="10" step="0.1" oninput="calcSpan1()"></div>
-      <div class="lb-field"><div class="lb-label">No. of Amplifiers</div><input type="number" class="lb-input" id="lbna1" value="2" min="0" max="20" step="1" oninput="calcSpan1()"></div>
+      <div class="lb-field"><div class="lb-label" title="Transmit Power at line output (dBm)">Tx Power (Line Out)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbtx1" value="0" step="0.5" oninput="calcSpan1()"><span class="lb-unit">dBm</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Minimum receive power threshold (dBm)">Rx Sensitivity</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbrx1" value="-28" step="0.5" oninput="calcSpan1()"><span class="lb-unit">dBm</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Gain per EDFA amplifier — ค่าปกติ 15–25 dB">EDFA Gain / Amp</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbag1" value="22" min="0" max="40" step="0.5" oninput="calcSpan1()"><span class="lb-unit">dB</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Noise Figure: ค่ายิ่งต่ำยิ่งดี — ค่าปกติ 5–8 dB">Noise Figure (NF)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbnf1" value="5" min="3" max="10" step="0.1" oninput="calcSpan1()"><span class="lb-unit">dB</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="จำนวน EDFA ทั้งหมดใน link">No. of Amplifiers</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbna1" value="2" min="0" max="20" step="1" oninput="calcSpan1()"><span class="lb-unit">amps</span></div></div>
       <div class="lb-field"><div class="lb-label">Channel Spacing</div>
         <select class="lb-input" id="lbcs1" onchange="calcSpan1()">
           <option value="50">50 GHz</option>
@@ -1500,6 +1518,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 2</div>
   <div id="svc2"></div>
   <div class="diag-box"><button class="export-btn" onclick="exportPNG('c2','Option2-Topology')">⬇ Export PNG</button><canvas id="c2"></canvas></div>
+  <div class="canvas-scroll-hint">← หมุนอุปกรณ์หรือขยายหน้าจอเพื่อดู Topology แบบเต็ม →</div>
 
 
   <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 2</div>
@@ -1591,11 +1610,11 @@ footer {
   <div class="span-panel">
     <div class="span-panel-title">📊 Link Budget Calculator</div>
     <div class="lb-grid">
-      <div class="lb-field"><div class="lb-label">Tx Power (Line Out)</div><input type="number" class="lb-input" id="lbtx2" value="0" step="0.5" oninput="calcSpan2()"> </div>
-      <div class="lb-field"><div class="lb-label">Rx Sensitivity</div><input type="number" class="lb-input" id="lbrx2" value="-28" step="0.5" oninput="calcSpan2()"></div>
-      <div class="lb-field"><div class="lb-label">EDFA Gain / Amp</div><input type="number" class="lb-input" id="lbag2" value="22" min="0" max="40" step="0.5" oninput="calcSpan2()"></div>
-      <div class="lb-field"><div class="lb-label">Noise Figure (NF)</div><input type="number" class="lb-input" id="lbnf2" value="5" min="3" max="10" step="0.1" oninput="calcSpan2()"></div>
-      <div class="lb-field"><div class="lb-label">No. of Amplifiers</div><input type="number" class="lb-input" id="lbna2" value="2" min="0" max="20" step="1" oninput="calcSpan2()"></div>
+      <div class="lb-field"><div class="lb-label" title="Transmit Power at line output (dBm)">Tx Power (Line Out)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbtx2" value="0" step="0.5" oninput="calcSpan2()"><span class="lb-unit">dBm</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Minimum receive power threshold (dBm)">Rx Sensitivity</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbrx2" value="-28" step="0.5" oninput="calcSpan2()"><span class="lb-unit">dBm</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Gain per EDFA amplifier — ค่าปกติ 15–25 dB">EDFA Gain / Amp</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbag2" value="22" min="0" max="40" step="0.5" oninput="calcSpan2()"><span class="lb-unit">dB</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Noise Figure: ค่ายิ่งต่ำยิ่งดี — ค่าปกติ 5–8 dB">Noise Figure (NF)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbnf2" value="5" min="3" max="10" step="0.1" oninput="calcSpan2()"><span class="lb-unit">dB</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="จำนวน EDFA ทั้งหมดใน link">No. of Amplifiers</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbna2" value="2" min="0" max="20" step="1" oninput="calcSpan2()"><span class="lb-unit">amps</span></div></div>
       <div class="lb-field"><div class="lb-label">Channel Spacing</div>
         <select class="lb-input" id="lbcs2" onchange="calcSpan2()">
           <option value="50">50 GHz</option>
@@ -1700,6 +1719,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 3</div>
   <div id="svc3"></div>
   <div class="diag-box"><button class="export-btn" onclick="exportPNG('c3','Option3-Topology')">⬇ Export PNG</button><canvas id="c3"></canvas></div>
+  <div class="canvas-scroll-hint">← หมุนอุปกรณ์หรือขยายหน้าจอเพื่อดู Topology แบบเต็ม →</div>
 
 
   <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 3</div>
@@ -1733,11 +1753,11 @@ footer {
   <div class="span-panel">
     <div class="span-panel-title">📊 Link Budget Calculator</div>
     <div class="lb-grid">
-      <div class="lb-field"><div class="lb-label">Tx Power (Line Out)</div><input type="number" class="lb-input" id="lbtx3" value="0" step="0.5" oninput="calcSpan3()"> </div>
-      <div class="lb-field"><div class="lb-label">Rx Sensitivity</div><input type="number" class="lb-input" id="lbrx3" value="-28" step="0.5" oninput="calcSpan3()"></div>
-      <div class="lb-field"><div class="lb-label">EDFA Gain / Amp</div><input type="number" class="lb-input" id="lbag3" value="22" min="0" max="40" step="0.5" oninput="calcSpan3()"></div>
-      <div class="lb-field"><div class="lb-label">Noise Figure (NF)</div><input type="number" class="lb-input" id="lbnf3" value="5" min="3" max="10" step="0.1" oninput="calcSpan3()"></div>
-      <div class="lb-field"><div class="lb-label">No. of Amplifiers</div><input type="number" class="lb-input" id="lbna3" value="2" min="0" max="20" step="1" oninput="calcSpan3()"></div>
+      <div class="lb-field"><div class="lb-label" title="Transmit Power at line output (dBm)">Tx Power (Line Out)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbtx3" value="0" step="0.5" oninput="calcSpan3()"><span class="lb-unit">dBm</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Minimum receive power threshold (dBm)">Rx Sensitivity</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbrx3" value="-28" step="0.5" oninput="calcSpan3()"><span class="lb-unit">dBm</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Gain per EDFA amplifier — ค่าปกติ 15–25 dB">EDFA Gain / Amp</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbag3" value="22" min="0" max="40" step="0.5" oninput="calcSpan3()"><span class="lb-unit">dB</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Noise Figure: ค่ายิ่งต่ำยิ่งดี — ค่าปกติ 5–8 dB">Noise Figure (NF)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbnf3" value="5" min="3" max="10" step="0.1" oninput="calcSpan3()"><span class="lb-unit">dB</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="จำนวน EDFA ทั้งหมดใน link">No. of Amplifiers</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbna3" value="2" min="0" max="20" step="1" oninput="calcSpan3()"><span class="lb-unit">amps</span></div></div>
       <div class="lb-field"><div class="lb-label">Channel Spacing</div>
         <select class="lb-input" id="lbcs3" onchange="calcSpan3()">
           <option value="50">50 GHz</option>
@@ -1926,6 +1946,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 4</div>
   <div id="svc4"></div>
   <div class="diag-box"><button class="export-btn" onclick="exportPNG('c4','Option4-Topology')">⬇ Export PNG</button><canvas id="c4"></canvas></div>
+  <div class="canvas-scroll-hint">← หมุนอุปกรณ์หรือขยายหน้าจอเพื่อดู Topology แบบเต็ม →</div>
 
 
   <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 4</div>
@@ -2031,11 +2052,11 @@ footer {
   <div class="span-panel">
     <div class="span-panel-title">📊 Link Budget Calculator</div>
     <div class="lb-grid">
-      <div class="lb-field"><div class="lb-label">Tx Power (Line Out)</div><input type="number" class="lb-input" id="lbtx4" value="0" step="0.5" oninput="calcSpan4()"> </div>
-      <div class="lb-field"><div class="lb-label">Rx Sensitivity</div><input type="number" class="lb-input" id="lbrx4" value="-28" step="0.5" oninput="calcSpan4()"></div>
-      <div class="lb-field"><div class="lb-label">EDFA Gain / Amp</div><input type="number" class="lb-input" id="lbag4" value="22" min="0" max="40" step="0.5" oninput="calcSpan4()"></div>
-      <div class="lb-field"><div class="lb-label">Noise Figure (NF)</div><input type="number" class="lb-input" id="lbnf4" value="5" min="3" max="10" step="0.1" oninput="calcSpan4()"></div>
-      <div class="lb-field"><div class="lb-label">No. of Amplifiers</div><input type="number" class="lb-input" id="lbna4" value="2" min="0" max="20" step="1" oninput="calcSpan4()"></div>
+      <div class="lb-field"><div class="lb-label" title="Transmit Power at line output (dBm)">Tx Power (Line Out)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbtx4" value="0" step="0.5" oninput="calcSpan4()"><span class="lb-unit">dBm</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Minimum receive power threshold (dBm)">Rx Sensitivity</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbrx4" value="-28" step="0.5" oninput="calcSpan4()"><span class="lb-unit">dBm</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Gain per EDFA amplifier — ค่าปกติ 15–25 dB">EDFA Gain / Amp</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbag4" value="22" min="0" max="40" step="0.5" oninput="calcSpan4()"><span class="lb-unit">dB</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Noise Figure: ค่ายิ่งต่ำยิ่งดี — ค่าปกติ 5–8 dB">Noise Figure (NF)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbnf4" value="5" min="3" max="10" step="0.1" oninput="calcSpan4()"><span class="lb-unit">dB</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="จำนวน EDFA ทั้งหมดใน link">No. of Amplifiers</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbna4" value="2" min="0" max="20" step="1" oninput="calcSpan4()"><span class="lb-unit">amps</span></div></div>
       <div class="lb-field"><div class="lb-label">Channel Spacing</div>
         <select class="lb-input" id="lbcs4" onchange="calcSpan4()">
           <option value="50">50 GHz</option>
@@ -2250,6 +2271,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 5</div>
   <div id="svc5"></div>
   <div class="diag-box"><button class="export-btn" onclick="exportPNG('c5','Option5-Topology')">⬇ Export PNG</button><canvas id="c5"></canvas></div>
+  <div class="canvas-scroll-hint">← หมุนอุปกรณ์หรือขยายหน้าจอเพื่อดู Topology แบบเต็ม →</div>
 
 
   <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 5</div>
@@ -2369,11 +2391,11 @@ footer {
   <div class="span-panel">
     <div class="span-panel-title">📊 Link Budget Calculator</div>
     <div class="lb-grid">
-      <div class="lb-field"><div class="lb-label">Tx Power (Line Out)</div><input type="number" class="lb-input" id="lbtx5" value="0" step="0.5" oninput="calcSpan5()"> </div>
-      <div class="lb-field"><div class="lb-label">Rx Sensitivity</div><input type="number" class="lb-input" id="lbrx5" value="-28" step="0.5" oninput="calcSpan5()"></div>
-      <div class="lb-field"><div class="lb-label">EDFA Gain / Amp</div><input type="number" class="lb-input" id="lbag5" value="22" min="0" max="40" step="0.5" oninput="calcSpan5()"></div>
-      <div class="lb-field"><div class="lb-label">Noise Figure (NF)</div><input type="number" class="lb-input" id="lbnf5" value="5" min="3" max="10" step="0.1" oninput="calcSpan5()"></div>
-      <div class="lb-field"><div class="lb-label">No. of Amplifiers</div><input type="number" class="lb-input" id="lbna5" value="2" min="0" max="20" step="1" oninput="calcSpan5()"></div>
+      <div class="lb-field"><div class="lb-label" title="Transmit Power at line output (dBm)">Tx Power (Line Out)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbtx5" value="0" step="0.5" oninput="calcSpan5()"><span class="lb-unit">dBm</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Minimum receive power threshold (dBm)">Rx Sensitivity</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbrx5" value="-28" step="0.5" oninput="calcSpan5()"><span class="lb-unit">dBm</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Gain per EDFA amplifier — ค่าปกติ 15–25 dB">EDFA Gain / Amp</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbag5" value="22" min="0" max="40" step="0.5" oninput="calcSpan5()"><span class="lb-unit">dB</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="Noise Figure: ค่ายิ่งต่ำยิ่งดี — ค่าปกติ 5–8 dB">Noise Figure (NF)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbnf5" value="5" min="3" max="10" step="0.1" oninput="calcSpan5()"><span class="lb-unit">dB</span></div></div>
+      <div class="lb-field"><div class="lb-label" title="จำนวน EDFA ทั้งหมดใน link">No. of Amplifiers</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbna5" value="2" min="0" max="20" step="1" oninput="calcSpan5()"><span class="lb-unit">amps</span></div></div>
       <div class="lb-field"><div class="lb-label">Channel Spacing</div>
         <select class="lb-input" id="lbcs5" onchange="calcSpan5()">
           <option value="50">50 GHz</option>
@@ -4123,9 +4145,10 @@ function validate(cfg, panelId) {
 
   let html2 = `<div class="val-score-bar">
     <span class="val-score-label">CONFIG HEALTH</span>
-    <div class="val-score-track"><div class="val-score-fill" style="width:${score}%;background:${scoreColor}"></div></div>
+    <div class="val-score-track" title="Score = 100 − (errors × 25) − (warnings × 8)"><div class="val-score-fill" style="width:${score}%;background:${scoreColor}"></div></div>
     <span class="val-score-num" style="color:${scoreColor}">${score}%</span>
     <span style="font-size:11px;color:var(--txt3);font-family:'Segoe UI Semibold','Segoe UI',Consolas,monospace">${errCount} error${errCount!==1?'s':''} · ${warnCount} warning${warnCount!==1?'s':''}</span>
+    <span style="font-size:10px;color:var(--txt3);cursor:help;" title="คะแนน: เริ่มที่ 100 — หัก 25 ต่อ 1 error, หัก 8 ต่อ 1 warning">ⓘ</span>
   </div>`;
 
   if (errCount === 0 && warnCount === 0) {
@@ -4668,6 +4691,17 @@ function exportPNG(canvasId, filename){
   a.href = tmp.toDataURL('image/png');
   a.download = (filename||'topology')+'.png';
   a.click();
+  showToast('✅ Exported: ' + (filename||'topology') + '.png');
+}
+
+function showToast(msg, ms){
+  ms = ms || 2400;
+  const t = g('toast');
+  if(!t) return;
+  t.textContent = msg;
+  t.style.opacity = '1'; t.style.transform = 'translateY(0)';
+  clearTimeout(t._tid);
+  t._tid = setTimeout(function(){ t.style.opacity='0'; t.style.transform='translateY(8px)'; }, ms);
 }
 
 /* Safe runner — keeps one module's error from breaking the rest */
@@ -5370,5 +5404,6 @@ function updateWdmSummary(){
   </div>
 </div>
 
+<div id="toast" role="status" aria-live="polite" style="position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--surface);border:1px solid var(--green-bd);color:var(--green);border-radius:8px;padding:10px 18px;font-size:13px;font-weight:600;box-shadow:var(--shadow);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;min-width:180px;text-align:center;"></div>
 </body>
 </html>
