@@ -4080,12 +4080,22 @@ function validate(cfg, panelId) {
 
   // ── R09  400G/800G line card ≠ T402 tributary ──────────────────────────
   if (is400G(slbW) && stb && stb.pn.includes('T402')) {
-    errs.push({ level:'err', title:'R09 · Speed Mismatch: N801/N602 + T402', body:'T402 รองรับแค่ 100G OTU4 ไม่สามารถจับคู่กับ N801/N602 (400G/800G) ได้ ควรใช้ T404 หรือ T402 ร่วมกับ N402' });
+    errs.push({ level:'err', title:'R09 · Speed Mismatch: N801/N602 + T402 (Source Working)', body:'T402 รองรับแค่ 100G OTU4 ไม่สามารถจับคู่กับ N801/N602 (400G/800G) ได้ ควรใช้ T404 หรือ T402 ร่วมกับ N402' });
     mark([slbWId, stbId], 'err');
   }
+  // Bug 3 fix: also check Protection LB — previously only Working LB was validated.
+  if (is400G(slbP) && stb && stb.pn.includes('T402')) {
+    errs.push({ level:'err', title:'R09 · Speed Mismatch: N801/N602 + T402 (Source Protection)', body:'T402 รองรับแค่ 100G OTU4 ไม่สามารถจับคู่กับ N801/N602 (400G/800G) Protection line card ควรใช้ T404' });
+    mark([slbPId, stbId], 'err');
+  }
   if (is400G(klbW) && ktb && ktb.pn.includes('T402')) {
-    errs.push({ level:'err', title:'R09 · Speed Mismatch: N801/N602 + T402 (Sink)', body:'T402 ที่ Sink ไม่รองรับ 400G/800G line card ควรเปลี่ยนเป็น T404' });
+    errs.push({ level:'err', title:'R09 · Speed Mismatch: N801/N602 + T402 (Sink Working)', body:'T402 ที่ Sink ไม่รองรับ 400G/800G line card ควรเปลี่ยนเป็น T404' });
     mark([klbWId, ktbId], 'err');
+  }
+  // Bug 3 fix: Sink Protection LB + T402 check.
+  if (is400G(klbP) && ktb && ktb.pn.includes('T402')) {
+    errs.push({ level:'err', title:'R09 · Speed Mismatch: N801/N602 + T402 (Sink Protection)', body:'T402 ที่ Sink ไม่รองรับ 400G/800G Protection line card ควรเปลี่ยนเป็น T404' });
+    mark([klbPId, ktbId], 'err');
   }
 
   // ── R04  Tributary ports ≤ Line card ports ──────────────────────────────
@@ -4119,19 +4129,22 @@ function validate(cfg, panelId) {
   }
 
   // ── R10  End-to-end path gen consistency (Working) ──────────────────────
-  const wPathLbs = [slbW, ...regenWorking.map(r => r.lb)].filter(Boolean);
+  // Bug 2 fix: include klbW (Sink Working LB) in path — previously omitted,
+  // allowing Source=TNS7 + Regens=TNS7 + Sink=TNS3 to pass undetected.
+  const wPathLbs = [slbW, ...regenWorking.map(r => r.lb), klbW].filter(Boolean);
   const wGens = [...new Set(wPathLbs.map(lb => lb.gen))];
   if (wGens.length > 1) {
     errs.push({ level:'err', title:'R10 · Working Path: ผสม Generation (TNS7/TNS3)', body:`Working path มีทั้ง ${wGens.join(' และ ')} ไม่สามารถ interoperate กันได้ ต้องใช้ series เดียวกันตลอด path` });
-    mark([slbWId, ...regenWorking.map(r => r.id)], 'err');
+    mark([slbWId, ...regenWorking.map(r => r.id), klbWId], 'err');
   }
 
   // ── R10  End-to-end path gen consistency (Protection) ───────────────────
-  const pPathLbs = [slbP, ...regenProtection.map(r => r.lb)].filter(Boolean);
+  // Bug 2 fix: include klbP (Sink Protection LB) in path check.
+  const pPathLbs = [slbP, ...regenProtection.map(r => r.lb), klbP].filter(Boolean);
   const pGens = [...new Set(pPathLbs.map(lb => lb.gen))];
   if (pGens.length > 1) {
     errs.push({ level:'err', title:'R10 · Protection Path: ผสม Generation', body:`Protection path มีทั้ง ${pGens.join(' และ ')} ต้องใช้ series เดียวกันตลอด` });
-    mark([slbPId, ...regenProtection.map(r => r.id)], 'err');
+    mark([slbPId, ...regenProtection.map(r => r.id), klbPId], 'err');
   }
 
   // ── R08  T404 needs adequate line capacity ──────────────────────────────
@@ -4162,7 +4175,9 @@ function validate(cfg, panelId) {
   const errCount  = errs.filter(e => e.level === 'err').length;
   const warnCount = errs.filter(e => e.level === 'warn').length;
   const score = Math.max(0, 100 - errCount * 25 - warnCount * 8);
-  const scoreColor = score >= 85 ? '#059669' : score >= 60 ? '#d97706' : '#dc2626';
+  // Bug 4 fix: use CSS variables so color adapts to light/dark theme
+  const cssVar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const scoreColor = score >= 85 ? cssVar('--green') : score >= 60 ? cssVar('--amber') : cssVar('--red');
 
   const panel = document.getElementById(panelId);
   if (!panel) return;
@@ -4186,11 +4201,21 @@ function validate(cfg, panelId) {
 
   panel.innerHTML = html2;
 
+  // Bug 1 fix: clear val-* from ALL possible field IDs first, then apply new states.
+  // Previously only fields in the current `fields` map were cleared, leaving stale
+  // val-err/val-warn classes on selects that became valid.
+  const allFieldIds = [
+    stbId, slbWId, slbPId, ktbId, klbWId, klbPId,
+    ...regenWorking.map(r => r.id),
+    ...regenProtection.map(r => r.id),
+  ];
+  allFieldIds.filter(Boolean).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('val-err','val-warn','val-ok');
+  });
   Object.entries(fields).forEach(([id, level]) => {
     const el = document.getElementById(id);
-    if (!el) return;
-    el.classList.remove('val-err','val-warn','val-ok');
-    el.classList.add('val-' + level);
+    if (el) el.classList.add('val-' + level);
   });
 }
 
