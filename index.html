@@ -3357,14 +3357,6 @@ function drawSite(ctx,x,y,w,h,label,chassis,col,siteName){
   ctx.beginPath(); ctx.roundRect(x+2,y+2,w-4,hBandH,10); ctx.fillStyle=hG; ctx.fill();
   ctx.restore();
 
-  // left accent stripe
-  ctx.save();
-  const stripeG=ctx.createLinearGradient(x,y,x,y+h);
-  stripeG.addColorStop(0,col); stripeG.addColorStop(1,col+'44');
-  ctx.beginPath(); ctx.roundRect(x+2,y+2,4,h-4,{upperLeft:10,lowerLeft:10,upperRight:0,lowerRight:0});
-  ctx.fillStyle=stripeG; ctx.fill();
-  ctx.restore();
-
   // role label (SOURCE / REGEN / SINK)
   T(ctx,label, x+w/2+2, y+20, K.txt3, 10, 'center', true);
 
