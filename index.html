@@ -3221,6 +3221,15 @@ const g  = id => document.getElementById(id);
 const gv = id => { const e=g(id); return e?e.value:''; };
 const fm = v  => v==null?'—':'$'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 const fmU= v  => v?fm(v):'<span style="color:#8494b0">—</span>';
+/* ── HTML escape helper — prevents XSS when embedding user input in innerHTML ── */
+function escHtml(s){
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
 
 /* ══════════════ CANVAS ══════════════ */
 const K = {
@@ -3850,26 +3859,21 @@ function calcServiceBW(cfg, elId) {
     </div>`;
 }
 
-function svc1(){
+/* ── svcByOpt: consolidates svc1-5 (same logic, different prefix) ── */
+function svcByOpt(opt){
+  const pfx = {1:'a1',2:'b1',3:'c1',4:'d1',5:'e1'}[opt];
+  if(!pfx) return;
   calcServiceBW({
-    stb:  TB[gv('a1-stb')]  || null,
-    slbW: LB[gv('a1-slbw')] || null,
-    slbP: LB[gv('a1-slbp')] || null,
-    ktb:  TB[gv('a1-ktb')]  || null,
-    klbW: LB[gv('a1-klbw')] || null,
-    klbP: LB[gv('a1-klbp')] || null,
-  }, 'svc1');
+    stb:  TB[gv(pfx+'-stb')]  || null,
+    slbW: LB[gv(pfx+'-slbw')] || null,
+    slbP: LB[gv(pfx+'-slbp')] || null,
+    ktb:  TB[gv(pfx+'-ktb')]  || null,
+    klbW: LB[gv(pfx+'-klbw')] || null,
+    klbP: LB[gv(pfx+'-klbp')] || null,
+  }, 'svc'+opt);
 }
-function svc2(){
-  calcServiceBW({
-    stb:  TB[gv('b1-stb')]  || null,
-    slbW: LB[gv('b1-slbw')] || null,
-    slbP: LB[gv('b1-slbp')] || null,
-    ktb:  TB[gv('b1-ktb')]  || null,
-    klbW: LB[gv('b1-klbw')] || null,
-    klbP: LB[gv('b1-klbp')] || null,
-  }, 'svc2');
-}
+function svc1(){ svcByOpt(1); }
+function svc2(){ svcByOpt(2); }
 
 
 function row(n,pn,desc,type,site,qty,up,rmk){
@@ -3880,7 +3884,7 @@ function row(n,pn,desc,type,site,qty,up,rmk){
     <td class="pno">${pn}</td>
     <td style="font-size:11px">${desc}</td>
     <td><span class="bdg ${cls}">${type}</span></td>
-    <td style="font-size:15px;font-weight:700;color:var(--txt)">${site}</td>
+    <td style="font-size:15px;font-weight:700;color:var(--txt)">${escHtml(site)}</td>
     <td class="qty-cell">${qty}</td>
     <td class="usd-cell">${fmU(up)}</td>
     <td class="tot-cell">${fmU(tot)}</td>
@@ -4559,24 +4563,9 @@ function draw5(){
   drawLegend(ctx,W-254,H-70);
 }
 
-function svc3(){
-  calcServiceBW({
-    stb:  TB[gv('c1-stb')]  || null, slbW: LB[gv('c1-slbw')] || null, slbP: LB[gv('c1-slbp')] || null,
-    ktb:  TB[gv('c1-ktb')]  || null, klbW: LB[gv('c1-klbw')] || null, klbP: LB[gv('c1-klbp')] || null,
-  }, 'svc3');
-}
-function svc4(){
-  calcServiceBW({
-    stb:  TB[gv('d1-stb')]  || null, slbW: LB[gv('d1-slbw')] || null, slbP: LB[gv('d1-slbp')] || null,
-    ktb:  TB[gv('d1-ktb')]  || null, klbW: LB[gv('d1-klbw')] || null, klbP: LB[gv('d1-klbp')] || null,
-  }, 'svc4');
-}
-function svc5(){
-  calcServiceBW({
-    stb:  TB[gv('e1-stb')]  || null, slbW: LB[gv('e1-slbw')] || null, slbP: LB[gv('e1-slbp')] || null,
-    ktb:  TB[gv('e1-ktb')]  || null, klbW: LB[gv('e1-klbw')] || null, klbP: LB[gv('e1-klbp')] || null,
-  }, 'svc5');
-}
+function svc3(){ svcByOpt(3); }
+function svc4(){ svcByOpt(4); }
+function svc5(){ svcByOpt(5); }
 
 function buildBom3(){
   const stb  = TB[gv('c1-stb')]  || null;
@@ -4774,7 +4763,7 @@ function animLoop(){
       else if(n===3) draw3();
       else if(n===4) draw4();
       else if(n===5) draw5();
-    }catch(e){}
+    }catch(e){ console.error('animLoop draw'+n+':', e); }
   }
   requestAnimationFrame(animLoop);
 }
@@ -4830,14 +4819,14 @@ function fmDbm(v){ return (v>=0?'+':'')+v.toFixed(1)+' dBm'; }
    PMD : PMD_coeff × √L  via RSS  (ps)
 ───────────────────────────────────────────────────────────────────── */
 function calcSpanGeneric(opt, spanIds, protSpanIds){
-  const lc  = parseFloat(g('lc'+opt)?.value)||0.20;
-  const cl  = parseFloat(g('cl'+opt)?.value)||1.0;
-  const txP = parseFloat(g('lbtx'+opt)?.value)||0;
-  const rxS = parseFloat(g('lbrx'+opt)?.value)||-28;
-  const ag  = parseFloat(g('lbag'+opt)?.value)||22;
-  const nf  = parseFloat(g('lbnf'+opt)?.value)||5;
-  const na  = parseInt(g('lbna'+opt)?.value)||0;
-  const cs  = parseInt(g('lbcs'+opt)?.value)||50;
+  const lc  = Math.max(0.10, Math.min(0.40, parseFloat(g('lc'+opt)?.value)||0.20));
+  const cl  = Math.max(0.0,  Math.min(3.0,  parseFloat(g('cl'+opt)?.value)||1.0));
+  const txP = Math.max(-10,  Math.min(20,   parseFloat(g('lbtx'+opt)?.value)||0));
+  const rxS = Math.max(-45,  Math.min(-10,  parseFloat(g('lbrx'+opt)?.value)||-28));
+  const ag  = Math.max(10,   Math.min(40,   parseFloat(g('lbag'+opt)?.value)||22));
+  const nf  = Math.max(3,    Math.min(15,   parseFloat(g('lbnf'+opt)?.value)||5));
+  const na  = Math.max(0,    Math.min(30,   parseInt(g('lbna'+opt)?.value)||0));
+  const cs  = (parseInt(g('lbcs'+opt)?.value)||50) === 100 ? 100 : 50;
   const ft  = g('ft'+opt)?.value || 'G652D';
 
   /* ── Fiber type parameters ─────────────────────────────────── */
@@ -5184,7 +5173,7 @@ function drawWdm(){
     if(ch_data.label){
       ctx.font = '700 9px "Segoe UI",Arial,sans-serif';
       ctx.fillStyle = col_fill;
-      const lbl = ch_data.label.length>8 ? ch_data.label.substr(0,7)+'…' : ch_data.label;
+      const lbl = ch_data.label.length>8 ? ch_data.label.substring(0,7)+'…' : ch_data.label;
       ctx.fillText(lbl, rx+rw/2, ry+48);
     }
   }
@@ -5217,7 +5206,7 @@ function buildWdmAssignment(){
         <option value="protection"${ch.status==='protection'?'selected':''}>Protection Path</option>
         <option value="osc"       ${ch.status==='osc'       ?'selected':''}>OSC / Reserved</option>
       </select>
-      <input type="text" placeholder="Service label…" value="${ch.label||''}"
+      <input type="text" placeholder="Service label…" value="${escHtml(ch.label||'')}"
         style="width:100%;font-size:12px;padding:4px 6px;background:var(--surface);border:1px solid var(--bd);border-radius:4px;color:var(--txt)"
         oninput="wdmSetLabel(${i},this.value)">
     </div>`;
