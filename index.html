@@ -132,70 +132,10 @@
 .phys-section-title {
   font-size: 11px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase;
   color: var(--txt3); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--bd);
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 8px;
 }
 .phys-section-title::after { content:''; flex:1; height:1px; background:var(--bd); }
-.phys-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-bottom: 14px; }
-.phys-card {
-  border-radius: 8px; padding: 12px 16px; border: 1px solid var(--bd);
-  position: relative; overflow: hidden;
-}
-.phys-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
-.phys-card.ok::before   { background: linear-gradient(90deg,var(--green2),#34d399); }
-.phys-card.warn::before { background: linear-gradient(90deg,var(--amber2),#fbbf24); }
-.phys-card.err::before  { background: linear-gradient(90deg,var(--red),#f87171); }
-.phys-card.info::before { background: linear-gradient(90deg,var(--blue),#38BDF8); }
-.phys-card.ok   { background: var(--green-bg); }
-.phys-card.warn { background: var(--amber-bg); }
-.phys-card.err  { background: rgba(248,113,113,.08); }
-.phys-card.info { background: var(--blue-bg); }
-.phys-label  { font-size: 10px; font-weight: 700; color: var(--txt3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
-.phys-num    { font-size: 22px; font-weight: 800; font-family: 'Segoe UI Semibold','Segoe UI',Consolas,monospace; }
-.phys-unit   { font-size: 11px; color: var(--txt3); }
-.phys-status { font-size: 11px; font-weight: 700; margin-top: 4px; }
-.phys-card.ok   .phys-num { color: var(--green2); }
-.phys-card.warn .phys-num { color: var(--amber2); }
-.phys-card.err  .phys-num { color: var(--red);    }
-.phys-card.info .phys-num { color: var(--blue2);  }
-.phys-card.ok   .phys-status { color: var(--green2); }
-.phys-card.warn .phys-status { color: var(--amber2); }
-.phys-card.err  .phys-status { color: var(--red);    }
-.phys-card.info .phys-status { color: var(--blue2);  }
-.phys-divider { width:100%; height:1px; background:var(--bd); margin:12px 0; }
-.phys-mod-banner {
-  display: flex; align-items: center; gap: 12px;
-  background: var(--surface2); border: 1px solid var(--bd);
-  border-radius: 8px; padding: 10px 16px; margin-bottom: 12px;
-  font-size: 12px; color: var(--txt2);
-}
-.phys-mod-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  border-radius: 20px; padding: 3px 10px;
-  font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
-}
-.phys-osnr-rows { display: flex; flex-direction: column; gap: 6px; }
-.phys-osnr-row  {
-  display: flex; align-items: center; gap: 8px;
-  background: var(--surface2); border: 1px solid var(--bd);
-  border-radius: 6px; padding: 7px 12px; font-size: 12px;
-}
-.phys-osnr-row-label { color: var(--txt3); font-weight: 600; min-width: 80px; }
-.phys-osnr-row-val   { font-weight: 800; font-family: 'Segoe UI Semibold','Segoe UI',Consolas,monospace; font-size: 13px; }
-.phys-osnr-row-bar   { flex:1; height:6px; background:var(--surface3); border-radius:3px; overflow:hidden; }
-.phys-osnr-row-fill  { height:100%; border-radius:3px; transition:width .4s, background .4s; }
-
-/* ── PHYSICAL IMPAIRMENT PANEL ──────────────────────────────────────────── */
-.phys-panel {
-  background: var(--surface); border: 1px solid var(--bd);
-  border-radius: var(--radius); padding: 18px 20px; margin-top: 12px;
-  box-shadow: var(--shadow-sm);
-}
-.phys-section-title {
-  font-size: 11px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase;
-  color: var(--txt3); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--bd);
-  display: flex; align-items: center; gap: 8px;
-}
-.phys-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 10px; margin-bottom: 0; }
+.phys-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 10px; margin-bottom: 14px; }
 .phys-card {
   border-radius: 8px; padding: 12px 16px; border: 1px solid var(--bd);
   position: relative; overflow: hidden;
@@ -230,16 +170,16 @@
 }
 .phys-mod-badge {
   display: inline-flex; align-items: center; gap: 6px;
-  border-radius: 20px; padding: 3px 11px;
+  border-radius: 20px; padding: 3px 10px;
   font-size: 11px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase;
 }
-.phys-osnr-rows { display: flex; flex-direction: column; gap: 5px; margin-bottom: 0; }
+.phys-osnr-rows { display: flex; flex-direction: column; gap: 6px; }
 .phys-osnr-row  {
   display: flex; align-items: center; gap: 8px;
   background: var(--surface2); border: 1px solid var(--bd);
   border-radius: 6px; padding: 7px 12px; font-size: 12px;
 }
-.phys-osnr-label { color: var(--txt3); font-weight: 600; min-width: 96px; }
+.phys-osnr-label { color: var(--txt3); font-weight: 600; min-width: 60px; }
 .phys-osnr-val   { font-weight: 800; font-family: 'Segoe UI Semibold','Segoe UI',Consolas,monospace; font-size: 13px; min-width: 60px; text-align: right; }
 .phys-osnr-bar   { flex:1; height:6px; background:var(--surface3); border-radius:3px; overflow:hidden; }
 .phys-osnr-fill  { height:100%; border-radius:3px; transition:width .4s ease, background .4s ease; }
@@ -251,7 +191,7 @@
   border-radius: 20px; padding: 5px 12px; cursor: pointer;
   font-size: 13px; font-weight: 600; color: rgba(255,255,255,.8);
   transition: background .15s, border-color .15s;
-  user-select: none;
+  user-select: none; font-family: inherit; appearance: none;
 }
 .theme-toggle:hover { background: rgba(255,255,255,.18); }
 .theme-toggle-icon { font-size: 15px; transition: transform .3s; }
@@ -263,7 +203,7 @@
   border-radius: 20px; padding: 5px 12px; cursor: pointer;
   font-size: 13px; font-weight: 600; color: rgba(255,255,255,.8);
   transition: background .15s, border-color .15s;
-  user-select: none;
+  user-select: none; font-family: inherit; appearance: none;
 }
 .guide-btn:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.35); }
 .guide-btn-icon { font-size: 15px; }
@@ -512,9 +452,10 @@ header {
   display: flex; align-items: center; gap: 7px;
   padding: 0 20px; height: 56px;
   font-size: 15px; font-weight: 500; color: rgba(255,255,255,.85);
-  cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+  cursor: pointer; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px;
   transition: all .18s; white-space: nowrap; letter-spacing: .2px;
   position: relative; flex-shrink: 0; border-radius: 0;
+  background: transparent; font-family: inherit; appearance: none;
 }
 .tab .tab-icon {
   font-size: 15px; opacity: .75; transition: opacity .18s;
@@ -1094,8 +1035,8 @@ footer {
     </div>
   </div>
   <div class="h-right">
-    <div class="guide-btn" onclick="openGuide()"><span class="guide-btn-icon">📖</span><span>คู่มือ</span></div>
-    <div class="theme-toggle" onclick="toggleTheme()" id="themeBtn"><span class="theme-toggle-icon" id="themeIcon">☀️</span><span id="themeLabel">Light</span></div>
+    <button type="button" class="guide-btn" onclick="openGuide()" aria-label="เปิดคู่มือการใช้งาน"><span class="guide-btn-icon">📖</span><span>คู่มือ</span></button>
+    <button type="button" class="theme-toggle" onclick="toggleTheme()" id="themeBtn" aria-label="สลับธีม สว่าง/มืด"><span class="theme-toggle-icon" id="themeIcon">☀️</span><span id="themeLabel">Light</span></button>
     <span class="h-badge">v4.0</span>
     <div class="h-pill"><div class="h-dot"></div>LIVE CONFIG</div>
     <div id="clk"></div>
@@ -1103,36 +1044,36 @@ footer {
 </header>
 
 <!-- ══ TABS ══ -->
-<div class="tabbar">
-  <div class="tab on" onclick="sw(0)">
+<div class="tabbar" role="tablist" aria-label="Network design options">
+  <button type="button" class="tab on" role="tab" aria-selected="true" onclick="sw(0)" aria-label="Option 1 — 2R Regenerator">
     <span class="tab-icon">◈</span>
     Option 1 <span class="tab-badge">2R</span>
-  </div>
-  <div class="tab" onclick="sw(1)">
+  </button>
+  <button type="button" class="tab" role="tab" aria-selected="false" onclick="sw(1)" aria-label="Option 2 — 4R Regenerator">
     <span class="tab-icon">◈</span>
     Option 2 <span class="tab-badge">4R</span>
-  </div>
-  <div class="tab regen-none" onclick="sw(2)">
+  </button>
+  <button type="button" class="tab regen-none" role="tab" aria-selected="false" onclick="sw(2)" aria-label="Option 3 — No Regenerator">
     <span class="tab-icon">◈</span>
     Option 3 <span class="tab-badge">—</span>
-  </div>
-  <div class="tab" onclick="sw(3)">
+  </button>
+  <button type="button" class="tab" role="tab" aria-selected="false" onclick="sw(3)" aria-label="Option 4 — 6R Regenerator">
     <span class="tab-icon">◈</span>
     Option 4 <span class="tab-badge">6R</span>
-  </div>
-  <div class="tab" onclick="sw(4)">
+  </button>
+  <button type="button" class="tab" role="tab" aria-selected="false" onclick="sw(4)" aria-label="Option 5 — 8R Regenerator">
     <span class="tab-icon">◈</span>
     Option 5 <span class="tab-badge">8R</span>
-  </div>
-  <div class="tabbar-divider"></div>
-  <div class="tab" onclick="sw(5)">
+  </button>
+  <div class="tabbar-divider" role="separator"></div>
+  <button type="button" class="tab" role="tab" aria-selected="false" onclick="sw(5)" aria-label="Card Specifications">
     <span class="tab-icon">⊞</span>
     Card Specifications
-  </div>
-  <div class="tab" onclick="sw(6)">
+  </button>
+  <button type="button" class="tab" role="tab" aria-selected="false" onclick="sw(6)" aria-label="Wavelength Plan">
     <span class="tab-icon">📡</span>
     Wavelength Plan
-  </div>
+  </button>
 </div>
 
 <main>
@@ -4768,13 +4709,30 @@ function animLoop(){
   requestAnimationFrame(animLoop);
 }
 
+/* ── Timing constants (ms) — avoids magic numbers scattered in code ── */
+const DELAY = {
+  TAB:     80,   // redraw delay after tab switch
+  WDM:    100,   // WDM canvas draw delay after tab switch
+  STARTUP: 200,  // initial render delay on page load
+  THEME:   50,   // canvas redraw delay after theme toggle
+  RESIZE:  250,  // resize event debounce delay
+};
+
 function sw(i){
-  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));
+  document.querySelectorAll('.tab').forEach((t,j)=>{
+    t.classList.toggle('on', j===i);
+    t.setAttribute('aria-selected', j===i ? 'true' : 'false');
+  });
   document.querySelectorAll('.pane').forEach((p,j)=>p.classList.toggle('on',j===i));
-  setTimeout(upd,80);
-  if(i===6) setTimeout(()=>{drawWdm();},100);
+  setTimeout(upd, DELAY.TAB);
+  if(i===6) setTimeout(drawWdm, DELAY.WDM);
 }
-setInterval(()=>{ const c=g('clk'); if(c) c.textContent=new Date().toLocaleTimeString(); },1000);
+
+const _clockInterval = setInterval(()=>{
+  const c=g('clk'); if(c) c.textContent=new Date().toLocaleTimeString();
+}, 1000);
+window.addEventListener('unload', ()=>clearInterval(_clockInterval));
+
 window.addEventListener('load',()=>{
   setTimeout(()=>{
     syncSourceToSink();
@@ -4782,9 +4740,9 @@ window.addEventListener('load',()=>{
     animLoop();
     calcSpan1(); calcSpan2(); calcSpan3(); calcSpan4(); calcSpan5();
     initWdm();
-  },200);
+  }, DELAY.STARTUP);
 });
-window.addEventListener('resize',()=>{ clearTimeout(window._rt); window._rt=setTimeout(upd,250); });
+window.addEventListener('resize',()=>{ clearTimeout(window._rt); window._rt=setTimeout(upd, DELAY.RESIZE); });
 
 /* ══════════════ DARK / LIGHT TOGGLE ══════════════ */
 let isDark = true;
@@ -4802,7 +4760,7 @@ function toggleTheme(){
     K.bg='#f1f5f9'; K.wh='#ffffff';
     K.txt='#0f172a'; K.txt2='#334155'; K.txt3='#64748b'; K.bd='#cbd5e1';
   }
-  setTimeout(upd,50);
+  setTimeout(upd, DELAY.THEME);
 }
 
 /* ══════════════ SPAN LOSS + LINK BUDGET ══════════════ */
