@@ -4750,8 +4750,8 @@ function toggleTheme(){
   isDark = !isDark;
   document.documentElement.classList.toggle('light', !isDark);
   document.body.classList.toggle('light', !isDark);
-  g('themeIcon').textContent = isDark ? '☀️' : '🌙';
-  g('themeLabel').textContent = isDark ? 'Light' : 'Dark';
+  g('themeIcon').textContent = isDark ? '🌙' : '☀️';
+  g('themeLabel').textContent = isDark ? 'Dark' : 'Light';
   // update canvas K palette
   if(isDark){
     K.bg='#0F172A'; K.wh='#1E293B';
@@ -4791,7 +4791,7 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
   const FIBER = {
     G652D: { D:17.0,  pmd:0.10, name:'G.652D  Standard SMF',          lossTyp:0.20 },
     G654E: { D:20.0,  pmd:0.06, name:'G.654E  Ultra-low-loss SMF',     lossTyp:0.17 },
-    G655:  { D:4.5,   pmd:0.06, name:'G.655  NZDSF',                   lossTyp:0.21 },
+    G655:  { D:-4.5,  pmd:0.06, name:'G.655  NZDSF',                   lossTyp:0.21 },
   };
   const fiber = FIBER[ft] || FIBER.G652D;
 
