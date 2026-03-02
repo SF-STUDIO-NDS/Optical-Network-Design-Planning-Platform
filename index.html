@@ -3854,16 +3854,20 @@ function svc2(){ svcByOpt(2); }
 function row(n,pn,desc,type,site,qty,up,rmk){
   const cls={TRIB:'bt',LINE:'bl'}[type]||'bt';
   const tot=up&&qty?up*qty:null;
+  const safePn = escHtml(pn ?? '');
+  const safeDesc = escHtml(desc ?? '');
+  const safeType = escHtml(type ?? '');
+  const safeRmk = escHtml(rmk ?? '');
   return `<tr>
     <td class="n">${String(n).padStart(2,'0')}</td>
-    <td class="pno">${pn}</td>
-    <td style="font-size:11px">${desc}</td>
-    <td><span class="bdg ${cls}">${type}</span></td>
+    <td class="pno">${safePn}</td>
+    <td style="font-size:11px">${safeDesc}</td>
+    <td><span class="bdg ${cls}">${safeType}</span></td>
     <td style="font-size:15px;font-weight:700;color:var(--txt)">${escHtml(site)}</td>
     <td class="qty-cell">${qty}</td>
     <td class="usd-cell">${fmU(up)}</td>
     <td class="tot-cell">${fmU(tot)}</td>
-    <td style="font-size:11px;color:var(--txt3)">${rmk}</td></tr>`;
+    <td style="font-size:11px;color:var(--txt3)">${safeRmk}</td></tr>`;
 }
 function totalRow(tot){
   return `<tr class="total-row">
