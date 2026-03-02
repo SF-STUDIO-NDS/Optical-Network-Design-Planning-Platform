@@ -1256,7 +1256,7 @@ footer {
   </div>
 
 
-  <div id="val1" class="val-panel"></div>
+  <div id="val1" class="val-panel" role="status" aria-live="polite" aria-atomic="true"></div>
   <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 1</div>
   <div id="svc1"></div>
   <div class="diag-box"><button class="export-btn" onclick="exportPNG('c1','Option1-Topology')">⬇ Export PNG</button><canvas id="c1"></canvas></div>
@@ -1537,7 +1537,7 @@ footer {
   </div>
 
 
-  <div id="val2" class="val-panel"></div>
+  <div id="val2" class="val-panel" role="status" aria-live="polite" aria-atomic="true"></div>
   <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 2</div>
   <div id="svc2"></div>
   <div class="diag-box"><button class="export-btn" onclick="exportPNG('c2','Option2-Topology')">⬇ Export PNG</button><canvas id="c2"></canvas></div>
@@ -1737,7 +1737,7 @@ footer {
     </div>
   </div>
 
-  <div id="val3" class="val-panel"></div>
+  <div id="val3" class="val-panel" role="status" aria-live="polite" aria-atomic="true"></div>
   <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 3</div>
   <div id="svc3"></div>
   <div class="diag-box"><button class="export-btn" onclick="exportPNG('c3','Option3-Topology')">⬇ Export PNG</button><canvas id="c3"></canvas></div>
@@ -1963,7 +1963,7 @@ footer {
     </div>
   </div>
 
-  <div id="val4" class="val-panel"></div>
+  <div id="val4" class="val-panel" role="status" aria-live="polite" aria-atomic="true"></div>
   <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 4</div>
   <div id="svc4"></div>
   <div class="diag-box"><button class="export-btn" onclick="exportPNG('c4','Option4-Topology')">⬇ Export PNG</button><canvas id="c4"></canvas></div>
@@ -2287,7 +2287,7 @@ footer {
     </div>
   </div>
 
-  <div id="val5" class="val-panel"></div>
+  <div id="val5" class="val-panel" role="status" aria-live="polite" aria-atomic="true"></div>
   <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 5</div>
   <div id="svc5"></div>
   <div class="diag-box"><button class="export-btn" onclick="exportPNG('c5','Option5-Topology')">⬇ Export PNG</button><canvas id="c5"></canvas></div>
@@ -3213,6 +3213,9 @@ function escHtml(s){
     .replace(/"/g,'&quot;')
     .replace(/'/g,'&#39;');
 }
+function safeLevel(level){
+  return ['err','warn','info','ok'].includes(level) ? level : 'info';
+}
 
 /* ══════════════ CANVAS ══════════════ */
 const K = {
@@ -3854,16 +3857,20 @@ function svc2(){ svcByOpt(2); }
 function row(n,pn,desc,type,site,qty,up,rmk){
   const cls={TRIB:'bt',LINE:'bl'}[type]||'bt';
   const tot=up&&qty?up*qty:null;
+  const safePn = escHtml(pn ?? '');
+  const safeDesc = escHtml(desc ?? '');
+  const safeType = escHtml(type ?? '');
+  const safeRmk = escHtml(rmk ?? '');
   return `<tr>
     <td class="n">${String(n).padStart(2,'0')}</td>
-    <td class="pno">${pn}</td>
-    <td style="font-size:11px">${desc}</td>
-    <td><span class="bdg ${cls}">${type}</span></td>
+    <td class="pno">${safePn}</td>
+    <td style="font-size:11px">${safeDesc}</td>
+    <td><span class="bdg ${cls}">${safeType}</span></td>
     <td style="font-size:15px;font-weight:700;color:var(--txt)">${escHtml(site)}</td>
     <td class="qty-cell">${qty}</td>
     <td class="usd-cell">${fmU(up)}</td>
     <td class="tot-cell">${fmU(tot)}</td>
-    <td style="font-size:11px;color:var(--txt3)">${rmk}</td></tr>`;
+    <td style="font-size:11px;color:var(--txt3)">${safeRmk}</td></tr>`;
 }
 function totalRow(tot){
   return `<tr class="total-row">
@@ -4182,8 +4189,11 @@ function validate(cfg, panelId) {
   }
 
   errs.forEach(e => {
-    const icon = { err:'❌', warn:'⚠️', info:'ℹ️', ok:'✅' }[e.level] || '•';
-    html2 += `<div class="val-alert ${e.level}"><span class="val-icon">${icon}</span><div><div class="val-title">${e.title}</div><div class="val-body">${e.body}</div></div></div>`;
+    const level = safeLevel(e.level);
+    const icon = { err:'❌', warn:'⚠️', info:'ℹ️', ok:'✅' }[level] || '•';
+    const safeTitle = escHtml(e.title ?? '');
+    const safeBody = escHtml(e.body ?? '');
+    html2 += `<div class="val-alert ${level}"><span class="val-icon">${icon}</span><div><div class="val-title">${safeTitle}</div><div class="val-body">${safeBody}</div></div></div>`;
   });
 
   panel.innerHTML = html2;
@@ -5033,17 +5043,20 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
   const modBgCol  = is400G ? 'rgba(245,158,11,.12)' : 'rgba(56,189,248,.10)';
   const modBdCol  = is400G ? 'rgba(245,158,11,.35)' : 'rgba(56,189,248,.30)';
   const modTxtCol = is400G ? '#f59e0b'               : '#38BDF8';
+  const safeModLabel = escHtml(modLabel);
+  const safeOsnrReqLabel = escHtml(osnrReqLabel);
+  const safeFiberName = escHtml(fiber.name);
 
   physEl.innerHTML = `
   <!-- ── OSNR Detail Section ──────────────────────────────── -->
-  <div class="phys-section-title">📡 OSNR — Accumulated ASE Model · ${modLabel}</div>
+  <div class="phys-section-title">📡 OSNR — Accumulated ASE Model · ${safeModLabel}</div>
 
   <div class="phys-mod-banner">
     <span class="phys-mod-badge" style="background:${modBgCol};border:1px solid ${modBdCol};color:${modTxtCol}">
-      ${modLabel}
+      ${safeModLabel}
     </span>
-    <span>Required OSNR: <strong style="color:${modTxtCol}">${osnrReqLabel}</strong></span>
-    <span style="margin-left:auto;color:var(--txt3);font-size:11px">Fiber: ${fiber.name} · D=${fiber.D} ps/nm/km</span>
+    <span>Required OSNR: <strong style="color:${modTxtCol}">${safeOsnrReqLabel}</strong></span>
+    <span style="margin-left:auto;color:var(--txt3);font-size:11px">Fiber: ${safeFiberName} · D=${fiber.D} ps/nm/km</span>
   </div>
 
   <!-- Per-span OSNR rows -->
@@ -5059,7 +5072,7 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
     <div class="phys-card info">
       <div class="phys-label">Required OSNR</div>
       <div class="phys-num">${osnrReqDB.toFixed(1)}<span class="phys-unit"> dB</span></div>
-      <div class="phys-status">ℹ️ ${modLabel}</div>
+      <div class="phys-status">ℹ️ ${safeModLabel}</div>
     </div>
     <div class="phys-card ${osnrMargin>=3?'ok':osnrMargin>=0?'warn':'err'}">
       <div class="phys-label">OSNR Margin</div>
@@ -5071,7 +5084,7 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
   <div class="phys-divider"></div>
 
   <!-- ── Chromatic Dispersion & PMD Section ───────────────── -->
-  <div class="phys-section-title" style="margin-top:0">📐 Chromatic Dispersion (CD) &amp; PMD — ${fiber.name}</div>
+  <div class="phys-section-title" style="margin-top:0">📐 Chromatic Dispersion (CD) &amp; PMD — ${safeFiberName}</div>
 
   <div class="phys-grid">
     <div class="phys-card ${cdCls}">
@@ -5087,7 +5100,7 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
     <div class="phys-card info">
       <div class="phys-label">DSP CD Tolerance</div>
       <div class="phys-num" style="font-size:18px">&plusmn;${cdWarn.toLocaleString()}<span class="phys-unit"> ps/nm</span></div>
-      <div class="phys-status">ℹ️ ${modLabel}</div>
+      <div class="phys-status">ℹ️ ${safeModLabel}</div>
     </div>
     <div class="phys-card ${pmdCls}">
       <div class="phys-label">Total PMD</div>
@@ -5097,12 +5110,12 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
     <div class="phys-card info">
       <div class="phys-label">PMD Coefficient</div>
       <div class="phys-num">${fiber.pmd}<span class="phys-unit"> ps/√km</span></div>
-      <div class="phys-status">ℹ️ ${fiber.name.split(' ')[0]}</div>
+      <div class="phys-status">ℹ️ ${escHtml(fiber.name.split(' ')[0])}</div>
     </div>
     <div class="phys-card info">
       <div class="phys-label">PMD Tolerance</div>
       <div class="phys-num">${pmdWarn}<span class="phys-unit"> ps</span></div>
-      <div class="phys-status">ℹ️ ${modLabel}</div>
+      <div class="phys-status">ℹ️ ${safeModLabel}</div>
     </div>
   </div>`;
 }
