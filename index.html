@@ -415,6 +415,10 @@
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: var(--bg);
+  background-image:
+    radial-gradient(circle at 15% -10%, color-mix(in oklab, var(--blue2) 18%, transparent), transparent 38%),
+    radial-gradient(circle at 88% -22%, color-mix(in oklab, var(--purple2) 16%, transparent), transparent 42%);
+  background-attachment: fixed;
   color: var(--txt);
   font-size: var(--fs-lg);
   line-height: 1.5;
@@ -432,6 +436,8 @@ header {
   padding: 0 20px; height: 66px;
   box-shadow: 0 2px 20px rgba(0,0,0,.5);
   position: sticky; top: 0; z-index: 300;
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid color-mix(in oklab, var(--blue2) 24%, transparent);
 }
 .h-left { display: flex; align-items: center; gap: 20px; }
 .h-icon {
@@ -490,7 +496,10 @@ header {
 .tab .tab-icon {
   font-size: var(--fs-md); opacity: .75; transition: opacity .18s;
 }
-.tab:hover { color: #ffffff; background: rgba(255,255,255,.06); }
+.tab:hover {
+  color: #ffffff;
+  background: color-mix(in oklab, var(--blue2) 13%, transparent);
+}
 .tab:hover .tab-icon { opacity: 1; }
 .tab.on {
   color: var(--blue2); border-bottom-color: var(--blue2); font-weight: 700;
@@ -515,7 +524,7 @@ header {
 .light .tab.on { color: var(--blue2); background: linear-gradient(to bottom, transparent 60%, rgba(2,132,199,.05)); }
 
 /* ══ MAIN ════════════════════════════════ */
-main { padding: 28px 20px; max-width: 100%; margin: 0 auto; }
+main { padding: 28px 20px 34px; max-width: 1500px; margin: 0 auto; }
 .pane { display: none; animation: fadeIn .2s ease; }
 .pane.on { display: block; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
@@ -540,6 +549,19 @@ main { padding: 28px 20px; max-width: 100%; margin: 0 auto; }
   padding: 22px;
   margin-bottom: 20px;
   box-shadow: var(--shadow-sm), inset 0 1px 0 color-mix(in oklab, var(--txt) 8%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+.cfg-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--blue2) 70%, var(--teal2)), color-mix(in oklab, var(--purple2) 65%, var(--blue2)));
+  opacity: .7;
+  pointer-events: none;
 }
 .cfg-row { display: grid; gap: 14px; }
 .cfg-opt1 { grid-template-columns: repeat(4,1fr); }
