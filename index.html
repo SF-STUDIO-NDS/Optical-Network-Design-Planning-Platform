@@ -3974,11 +3974,15 @@ function recalcGrand(elId, skipEngCalc){
   const spare=+(cg.dataset.spare||0);
   const dcInput=g(elId+'-discount');
   const enInput=g(elId+'-eng');
-  const discountVal = dcInput ? +dcInput.value||0 : 0;
+  const discountRaw = dcInput ? dcInput.value : '';
+  const discountVal = discountRaw !== '' ? +discountRaw||0 : 0;
   if(!skipEngCalc && enInput){
-    const base = cards + spare - discountVal;
-    const autoEng = base > 0 ? +(base * 0.15).toFixed(2) : 0;
-    enInput.value = autoEng > 0 ? autoEng : '';
+    if(discountRaw === ''){
+      enInput.value = '';
+    } else {
+      const base = cards + spare - discountVal;
+      enInput.value = base > 0 ? +(base * 0.15).toFixed(2) : '';
+    }
   }
   const engVal = enInput ? +enInput.value||0 : 0;
   const grandTotal = cards + spare - discountVal + engVal;
