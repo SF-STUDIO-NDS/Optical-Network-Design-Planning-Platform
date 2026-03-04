@@ -657,7 +657,7 @@ button:focus-visible, .tab:focus-visible { outline: 2px solid var(--blue2); outl
 .canvas-scroll-hint { display: none; text-align: center; font-size: var(--fs-xs); color: var(--txt3); padding: 4px 0 8px; letter-spacing: .5px; }
 
 /* ══ COST TILES ══════════════════════════ */
-.cost-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
+.cost-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 20px; }
 .cost-tile {
   background: var(--surface);
   border: 1px solid var(--bd);
@@ -674,6 +674,7 @@ button:focus-visible, .tab:focus-visible { outline: 2px solid var(--blue2); outl
 .cost-tile.ct-trib::before  { background: linear-gradient(90deg,var(--teal2),var(--blue2)); }
 .cost-tile.ct-line::before  { background: linear-gradient(90deg,var(--amber2),var(--amber)); }
 .cost-tile.ct-total::before { background: linear-gradient(90deg,var(--green2),var(--green)); }
+.cost-tile.ct-eng::before   { background: linear-gradient(90deg,var(--purple2),var(--purple)); }
 .cost-tile-icon {
   width: 38px; height: 38px; border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
@@ -967,7 +968,7 @@ footer {
 @media (max-width: 1024px) {
   .cfg-opt1 { grid-template-columns: repeat(2,1fr); }
   .cfg-opt2 { grid-template-columns: repeat(3,1fr); }
-  .cost-grid { grid-template-columns: repeat(3,1fr); }
+  .cost-grid { grid-template-columns: repeat(4,1fr); }
   .h-badge { display: none; }
   #clk { display: none; }
   .canvas-scroll-hint { display: block; }
@@ -3915,6 +3916,13 @@ function totalRow(tot){
     <td class="tot-cell" style="font-size:16px;color:var(--navy)">${fm(tot)}</td>
     <td style="font-size:11px;color:var(--txt3)">excl. chassis &amp; infra</td></tr>`;
 }
+function engServRow(tot){
+  const fee=tot*0.15;
+  return `<tr class="total-row" style="background:var(--purple-bg)!important;border-top:2px solid var(--purple-bd)!important">
+    <td colspan="7" style="text-align:right;font-size:11px;color:var(--purple2);font-weight:700;padding:12px 16px;letter-spacing:.5px">Engineering Services (By H.) — 15%</td>
+    <td class="tot-cell" style="font-size:16px;color:var(--purple2)">${fm(fee)}</td>
+    <td style="font-size:11px;color:var(--txt3)">15% of CARDS TOTAL</td></tr>`;
+}
 
 /* ══════════════ COST TILES ══════════════ */
 function costTiles(elId,tribs,lines){
@@ -3923,6 +3931,7 @@ function costTiles(elId,tribs,lines){
   tribs.forEach(i=>{ if(i&&i.p&&i.q) tT+=i.p*i.q; });
   lines.forEach(i=>{ if(i&&i.p&&i.q) lT+=i.p*i.q; });
   const grand=tT+lT;
+  const engFee=grand*0.15;
   const sz=v=>v>999999?17:v>99999?20:22;
   el.innerHTML=`
     <div class="cost-tile ct-trib">
@@ -3942,6 +3951,12 @@ function costTiles(elId,tribs,lines){
       <div class="cost-lbl">Total — Cards Only</div>
       <div class="cost-val" style="color:var(--green);font-size:${sz(grand)}px">${fm(grand)}</div>
       <div class="cost-sub">excl. chassis &amp; infrastructure</div>
+    </div>
+    <div class="cost-tile ct-eng">
+      <div class="cost-tile-icon" style="background:var(--purple-bg)">⚙️</div>
+      <div class="cost-lbl">Engineering Services (By H.)</div>
+      <div class="cost-val" style="color:var(--purple2);font-size:${sz(engFee)}px">${fm(engFee)}</div>
+      <div class="cost-sub">15% of CARDS TOTAL</div>
     </div>`;
 }
 
@@ -3978,7 +3993,7 @@ function buildBom1(){
   if(r2lb)  { h+=row(n++,r2lb.pn, 'Line — '+r2lb.sh+' 3R Regen Slot 1','LINE',rbSite,1,r2lb.price,'Protection'); a(1,r2lb.price); }
   if(r2lb2) { h+=row(n++,r2lb2.pn,'Line — '+r2lb2.sh+' 3R Regen Slot 2','LINE',rbSite,1,r2lb2.price,'Protection'); a(1,r2lb2.price); }
   if(!h) h=`<tr><td colspan="9" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected — use dropdowns above to configure</td></tr>`;
-  else h+=totalRow(tot);
+  else { h+=totalRow(tot); h+=engServRow(tot); }
   g('b1').innerHTML=h;
   costTiles('cg1',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4027,7 +4042,7 @@ function buildBom2(){
   if(rdlb)  { h+=row(n++,rdlb.pn, 'Line — '+rdlb.sh+' 3R Regen Slot 1','LINE','Regen D_'+rdn2,1,rdlb.price, 'Protection'); a(1,rdlb.price); }
   if(rdlb2) { h+=row(n++,rdlb2.pn,'Line — '+rdlb2.sh+' 3R Regen Slot 2','LINE','Regen D_'+rdn2,1,rdlb2.price,'Protection'); a(1,rdlb2.price); }
   if(!h) h=`<tr><td colspan="9" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected — use dropdowns above to configure</td></tr>`;
-  else h+=totalRow(tot);
+  else { h+=totalRow(tot); h+=engServRow(tot); }
   g('b2').innerHTML=h;
   costTiles('cg2',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4632,7 +4647,7 @@ function buildBom3(){
   if(klbW) { h+=row(n++,klbW.pn,'Line — '+klbW.sh+' (Working RX)',   'LINE','Sink_'+kn3,  1,klbW.price,''); a(1,klbW.price); }
   if(klbP) { h+=row(n++,klbP.pn,'Line — '+klbP.sh+' (Protection RX)','LINE','Sink_'+kn3,  1,klbP.price,''); a(1,klbP.price); }
   if(!h) h=`<tr><td colspan="9" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected — use dropdowns above to configure</td></tr>`;
-  else h+=totalRow(tot);
+  else { h+=totalRow(tot); h+=engServRow(tot); }
   g('b3').innerHTML=h;
   costTiles('cg3',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4679,7 +4694,7 @@ function buildBom4(){
   if(rflb)  { h+=row(n++,rflb.pn, 'Line — '+rflb.sh+' Regen Slot 1','LINE','Regen F_'+rfn4,1,rflb.price,'Protection'); a(1,rflb.price); }
   if(rflb2) { h+=row(n++,rflb2.pn,'Line — '+rflb2.sh+' Regen Slot 2','LINE','Regen F_'+rfn4,1,rflb2.price,'Protection'); a(1,rflb2.price); }
   if(!h) h=`<tr><td colspan="9" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected</td></tr>`;
-  else h+=totalRow(tot);
+  else { h+=totalRow(tot); h+=engServRow(tot); }
   g('b4').innerHTML=h;
   costTiles('cg4',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4741,7 +4756,7 @@ function buildBom5(){
   if(rhlb)  { h+=row(n++,rhlb.pn, 'Line — '+rhlb.sh+' Regen Slot 1','LINE','Regen H_'+rhn5,1,rhlb.price,'Protection'); a(1,rhlb.price); }
   if(rhlb2) { h+=row(n++,rhlb2.pn,'Line — '+rhlb2.sh+' Regen Slot 2','LINE','Regen H_'+rhn5,1,rhlb2.price,'Protection'); a(1,rhlb2.price); }
   if(!h) h=`<tr><td colspan="9" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected</td></tr>`;
-  else h+=totalRow(tot);
+  else { h+=totalRow(tot); h+=engServRow(tot); }
   g('b5').innerHTML=h;
   costTiles('cg5',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
