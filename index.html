@@ -702,7 +702,13 @@ th {
   color: var(--txt3); border-bottom: 2px solid var(--bd); white-space: nowrap;
   text-transform: uppercase;
 }
-td { padding: 10px 16px; border-bottom: 1px solid var(--bd2); vertical-align: middle; }
+td { padding: 8px 12px; border-bottom: 1px solid var(--bd2); vertical-align: middle; }
+.bom-wrap th:nth-child(1), .bom-wrap td:nth-child(1) { width: 36px; padding-left: 10px; padding-right: 6px; }
+.bom-wrap th:nth-child(6), .bom-wrap td:nth-child(6) { width: 46px; }
+.bom-wrap th:nth-child(7), .bom-wrap td:nth-child(7) { width: 120px; }
+.bom-wrap th:nth-child(8), .bom-wrap td:nth-child(8) { width: 110px; }
+.bom-wrap th:nth-child(10),.bom-wrap td:nth-child(10){ width: 76px; padding-left: 8px; padding-right: 8px; }
+.bom-wrap th:nth-child(11),.bom-wrap td:nth-child(11){ width: 110px; }
 tr:last-child td { border-bottom: none; }
 tbody tr:nth-child(even) td { background: rgba(255,255,255,.03); }
 tbody tr:hover td { background: var(--blue-bg) !important; }
@@ -711,7 +717,7 @@ tbody tr:hover td { background: var(--blue-bg) !important; }
 .qty-cell { font-family: 'Segoe UI Semibold', 'Segoe UI', Consolas, monospace; font-weight: 700; color: var(--green2); font-size: var(--fs-lg); text-align: center; }
 .usd-cell { font-family: 'Segoe UI Semibold', 'Segoe UI', Consolas, monospace; font-size: var(--fs-lg); color: var(--amber2); font-weight: 500; text-align: right; }
 .tot-cell { font-family: 'Segoe UI Semibold', 'Segoe UI', Consolas, monospace; font-size: var(--fs-xl); color: var(--navy); font-weight: 700; text-align: right; }
-.spare-input { width: 64px; border: 1px solid var(--bd); border-radius: 6px; padding: 4px 6px; text-align: center; background: var(--surface); color: var(--txt); font-size: var(--fs-sm); font-family: 'Segoe UI Semibold', monospace; outline: none; transition: border-color .15s; }
+.spare-input { width: 56px; border: 1px solid var(--bd); border-radius: 6px; padding: 3px 5px; text-align: center; background: var(--surface); color: var(--txt); font-size: var(--fs-sm); font-family: 'Segoe UI Semibold', monospace; outline: none; transition: border-color .15s; }
 .spare-input:focus { border-color: var(--teal); box-shadow: 0 0 0 2px rgba(20,184,166,.15); }
 .spare-tot-cell { font-family: 'Segoe UI Semibold', 'Segoe UI', Consolas, monospace; font-size: var(--fs-lg); color: var(--teal); font-weight: 700; text-align: right; min-width: 110px; }
 tr.total-row td { background: var(--blue-bg) !important; border-top: 2px solid var(--blue-bd); }
@@ -1021,7 +1027,7 @@ footer {
 
   /* ── BOM Table ── */
   .bom-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); }
-  .bom-wrap table { min-width: 900px; }
+  .bom-wrap table { min-width: 820px; }
   th { font-size: var(--fs-2xs); padding: 9px 10px; }
   td { padding: 8px 10px; }
   .n, .pno { font-size: var(--fs-sm); }
@@ -1313,7 +1319,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — Option 1</div>
   <div class="bom-wrap"><table><thead><tr>
     <th>#</th><th>Part Number</th><th>Description</th><th>Type</th>
-    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Total Spare (USD)</th>
+    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Spare (USD)</th>
   </tr></thead><tbody id="b1"></tbody></table></div>
 
   <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 1</div>
@@ -1594,7 +1600,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — Option 2</div>
   <div class="bom-wrap"><table><thead><tr>
     <th>#</th><th>Part Number</th><th>Description</th><th>Type</th>
-    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Total Spare (USD)</th>
+    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Spare (USD)</th>
   </tr></thead><tbody id="b2"></tbody></table></div>
 
   <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 2</div>
@@ -1794,7 +1800,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — Option 3</div>
   <div class="bom-wrap"><table><thead><tr>
     <th>#</th><th>Part Number</th><th>Description</th><th>Type</th>
-    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Total Spare (USD)</th>
+    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Spare (USD)</th>
   </tr></thead><tbody id="b3"></tbody></table></div>
 
   <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 3</div>
@@ -2020,7 +2026,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — Option 4</div>
   <div class="bom-wrap"><table><thead><tr>
     <th>#</th><th>Part Number</th><th>Description</th><th>Type</th>
-    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Total Spare (USD)</th>
+    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Spare (USD)</th>
   </tr></thead><tbody id="b4"></tbody></table></div>
 
   <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 4</div>
@@ -2344,7 +2350,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — Option 5</div>
   <div class="bom-wrap"><table><thead><tr>
     <th>#</th><th>Part Number</th><th>Description</th><th>Type</th>
-    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Total Spare (USD)</th>
+    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Spare (USD)</th>
   </tr></thead><tbody id="b5"></tbody></table></div>
 
   <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 5</div>
@@ -3913,7 +3919,7 @@ function row(n,pn,desc,type,site,qty,up,rmk){
     <td class="usd-cell">${fmU(up)}</td>
     <td class="tot-cell">${fmU(tot)}</td>
     <td style="font-size:11px;color:var(--txt3)">${safeRmk}</td>
-    <td style="text-align:center"><input type="number" class="spare-input" min="0" step="1" placeholder="0" oninput="var s=+this.value,p=${up||0};this.closest('td').nextElementSibling.textContent=s>0&&p?fmU(s*p):'—'"></td>
+    <td style="text-align:center"><input type="number" class="spare-input" min="0" step="1" placeholder="0" oninput="var s=+this.value,p=${up||0},v=s>0&&p?s*p:0;this.dataset.spare=v;this.closest('td').nextElementSibling.textContent=v?fmU(v):'—';updateBomSpare(this.closest('tbody'))"></td>
     <td class="spare-tot-cell">—</td></tr>`;
 }
 function totalRow(tot){
@@ -3930,6 +3936,18 @@ function engServRow(tot){
     <td class="tot-cell" style="font-size:16px;color:var(--purple2)">${fm(fee)}</td>
     <td style="font-size:11px;color:var(--txt3)">15% of CARDS TOTAL</td>
     <td></td><td></td></tr>`;
+}
+
+function spareRow(){
+  return `<tr class="total-row" style="background:rgba(20,184,166,.08)!important;border-top:2px solid rgba(20,184,166,.35)!important">
+    <td colspan="10" style="text-align:right;font-size:11px;color:var(--teal);font-weight:700;padding:12px 16px;letter-spacing:.5px">Spare Parts Total (USD)</td>
+    <td class="spare-tot-cell spare-summary-cell" style="font-size:16px">—</td></tr>`;
+}
+function updateBomSpare(tbody){
+  let sum=0;
+  tbody.querySelectorAll('.spare-input').forEach(i=>{ sum+=+(i.dataset.spare||0); });
+  const cell=tbody.querySelector('.spare-summary-cell');
+  if(cell) cell.textContent = sum>0 ? fm(sum) : '—';
 }
 
 /* ══════════════ COST TILES ══════════════ */
@@ -4007,7 +4025,7 @@ function buildBom1(){
   if(r2lb)  { h+=row(n++,r2lb.pn, 'Line — '+r2lb.sh+' 3R Regen Slot 1','LINE',rbSite,1,r2lb.price,'Protection'); a(1,r2lb.price); }
   if(r2lb2) { h+=row(n++,r2lb2.pn,'Line — '+r2lb2.sh+' 3R Regen Slot 2','LINE',rbSite,1,r2lb2.price,'Protection'); a(1,r2lb2.price); }
   if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected — use dropdowns above to configure</td></tr>`;
-  else { h+=totalRow(tot); h+=engServRow(tot); }
+  else { h+=totalRow(tot); h+=engServRow(tot); h+=spareRow(); }
   g('b1').innerHTML=h;
   costTiles('cg1',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4056,7 +4074,7 @@ function buildBom2(){
   if(rdlb)  { h+=row(n++,rdlb.pn, 'Line — '+rdlb.sh+' 3R Regen Slot 1','LINE','Regen D_'+rdn2,1,rdlb.price, 'Protection'); a(1,rdlb.price); }
   if(rdlb2) { h+=row(n++,rdlb2.pn,'Line — '+rdlb2.sh+' 3R Regen Slot 2','LINE','Regen D_'+rdn2,1,rdlb2.price,'Protection'); a(1,rdlb2.price); }
   if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected — use dropdowns above to configure</td></tr>`;
-  else { h+=totalRow(tot); h+=engServRow(tot); }
+  else { h+=totalRow(tot); h+=engServRow(tot); h+=spareRow(); }
   g('b2').innerHTML=h;
   costTiles('cg2',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4661,7 +4679,7 @@ function buildBom3(){
   if(klbW) { h+=row(n++,klbW.pn,'Line — '+klbW.sh+' (Working RX)',   'LINE','Sink_'+kn3,  1,klbW.price,''); a(1,klbW.price); }
   if(klbP) { h+=row(n++,klbP.pn,'Line — '+klbP.sh+' (Protection RX)','LINE','Sink_'+kn3,  1,klbP.price,''); a(1,klbP.price); }
   if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected — use dropdowns above to configure</td></tr>`;
-  else { h+=totalRow(tot); h+=engServRow(tot); }
+  else { h+=totalRow(tot); h+=engServRow(tot); h+=spareRow(); }
   g('b3').innerHTML=h;
   costTiles('cg3',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4708,7 +4726,7 @@ function buildBom4(){
   if(rflb)  { h+=row(n++,rflb.pn, 'Line — '+rflb.sh+' Regen Slot 1','LINE','Regen F_'+rfn4,1,rflb.price,'Protection'); a(1,rflb.price); }
   if(rflb2) { h+=row(n++,rflb2.pn,'Line — '+rflb2.sh+' Regen Slot 2','LINE','Regen F_'+rfn4,1,rflb2.price,'Protection'); a(1,rflb2.price); }
   if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected</td></tr>`;
-  else { h+=totalRow(tot); h+=engServRow(tot); }
+  else { h+=totalRow(tot); h+=engServRow(tot); h+=spareRow(); }
   g('b4').innerHTML=h;
   costTiles('cg4',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4770,7 +4788,7 @@ function buildBom5(){
   if(rhlb)  { h+=row(n++,rhlb.pn, 'Line — '+rhlb.sh+' Regen Slot 1','LINE','Regen H_'+rhn5,1,rhlb.price,'Protection'); a(1,rhlb.price); }
   if(rhlb2) { h+=row(n++,rhlb2.pn,'Line — '+rhlb2.sh+' Regen Slot 2','LINE','Regen H_'+rhn5,1,rhlb2.price,'Protection'); a(1,rhlb2.price); }
   if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected</td></tr>`;
-  else { h+=totalRow(tot); h+=engServRow(tot); }
+  else { h+=totalRow(tot); h+=engServRow(tot); h+=spareRow(); }
   g('b5').innerHTML=h;
   costTiles('cg5',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
