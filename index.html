@@ -680,6 +680,9 @@ tr.cst-total   { border-top: 2px solid var(--bd) !important; background: rgba(16
 tr.cst-total   .cst-bar { background: linear-gradient(180deg,var(--green2),var(--green)); }
 tr.cst-spare   .cst-bar { background: linear-gradient(180deg,var(--blue),var(--teal2)); }
 tr.cst-discount .cst-bar { background: linear-gradient(180deg,#f43f5e,#e11d48); }
+tr.cst-after   { background: rgba(244,63,94,.05); }
+tr.cst-after   .cst-bar { background: linear-gradient(180deg,#fb7185,#f43f5e); }
+tr.cst-after   .cst-name { color: #f43f5e; }
 tr.cst-eng     .cst-bar { background: linear-gradient(180deg,var(--purple2),var(--purple)); }
 tr.cst-grand   { border-top: 2px solid var(--bd) !important; background: rgba(239,68,68,.05); }
 tr.cst-grand   .cst-bar { background: linear-gradient(180deg,#f59e0b,#ef4444); }
@@ -3976,16 +3979,19 @@ function recalcGrand(elId, skipEngCalc){
   const enInput=g(elId+'-eng');
   const discountRaw = dcInput ? dcInput.value : '';
   const discountVal = discountRaw !== '' ? +discountRaw||0 : 0;
+  const afterDiscount = cards + spare - discountVal;
+  // Update After price discount row
+  const afEl=g(elId+'-after');
+  if(afEl) afEl.textContent = discountRaw !== '' ? fm(afterDiscount) : '—';
   if(!skipEngCalc && enInput){
     if(discountRaw === ''){
       enInput.value = '';
     } else {
-      const base = cards + spare - discountVal;
-      enInput.value = base > 0 ? +(base * 0.15).toFixed(2) : '';
+      enInput.value = afterDiscount > 0 ? +(afterDiscount * 0.15).toFixed(2) : '';
     }
   }
   const engVal = enInput ? +enInput.value||0 : 0;
-  const grandTotal = cards + spare - discountVal + engVal;
+  const grandTotal = afterDiscount + engVal;
   const gtEl=g(elId+'-grand');
   if(gtEl) gtEl.textContent = fm(grandTotal);
 }
@@ -4014,8 +4020,9 @@ function costTiles(elId,tribs,lines){
     ${row('cst-total','💰','Total — Cards Only','excl. chassis &amp; infrastructure',`<span style="color:var(--green2)">${fm(grand)}</span>`)}
     ${row('cst-spare','🔧','Spare Parts','from BOM spare inputs',`<span id="${elId}-spare" style="color:var(--blue)">—</span>`)}
     ${row('cst-discount','🏷️','One-off Discount <span class="cst-manual">(manual)</span>','Cards + Spare',`<span style="color:#f43f5e;font-size:15px;font-weight:700;margin-right:2px">−</span><input class="cst-input" id="${elId}-discount" type="number" min="0" step="0.01" placeholder="0.00" style="color:#f43f5e" oninput="recalcGrand('${elId}')">`)}
-    ${row('cst-eng','⚙️','Engineering Services 15% <span class="cst-manual">(manual)</span>','15% of (Cards + Spare − Discount)',`<input class="cst-input" id="${elId}-eng" type="number" min="0" step="0.01" placeholder="0.00" style="color:var(--purple2)" oninput="recalcGrand('${elId}',true)">`)}
-    ${row('cst-grand','🧾','Grand Total','(Cards + Spare) × 80% + Eng. Services',`<span id="${elId}-grand" style="color:var(--red)">${fm(grand)}</span>`)}
+    ${row('cst-after','💵','After price discount','Spare Parts Total + Cards Only − One-off Discount',`<span id="${elId}-after" style="color:#f43f5e">—</span>`)}
+    ${row('cst-eng','⚙️','Engineering Services 15% <span class="cst-manual">(manual)</span>','15% of After price discount',`<input class="cst-input" id="${elId}-eng" type="number" min="0" step="0.01" placeholder="0.00" style="color:var(--purple2)" oninput="recalcGrand('${elId}',true)">`)}
+    ${row('cst-grand','🧾','Grand Total','After price discount + Engineering Services 15%',`<span id="${elId}-grand" style="color:var(--red)">${fm(grand)}</span>`)}
   </tbody></table></div>`;
 }
 
