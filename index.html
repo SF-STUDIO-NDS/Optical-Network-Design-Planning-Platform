@@ -685,6 +685,22 @@ tr.cst-grand   { border-top: 2px solid var(--bd) !important; background: rgba(23
 tr.cst-grand   .cst-bar { background: linear-gradient(180deg,#f59e0b,#ef4444); }
 tr.cst-grand .cst-name   { font-size: 14px; }
 tr.cst-grand .cst-amount { font-size: 21px; }
+.cst-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed currentColor;
+  text-align: right;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Segoe UI Semibold','Segoe UI',Consolas,monospace;
+  width: 150px;
+  outline: none;
+  padding: 2px 0;
+  appearance: textfield;
+}
+.cst-input::-webkit-inner-spin-button,
+.cst-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.cst-input:focus { border-bottom-style: solid; }
 
 /* ══ BOM TABLE ═══════════════════════════ */
 .bom-wrap {
@@ -3952,22 +3968,26 @@ function updateBomSpare(tbody){
   // sync cost summary table
   const cgId='cg'+(tbody.id||'').replace(/\D/g,'');
   const cg=g(cgId); if(!cg) return;
-  const cards=+(cg.dataset.cards||0);
-  const discountAmt=(cards+sum)*0.20;
-  const discounted=(cards+sum)*0.80;
-  const engFee=discounted*0.15;
-  const grandTotal=discounted+engFee;
+  cg.dataset.spare=sum;
   // update BOM Engineering Services row (still in BOM table)
+  const cards=+(cg.dataset.cards||0);
   const bomEng=tbody.querySelector('.bom-eng-cell');
-  if(bomEng) bomEng.textContent=fm(engFee);
-  // update cost summary cells
+  if(bomEng) bomEng.textContent=fm((cards+sum)*0.80*0.15);
+  // update spare display and recalc grand from current manual inputs
   const spEl=g(cgId+'-spare');
   if(spEl) spEl.textContent = sum>0 ? fm(sum) : '—';
-  const dcEl=g(cgId+'-discount');
-  if(dcEl) dcEl.textContent = '−'+fm(discountAmt);
-  const enEl=g(cgId+'-eng');
-  if(enEl) enEl.textContent = fm(engFee);
-  const gtEl=g(cgId+'-grand');
+  recalcGrand(cgId);
+}
+function recalcGrand(elId){
+  const cg=g(elId); if(!cg) return;
+  const cards=+(cg.dataset.cards||0);
+  const spare=+(cg.dataset.spare||0);
+  const dcInput=g(elId+'-discount');
+  const enInput=g(elId+'-eng');
+  const discountVal = dcInput ? +dcInput.value||0 : 0;
+  const engVal      = enInput ? +enInput.value||0 : 0;
+  const grandTotal  = cards + spare - discountVal + engVal;
+  const gtEl=g(elId+'-grand');
   if(gtEl) gtEl.textContent = fm(grandTotal);
 }
 
@@ -3979,9 +3999,10 @@ function costTiles(elId,tribs,lines){
   lines.forEach(i=>{ if(i&&i.p&&i.q) lT+=i.p*i.q; });
   const grand=tT+lT;
   el.dataset.cards=grand;
-  const discountAmt=grand*0.20;
+  el.dataset.spare=0;
+  const discountAmt=+(grand*0.20).toFixed(2);
   const discounted=grand*0.80;
-  const engFee=discounted*0.15;
+  const engFee=+(discounted*0.15).toFixed(2);
   const grandTotal=discounted+engFee;
   const row=(cls,ic,name,desc,valHtml)=>`
     <tr class="${cls}">
@@ -3993,8 +4014,8 @@ function costTiles(elId,tribs,lines){
   el.innerHTML=`<div class="cst-wrap"><table class="cst-tbl"><tbody>
     ${row('cst-total','💰','Total — Cards Only','excl. chassis &amp; infrastructure',`<span style="color:var(--green2)">${fm(grand)}</span>`)}
     ${row('cst-spare','🔧','Spare Parts','from BOM spare inputs',`<span id="${elId}-spare" style="color:var(--blue)">—</span>`)}
-    ${row('cst-discount','🏷️','One-off Discount','Cards + Spare',`<span id="${elId}-discount" style="color:#f43f5e">−${fm(discountAmt)}</span>`)}
-    ${row('cst-eng','⚙️','Engineering Services 15%','15% of (Cards + Spare) × 80%',`<span id="${elId}-eng" style="color:var(--purple2)">${fm(engFee)}</span>`)}
+    ${row('cst-discount','🏷️','One-off Discount','Cards + Spare',`<span style="color:#f43f5e;font-size:15px;font-weight:700;margin-right:2px">−</span><input class="cst-input" id="${elId}-discount" type="number" min="0" step="0.01" value="${discountAmt}" style="color:#f43f5e" oninput="recalcGrand('${elId}')">`)}
+    ${row('cst-eng','⚙️','Engineering Services 15%','15% of (Cards + Spare) × 80%',`<input class="cst-input" id="${elId}-eng" type="number" min="0" step="0.01" value="${engFee}" style="color:var(--purple2)" oninput="recalcGrand('${elId}')">`)}
     ${row('cst-grand','🧾','Grand Total','(Cards + Spare) × 80% + Eng. Services',`<span id="${elId}-grand" style="color:var(--red)">${fm(grandTotal)}</span>`)}
   </tbody></table></div>`;
 }
