@@ -3915,7 +3915,7 @@ function row(n,pn,desc,type,site,qty,up,rmk){
     <td class="pno">${safePn}</td>
     <td style="font-size:11px">${safeDesc}</td>
     <td><span class="bdg ${cls}">${safeType}</span></td>
-    <td style="font-size:15px;font-weight:700;color:var(--txt)">${escHtml(site)}</td>
+    <td style="font-size:15px;font-weight:700;color:var(--txt)">${escHtml(site.split('_').slice(1).join('_')||'-')}</td>
     <td class="qty-cell">${qty}</td>
     <td class="usd-cell">${fmU(up)}</td>
     <td class="tot-cell">${fmU(tot)}</td>
@@ -4031,10 +4031,10 @@ function buildBom1(){
   const ktb   = TB[gv('a1-ktb')]   || null;
   const klbW  = LB[gv('a1-klbw')]  || null;
   const klbP  = LB[gv('a1-klbp')]  || null;
-  const sn  = gv('a1-sname')  || 'Source';
-  const kn  = gv('a1-kname')  || 'Sink';
-  const ran = gv('a1-raname') || 'Regen A';
-  const rbn = gv('a1-rbname') || 'Regen B';
+  const sn  = gv('a1-sname')  || '';
+  const kn  = gv('a1-kname')  || '';
+  const ran = gv('a1-raname') || '';
+  const rbn = gv('a1-rbname') || '';
   const srcSite = 'Source_'+sn;
   const snkSite = 'Sink_'+kn;
   const raSite  = 'Regen A_'+ran;
@@ -4078,12 +4078,12 @@ function buildBom2(){
   const ktb   = TB[gv('b1-ktb')]   || null;
   const klbW  = LB[gv('b1-klbw')]  || null;
   const klbP  = LB[gv('b1-klbp')]  || null;
-  const sn2  = gv('b1-sname')  || 'Source';
-  const kn2  = gv('b1-kname')  || 'Sink';
-  const ran2 = gv('b1-raname') || 'Regen A';
-  const rbn2 = gv('b1-rbname') || 'Regen B';
-  const rcn2 = gv('b1-rcname') || 'Regen C';
-  const rdn2 = gv('b1-rdname') || 'Regen D';
+  const sn2  = gv('b1-sname')  || '';
+  const kn2  = gv('b1-kname')  || '';
+  const ran2 = gv('b1-raname') || '';
+  const rbn2 = gv('b1-rbname') || '';
+  const rcn2 = gv('b1-rcname') || '';
+  const rdn2 = gv('b1-rdname') || '';
   let h='',n=1,tot=0;
   const a=(q,p)=>{ if(q&&p) tot+=q*p; };
   if(stb)   { h+=row(n++,stb.pn,  'Tributary — '+stb.sh,  'TRIB','Source_'+sn2,1,stb.price,''); a(1,stb.price); }
@@ -4726,14 +4726,14 @@ function buildBom4(){
   const klbW  = LB[gv('d1-klbw')]  || null; const klbP  = LB[gv('d1-klbp')]  || null;
   let h='',n=1,tot=0;
   const a=(q,p)=>{ if(q&&p) tot+=q*p; };
-  const sn4  = gv('d1-sname')  || 'Source';
-  const kn4  = gv('d1-kname')  || 'Sink';
-  const ran4 = gv('d1-raname') || 'Regen A';
-  const rbn4 = gv('d1-rbname') || 'Regen B';
-  const rcn4 = gv('d1-rcname') || 'Regen C';
-  const rdn4 = gv('d1-rdname') || 'Regen D';
-  const ren4 = gv('d1-rename') || 'Regen E';
-  const rfn4 = gv('d1-rfname') || 'Regen F';
+  const sn4  = gv('d1-sname')  || '';
+  const kn4  = gv('d1-kname')  || '';
+  const ran4 = gv('d1-raname') || '';
+  const rbn4 = gv('d1-rbname') || '';
+  const rcn4 = gv('d1-rcname') || '';
+  const rdn4 = gv('d1-rdname') || '';
+  const ren4 = gv('d1-rename') || '';
+  const rfn4 = gv('d1-rfname') || '';
   if(stb)   { h+=row(n++,stb.pn,  'Tributary — '+stb.sh, 'TRIB','Source_'+sn4,1,stb.price,''); a(1,stb.price); }
   if(slbW)  { h+=row(n++,slbW.pn, 'Line — '+slbW.sh+' Working TX',  'LINE','Source_'+sn4,1,slbW.price,''); a(1,slbW.price); }
   if(slbP)  { h+=row(n++,slbP.pn, 'Line — '+slbP.sh+' Protection TX','LINE','Source_'+sn4,1,slbP.price,''); a(1,slbP.price); }
@@ -4782,16 +4782,16 @@ function buildBom5(){
   const klbW  = LB[gv('e1-klbw')]  || null; const klbP  = LB[gv('e1-klbp')]  || null;
   let h='',n=1,tot=0;
   const a=(q,p)=>{ if(q&&p) tot+=q*p; };
-  const sn5  = gv('e1-sname')  || 'Source';
-  const kn5  = gv('e1-kname')  || 'Sink';
-  const ran5 = gv('e1-raname') || 'Regen A';
-  const rbn5 = gv('e1-rbname') || 'Regen B';
-  const rcn5 = gv('e1-rcname') || 'Regen C';
-  const rdn5 = gv('e1-rdname') || 'Regen D';
-  const ren5 = gv('e1-rename') || 'Regen E';
-  const rfn5 = gv('e1-rfname') || 'Regen F';
-  const rgn5 = gv('e1-rgname') || 'Regen G';
-  const rhn5 = gv('e1-rhname') || 'Regen H';
+  const sn5  = gv('e1-sname')  || '';
+  const kn5  = gv('e1-kname')  || '';
+  const ran5 = gv('e1-raname') || '';
+  const rbn5 = gv('e1-rbname') || '';
+  const rcn5 = gv('e1-rcname') || '';
+  const rdn5 = gv('e1-rdname') || '';
+  const ren5 = gv('e1-rename') || '';
+  const rfn5 = gv('e1-rfname') || '';
+  const rgn5 = gv('e1-rgname') || '';
+  const rhn5 = gv('e1-rhname') || '';
   if(stb)   { h+=row(n++,stb.pn,  'Tributary — '+stb.sh, 'TRIB','Source_'+sn5,1,stb.price,''); a(1,stb.price); }
   if(slbW)  { h+=row(n++,slbW.pn, 'Line — '+slbW.sh+' Working TX',   'LINE','Source_'+sn5,1,slbW.price,''); a(1,slbW.price); }
   if(slbP)  { h+=row(n++,slbP.pn, 'Line — '+slbP.sh+' Protection TX','LINE','Source_'+sn5,1,slbP.price,''); a(1,slbP.price); }
