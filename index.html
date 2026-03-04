@@ -4219,12 +4219,20 @@ function validate(cfg, panelId) {
 
   // ── R04  Tributary ports ≤ Line card ports ──────────────────────────────
   if (stb && slbW && tpts(stb) > pts(slbW) && !is400G(slbW)) {
-    errs.push({ level:'warn', title:`R04 · Source: Tributary ports (${tpts(stb)}) > Line ports (${pts(slbW)})`, body:'จำนวน client port ของ Tributary card มากกว่า line port ที่รองรับ อาจต้องเพิ่ม Line Board หรือเปลี่ยนเป็น 2-port variant' });
+    errs.push({ level:'warn', title:`R04 · Source Working: Tributary ports (${tpts(stb)}) > Line ports (${pts(slbW)})`, body:'จำนวน client port ของ Tributary card มากกว่า line port ที่รองรับ อาจต้องเพิ่ม Line Board หรือเปลี่ยนเป็น 2-port variant' });
     mark([stbId, slbWId], 'warn');
   }
+  if (stb && slbP && tpts(stb) > pts(slbP) && !is400G(slbP)) {
+    errs.push({ level:'warn', title:`R04 · Source Protection: Tributary ports (${tpts(stb)}) > Line ports (${pts(slbP)})`, body:'Protection Line Board มี port น้อยกว่า Tributary card ควรเปลี่ยนเป็น 2-port variant' });
+    mark([stbId, slbPId], 'warn');
+  }
   if (ktb && klbW && tpts(ktb) > pts(klbW) && !is400G(klbW)) {
-    errs.push({ level:'warn', title:`R04 · Sink: Tributary ports (${tpts(ktb)}) > Line ports (${pts(klbW)})`, body:'จำนวน client port ของ Tributary card มากกว่า line port ที่รองรับ' });
+    errs.push({ level:'warn', title:`R04 · Sink Working: Tributary ports (${tpts(ktb)}) > Line ports (${pts(klbW)})`, body:'จำนวน client port ของ Tributary card มากกว่า line port ที่รองรับ' });
     mark([ktbId, klbWId], 'warn');
+  }
+  if (ktb && klbP && tpts(ktb) > pts(klbP) && !is400G(klbP)) {
+    errs.push({ level:'warn', title:`R04 · Sink Protection: Tributary ports (${tpts(ktb)}) > Line ports (${pts(klbP)})`, body:'Protection Line Board ที่ Sink มี port น้อยกว่า Tributary card' });
+    mark([ktbId, klbPId], 'warn');
   }
 
   // ── R07  Working vs Protection gen must match at Source & Sink ──────────
@@ -4268,12 +4276,20 @@ function validate(cfg, panelId) {
 
   // ── R08  T404 needs adequate line capacity ──────────────────────────────
   if (stb && stb.ports === 4 && slbW && !is400G(slbW) && pts(slbW) < 2) {
-    errs.push({ level:'warn', title:'R08 · T404 (4-port) + N402 1×100G (Source)', body:'T404 มี 4 client port แต่ N402 1×100G รองรับได้แค่ 1 working channel ควรใช้ N402 2×100G หรือ N602 2×400G' });
+    errs.push({ level:'warn', title:'R08 · T404 (4-port) + N402 1×100G Working (Source)', body:'T404 มี 4 client port แต่ N402 1×100G รองรับได้แค่ 1 working channel ควรใช้ N402 2×100G หรือ N602 2×400G' });
     mark([stbId, slbWId], 'warn');
   }
+  if (stb && stb.ports === 4 && slbP && !is400G(slbP) && pts(slbP) < 2) {
+    errs.push({ level:'warn', title:'R08 · T404 (4-port) + N402 1×100G Protection (Source)', body:'T404 มี 4 client port แต่ N402 1×100G Protection รองรับได้แค่ 1 channel ควรใช้ N402 2×100G หรือ N602 2×400G' });
+    mark([stbId, slbPId], 'warn');
+  }
   if (ktb && ktb.ports === 4 && klbW && !is400G(klbW) && pts(klbW) < 2) {
-    errs.push({ level:'warn', title:'R08 · T404 (4-port) + N402 1×100G (Sink)', body:'T404 มี 4 client port แต่ N402 1×100G รองรับได้แค่ 1 working channel ที่ Sink' });
+    errs.push({ level:'warn', title:'R08 · T404 (4-port) + N402 1×100G Working (Sink)', body:'T404 มี 4 client port แต่ N402 1×100G รองรับได้แค่ 1 working channel ที่ Sink' });
     mark([ktbId, klbWId], 'warn');
+  }
+  if (ktb && ktb.ports === 4 && klbP && !is400G(klbP) && pts(klbP) < 2) {
+    errs.push({ level:'warn', title:'R08 · T404 (4-port) + N402 1×100G Protection (Sink)', body:'T404 มี 4 client port แต่ N402 1×100G Protection รองรับได้แค่ 1 channel ที่ Sink' });
+    mark([ktbId, klbPId], 'warn');
   }
 
   // ── R02  Each regen gen must match its path Source gen ──────────────────
