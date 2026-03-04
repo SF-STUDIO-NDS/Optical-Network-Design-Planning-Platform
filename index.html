@@ -3968,15 +3968,20 @@ function updateBomSpare(tbody){
   if(spEl) spEl.textContent = sum>0 ? fm(sum) : '—';
   recalcGrand(cgId);
 }
-function recalcGrand(elId){
+function recalcGrand(elId, skipEngCalc){
   const cg=g(elId); if(!cg) return;
   const cards=+(cg.dataset.cards||0);
   const spare=+(cg.dataset.spare||0);
   const dcInput=g(elId+'-discount');
   const enInput=g(elId+'-eng');
   const discountVal = dcInput ? +dcInput.value||0 : 0;
-  const engVal      = enInput ? +enInput.value||0 : 0;
-  const grandTotal  = cards + spare - discountVal + engVal;
+  if(!skipEngCalc && enInput){
+    const base = cards + spare - discountVal;
+    const autoEng = base > 0 ? +(base * 0.15).toFixed(2) : 0;
+    enInput.value = autoEng > 0 ? autoEng : '';
+  }
+  const engVal = enInput ? +enInput.value||0 : 0;
+  const grandTotal = cards + spare - discountVal + engVal;
   const gtEl=g(elId+'-grand');
   if(gtEl) gtEl.textContent = fm(grandTotal);
 }
@@ -4005,7 +4010,7 @@ function costTiles(elId,tribs,lines){
     ${row('cst-total','💰','Total — Cards Only','excl. chassis &amp; infrastructure',`<span style="color:var(--green2)">${fm(grand)}</span>`)}
     ${row('cst-spare','🔧','Spare Parts','from BOM spare inputs',`<span id="${elId}-spare" style="color:var(--blue)">—</span>`)}
     ${row('cst-discount','🏷️','One-off Discount <span class="cst-manual">(manual)</span>','Cards + Spare',`<span style="color:#f43f5e;font-size:15px;font-weight:700;margin-right:2px">−</span><input class="cst-input" id="${elId}-discount" type="number" min="0" step="0.01" placeholder="0.00" style="color:#f43f5e" oninput="recalcGrand('${elId}')">`)}
-    ${row('cst-eng','⚙️','Engineering Services 15% <span class="cst-manual">(manual)</span>','15% of (Cards + Spare) × 80%',`<input class="cst-input" id="${elId}-eng" type="number" min="0" step="0.01" placeholder="0.00" style="color:var(--purple2)" oninput="recalcGrand('${elId}')">`)}
+    ${row('cst-eng','⚙️','Engineering Services 15% <span class="cst-manual">(manual)</span>','15% of (Cards + Spare − Discount)',`<input class="cst-input" id="${elId}-eng" type="number" min="0" step="0.01" placeholder="0.00" style="color:var(--purple2)" oninput="recalcGrand('${elId}',true)">`)}
     ${row('cst-grand','🧾','Grand Total','(Cards + Spare) × 80% + Eng. Services',`<span id="${elId}-grand" style="color:var(--red)">${fm(grand)}</span>`)}
   </tbody></table></div>`;
 }
