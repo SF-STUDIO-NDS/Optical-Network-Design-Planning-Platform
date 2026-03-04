@@ -4132,7 +4132,7 @@ function buildBom2(){
    Rules:
    R01  Line card gen must be same across Working & Protection on same path
    R02  Working line card (Source) must match Regen line card (same gen/speed)
-   R03  Working and Protection line cards must carry same speed (ports-count match)
+   R03  Source total port count (Working+Protection) must equal Sink total port count
    R04  Tributary ports must be ≤ Line card ports (no orphaned clients)
    R05  Regen must have line card selected (can't be empty)
    R06  Source & Sink must have both Tributary and Line cards
@@ -4245,14 +4245,12 @@ function validate(cfg, panelId) {
     mark([klbWId, klbPId], 'err');
   }
 
-  // ── R03  Working port count should match Protection port count ──────────
-  if (slbW && slbP && pts(slbW) !== pts(slbP)) {
-    errs.push({ level:'warn', title:'R03 · Port Count Mismatch: Working vs Protection (Source)', body:`Working มี ${pts(slbW)} port, Protection มี ${pts(slbP)} port — ควรเท่ากันเพื่อ capacity สมมาตร` });
-    mark([slbWId, slbPId], 'warn');
-  }
-  if (klbW && klbP && pts(klbW) !== pts(klbP)) {
-    errs.push({ level:'warn', title:'R03 · Port Count Mismatch: Working vs Protection (Sink)', body:`Working มี ${pts(klbW)} port, Protection มี ${pts(klbP)} port — ควรเท่ากัน` });
-    mark([klbWId, klbPId], 'warn');
+  // ── R03  Source total ports (W+P) must equal Sink total ports (W+P) ────
+  const srcTotal  = pts(slbW) + pts(slbP);
+  const sinkTotal = pts(klbW) + pts(klbP);
+  if ((slbW || slbP) && (klbW || klbP) && srcTotal !== sinkTotal) {
+    errs.push({ level:'err', title:'R03 · Port Count Mismatch: Source vs Sink', body:`Source รวม ${srcTotal} port (Working ${pts(slbW)} + Protection ${pts(slbP)}), Sink รวม ${sinkTotal} port (Working ${pts(klbW)} + Protection ${pts(klbP)}) — ต้องเท่ากัน` });
+    mark([slbWId, slbPId, klbWId, klbPId], 'err');
   }
 
   // ── R10  End-to-end path gen consistency (Working) ──────────────────────
