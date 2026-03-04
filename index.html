@@ -3991,11 +3991,9 @@ function costTiles(elId,tribs,lines){
       <td class="cst-amount">${valHtml}</td>
     </tr>`;
   el.innerHTML=`<div class="cst-wrap"><table class="cst-tbl"><tbody>
-    ${row('cst-trib','📥','Tributary Boards','T402 / T404 cards',`<span style="color:var(--teal)">${fm(tT)}</span>`)}
-    ${row('cst-line','🔀','Line Boards','N402 / N801 / N602 + CFP',`<span style="color:var(--amber2)">${fm(lT)}</span>`)}
     ${row('cst-total','💰','Total — Cards Only','excl. chassis &amp; infrastructure',`<span style="color:var(--green2)">${fm(grand)}</span>`)}
     ${row('cst-spare','🔧','Spare Parts','from BOM spare inputs',`<span id="${elId}-spare" style="color:var(--blue)">—</span>`)}
-    ${row('cst-discount','🏷️','One-off Discount 20%','20% off (Cards + Spare)',`<span id="${elId}-discount" style="color:#f43f5e">−${fm(discountAmt)}</span>`)}
+    ${row('cst-discount','🏷️','One-off Discount','Cards + Spare',`<span id="${elId}-discount" style="color:#f43f5e">−${fm(discountAmt)}</span>`)}
     ${row('cst-eng','⚙️','Engineering Services 15%','15% of (Cards + Spare) × 80%',`<span id="${elId}-eng" style="color:var(--purple2)">${fm(engFee)}</span>`)}
     ${row('cst-grand','🧾','Grand Total','(Cards + Spare) × 80% + Eng. Services',`<span id="${elId}-grand" style="color:var(--red)">${fm(grandTotal)}</span>`)}
   </tbody></table></div>`;
