@@ -680,6 +680,7 @@ tr.cst-total   { border-top: 2px solid var(--bd) !important; background: rgba(16
 tr.cst-total   .cst-bar { background: linear-gradient(180deg,var(--green2),var(--green)); }
 tr.cst-spare   .cst-bar { background: linear-gradient(180deg,var(--blue),var(--teal2)); }
 tr.cst-discount .cst-bar { background: linear-gradient(180deg,#f43f5e,#e11d48); }
+tr.cst-eng     .cst-bar { background: linear-gradient(180deg,var(--purple2),var(--purple)); }
 tr.cst-grand   { border-top: 2px solid var(--bd) !important; background: rgba(239,68,68,.05); }
 tr.cst-grand   .cst-bar { background: linear-gradient(180deg,#f59e0b,#ef4444); }
 tr.cst-grand .cst-name   { font-size: 14px; }
@@ -3953,9 +3954,10 @@ function updateBomSpare(tbody){
   const cg=g(cgId); if(!cg) return;
   const cards=+(cg.dataset.cards||0);
   const discountAmt=(cards+sum)*0.20;
-  const grandTotal=(cards+sum)*0.80;
+  const discounted=(cards+sum)*0.80;
+  const engFee=discounted*0.15;
+  const grandTotal=discounted+engFee;
   // update BOM Engineering Services row (still in BOM table)
-  const engFee=(cards+sum)*0.15;
   const bomEng=tbody.querySelector('.bom-eng-cell');
   if(bomEng) bomEng.textContent=fm(engFee);
   // update cost summary cells
@@ -3963,6 +3965,8 @@ function updateBomSpare(tbody){
   if(spEl) spEl.textContent = sum>0 ? fm(sum) : '—';
   const dcEl=g(cgId+'-discount');
   if(dcEl) dcEl.textContent = '−'+fm(discountAmt);
+  const enEl=g(cgId+'-eng');
+  if(enEl) enEl.textContent = fm(engFee);
   const gtEl=g(cgId+'-grand');
   if(gtEl) gtEl.textContent = fm(grandTotal);
 }
@@ -3976,7 +3980,9 @@ function costTiles(elId,tribs,lines){
   const grand=tT+lT;
   el.dataset.cards=grand;
   const discountAmt=grand*0.20;
-  const grandAfterDiscount=grand*0.80;
+  const discounted=grand*0.80;
+  const engFee=discounted*0.15;
+  const grandTotal=discounted+engFee;
   const row=(cls,ic,name,desc,valHtml)=>`
     <tr class="${cls}">
       <td class="cst-bar"></td>
@@ -3990,7 +3996,8 @@ function costTiles(elId,tribs,lines){
     ${row('cst-total','💰','Total — Cards Only','excl. chassis &amp; infrastructure',`<span style="color:var(--green2)">${fm(grand)}</span>`)}
     ${row('cst-spare','🔧','Spare Parts','from BOM spare inputs',`<span id="${elId}-spare" style="color:var(--blue)">—</span>`)}
     ${row('cst-discount','🏷️','One-off Discount 20%','20% off (Cards + Spare)',`<span id="${elId}-discount" style="color:#f43f5e">−${fm(discountAmt)}</span>`)}
-    ${row('cst-grand','🧾','Grand Total','(Cards + Spare) × 80%',`<span id="${elId}-grand" style="color:var(--red)">${fm(grandAfterDiscount)}</span>`)}
+    ${row('cst-eng','⚙️','Engineering Services 15%','15% of (Cards + Spare) × 80%',`<span id="${elId}-eng" style="color:var(--purple2)">${fm(engFee)}</span>`)}
+    ${row('cst-grand','🧾','Grand Total','(Cards + Spare) × 80% + Eng. Services',`<span id="${elId}-grand" style="color:var(--red)">${fm(grandTotal)}</span>`)}
   </tbody></table></div>`;
 }
 
