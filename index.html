@@ -656,36 +656,34 @@ button:focus-visible, .tab:focus-visible { outline: 2px solid var(--blue2); outl
 .diag-box canvas { display: block; max-width: 100%; margin: 0 auto; }
 .canvas-scroll-hint { display: none; text-align: center; font-size: var(--fs-xs); color: var(--txt3); padding: 4px 0 8px; letter-spacing: .5px; }
 
-/* ══ COST TILES ══════════════════════════ */
-.cost-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
-.cost-tile {
+/* ══ COST SUMMARY TABLE ══════════════════ */
+.cost-grid { margin-bottom: 20px; }
+.cst-wrap {
   background: var(--surface);
   border: 1px solid var(--bd);
   border-radius: var(--radius);
-  padding: 18px 20px;
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
-  position: relative; overflow: hidden;
-  transition: box-shadow .15s, transform .15s;
 }
-.cost-tile:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
-.cost-tile::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-}
-.cost-tile.ct-trib::before  { background: linear-gradient(90deg,var(--teal2),var(--blue2)); }
-.cost-tile.ct-line::before  { background: linear-gradient(90deg,var(--amber2),var(--amber)); }
-.cost-tile.ct-total::before { background: linear-gradient(90deg,var(--green2),var(--green)); }
-.cost-tile.ct-eng::before   { background: linear-gradient(90deg,var(--purple2),var(--purple)); }
-.cost-tile.ct-spare::before { background: linear-gradient(90deg,#14b8a6,#0891b2); }
-.cost-tile.ct-grand::before    { background: linear-gradient(90deg,#f59e0b,#ef4444); }
-.cost-tile.ct-discount::before { background: linear-gradient(90deg,#f43f5e,#e11d48); }
-.cost-tile-icon {
-  width: 38px; height: 38px; border-radius: 9px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: var(--fs-lg); margin-bottom: 10px;
-}
-.cost-lbl { font-size: var(--fs-xl); color: var(--txt3); font-weight: 500; margin-bottom: 4px; letter-spacing: .5px; text-transform: uppercase; }
-.cost-val { font-weight: 700; font-family: 'Segoe UI Semibold', 'Segoe UI', Consolas, monospace; }
-.cost-sub { font-size: var(--fs-xl); color: var(--txt3); margin-top: 4px; font-family: 'Segoe UI Semibold', 'Segoe UI', Consolas, monospace; }
+.cst-tbl { width: 100%; border-collapse: collapse; }
+.cst-tbl tr + tr { border-top: 1px solid var(--bd); }
+.cst-tbl td { padding: 13px 18px; vertical-align: middle; }
+.cst-ic   { width: 42px; text-align: center; font-size: 18px; }
+.cst-name { font-size: 13px; font-weight: 600; color: var(--txt1); }
+.cst-desc { font-size: 11px; color: var(--txt3); margin-top: 2px; font-family: 'Segoe UI Semibold','Segoe UI',Consolas,monospace; }
+.cst-amount { text-align: right; font-size: 18px; font-weight: 700;
+  font-family: 'Segoe UI Semibold','Segoe UI',Consolas,monospace; white-space: nowrap; padding-right: 20px; }
+.cst-bar  { width: 4px; padding: 0; }
+tr.cst-trib    .cst-bar { background: linear-gradient(180deg,var(--teal2),var(--blue2)); }
+tr.cst-line    .cst-bar { background: linear-gradient(180deg,var(--amber2),var(--amber)); }
+tr.cst-total   { border-top: 2px solid var(--bd) !important; background: rgba(16,185,129,.05); }
+tr.cst-total   .cst-bar { background: linear-gradient(180deg,var(--green2),var(--green)); }
+tr.cst-spare   .cst-bar { background: linear-gradient(180deg,var(--blue),var(--teal2)); }
+tr.cst-discount .cst-bar { background: linear-gradient(180deg,#f43f5e,#e11d48); }
+tr.cst-grand   { border-top: 2px solid var(--bd) !important; background: rgba(239,68,68,.05); }
+tr.cst-grand   .cst-bar { background: linear-gradient(180deg,#f59e0b,#ef4444); }
+tr.cst-grand .cst-name   { font-size: 14px; }
+tr.cst-grand .cst-amount { font-size: 21px; }
 
 /* ══ BOM TABLE ═══════════════════════════ */
 .bom-wrap {
@@ -980,7 +978,7 @@ footer {
 @media (max-width: 1024px) {
   .cfg-opt1 { grid-template-columns: repeat(2,1fr); }
   .cfg-opt2 { grid-template-columns: repeat(3,1fr); }
-  .cost-grid { grid-template-columns: repeat(3,1fr); }
+
   .h-badge { display: none; }
   #clk { display: none; }
   .canvas-scroll-hint { display: block; }
@@ -1022,9 +1020,9 @@ footer {
   .cfg-opt1 { grid-template-columns: 1fr 1fr; }
   .cfg-opt2 { grid-template-columns: 1fr 1fr; }
 
-  /* ── Cost tiles ── */
-  .cost-grid { grid-template-columns: 1fr; gap: 10px; }
-  .cost-tile { padding: 14px 16px; }
+  /* ── Cost summary ── */
+  .cst-tbl td { padding: 10px 12px; }
+  .cst-amount { font-size: 15px !important; padding-right: 12px; }
   .cost-lbl { font-size: var(--fs-xs); }
 
   /* ── BOM Table ── */
@@ -3950,83 +3948,50 @@ function updateBomSpare(tbody){
   tbody.querySelectorAll('.spare-input').forEach(i=>{ sum+=+(i.dataset.spare||0); });
   const cell=tbody.querySelector('.spare-summary-cell');
   if(cell) cell.textContent = sum>0 ? fm(sum) : '—';
-  // sync cost tiles
+  // sync cost summary table
   const cgId='cg'+(tbody.id||'').replace(/\D/g,'');
   const cg=g(cgId); if(!cg) return;
   const cards=+(cg.dataset.cards||0);
+  const discountAmt=(cards+sum)*0.20;
+  const grandTotal=(cards+sum)*0.80;
+  // update BOM Engineering Services row (still in BOM table)
   const engFee=(cards+sum)*0.15;
-  const total=cards+sum+engFee;
-  const sz=v=>v>999999?17:v>99999?20:22;
-  // update BOM Engineering Services row
   const bomEng=tbody.querySelector('.bom-eng-cell');
   if(bomEng) bomEng.textContent=fm(engFee);
-  // update cost tiles
-  const engEl=g(cgId+'-eng');
-  if(engEl){ engEl.textContent=fm(engFee); engEl.style.fontSize=sz(engFee)+'px'; }
+  // update cost summary cells
   const spEl=g(cgId+'-spare');
-  if(spEl){ spEl.textContent=fm(sum); spEl.style.fontSize=sz(sum)+'px'; }
-  const discountVal=(cards+sum)*0.8;
+  if(spEl) spEl.textContent = sum>0 ? fm(sum) : '—';
   const dcEl=g(cgId+'-discount');
-  if(dcEl){ dcEl.textContent=fm(discountVal); dcEl.style.fontSize=sz(discountVal)+'px'; }
+  if(dcEl) dcEl.textContent = '−'+fm(discountAmt);
   const gtEl=g(cgId+'-grand');
-  if(gtEl){ gtEl.textContent=fm(total); gtEl.style.fontSize=sz(total)+'px'; }
-  const subEl=g(cgId+'-grand-sub');
-  if(subEl) subEl.textContent='Cards + Engineering + Spare';
+  if(gtEl) gtEl.textContent = fm(grandTotal);
 }
 
-/* ══════════════ COST TILES ══════════════ */
+/* ══════════════ COST SUMMARY TABLE ══════════════ */
 function costTiles(elId,tribs,lines){
   const el=g(elId); if(!el) return;
   let tT=0,lT=0;
   tribs.forEach(i=>{ if(i&&i.p&&i.q) tT+=i.p*i.q; });
   lines.forEach(i=>{ if(i&&i.p&&i.q) lT+=i.p*i.q; });
   const grand=tT+lT;
-  const engFee=grand*0.15;
-  el.dataset.cards=grand; el.dataset.eng=engFee;
-  const sz=v=>v>999999?17:v>99999?20:22;
-  el.innerHTML=`
-    <div class="cost-tile ct-trib">
-      <div class="cost-tile-icon" style="background:var(--teal-bg)">📥</div>
-      <div class="cost-lbl">Tributary Boards</div>
-      <div class="cost-val" style="color:var(--teal);font-size:${sz(tT)}px">${fm(tT)}</div>
-      <div class="cost-sub">T402 / T404 cards</div>
-    </div>
-    <div class="cost-tile ct-line">
-      <div class="cost-tile-icon" style="background:var(--amber-bg)">🔀</div>
-      <div class="cost-lbl">Line Boards</div>
-      <div class="cost-val" style="color:var(--amber2);font-size:${sz(lT)}px">${fm(lT)}</div>
-      <div class="cost-sub">N402 / N801 / N602 + CFP</div>
-    </div>
-    <div class="cost-tile ct-total">
-      <div class="cost-tile-icon" style="background:var(--green-bg)">💰</div>
-      <div class="cost-lbl">Total — Cards Only</div>
-      <div class="cost-val" style="color:var(--green);font-size:${sz(grand)}px">${fm(grand)}</div>
-      <div class="cost-sub">excl. chassis &amp; infrastructure</div>
-    </div>
-    <div class="cost-tile ct-discount">
-      <div class="cost-tile-icon" style="background:rgba(244,63,94,.12)">🏷️</div>
-      <div class="cost-lbl">One-off Discount 20%</div>
-      <div class="cost-val" id="${elId}-discount" style="color:#f43f5e;font-size:${sz(grand*0.8)}px">${fm(grand*0.8)}</div>
-      <div class="cost-sub">Cards + Spare × 80%</div>
-    </div>
-    <div class="cost-tile ct-eng">
-      <div class="cost-tile-icon" style="background:var(--purple-bg)">⚙️</div>
-      <div class="cost-lbl">Engineering Services</div>
-      <div class="cost-val" id="${elId}-eng" style="color:var(--purple2);font-size:${sz(engFee)}px">${fm(engFee)}</div>
-      <div class="cost-sub">15% of CARDS + SPARE</div>
-    </div>
-    <div class="cost-tile ct-spare">
-      <div class="cost-tile-icon" style="background:rgba(20,184,166,.12)">🔧</div>
-      <div class="cost-lbl">Spare Parts</div>
-      <div class="cost-val" id="${elId}-spare" style="color:var(--teal);font-size:${sz(0)}px">${fm(0)}</div>
-      <div class="cost-sub">from BOM spare inputs</div>
-    </div>
-    <div class="cost-tile ct-grand">
-      <div class="cost-tile-icon" style="background:rgba(239,68,68,.12)">🧾</div>
-      <div class="cost-lbl">Grand Total</div>
-      <div class="cost-val" id="${elId}-grand" style="color:#ef4444;font-size:${sz(grand+engFee)}px">${fm(grand+engFee)}</div>
-      <div class="cost-sub" id="${elId}-grand-sub">Cards + Engineering + Spare</div>
-    </div>`;
+  el.dataset.cards=grand;
+  const discountAmt=grand*0.20;
+  const grandAfterDiscount=grand*0.80;
+  const row=(cls,ic,name,desc,valHtml)=>`
+    <tr class="${cls}">
+      <td class="cst-bar"></td>
+      <td class="cst-ic">${ic}</td>
+      <td><div class="cst-name">${name}</div><div class="cst-desc">${desc}</div></td>
+      <td class="cst-amount">${valHtml}</td>
+    </tr>`;
+  el.innerHTML=`<div class="cst-wrap"><table class="cst-tbl"><tbody>
+    ${row('cst-trib','📥','Tributary Boards','T402 / T404 cards',`<span style="color:var(--teal)">${fm(tT)}</span>`)}
+    ${row('cst-line','🔀','Line Boards','N402 / N801 / N602 + CFP',`<span style="color:var(--amber2)">${fm(lT)}</span>`)}
+    ${row('cst-total','💰','Total — Cards Only','excl. chassis &amp; infrastructure',`<span style="color:var(--green2)">${fm(grand)}</span>`)}
+    ${row('cst-spare','🔧','Spare Parts','from BOM spare inputs',`<span id="${elId}-spare" style="color:var(--blue)">—</span>`)}
+    ${row('cst-discount','🏷️','One-off Discount 20%','20% off (Cards + Spare)',`<span id="${elId}-discount" style="color:#f43f5e">−${fm(discountAmt)}</span>`)}
+    ${row('cst-grand','🧾','Grand Total','(Cards + Spare) × 80%',`<span id="${elId}-grand" style="color:var(--red)">${fm(grandAfterDiscount)}</span>`)}
+  </tbody></table></div>`;
 }
 
 /* ══════════════ BUILD BOM 1 ══════════════ */
