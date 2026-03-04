@@ -3946,14 +3946,6 @@ function totalRow(tot){
     <td style="font-size:11px;color:var(--txt3)">excl. chassis &amp; infra</td>
     <td></td><td></td></tr>`;
 }
-function engServRow(tot){
-  const fee=tot*0.15;
-  return `<tr class="total-row" style="background:var(--purple-bg)!important;border-top:2px solid var(--purple-bd)!important">
-    <td colspan="7" style="text-align:right;font-size:11px;color:var(--purple2);font-weight:700;padding:12px 16px;letter-spacing:.5px">Engineering Services (By H.) — 15%</td>
-    <td class="tot-cell bom-eng-cell" style="font-size:16px;color:var(--purple2)">${fm(fee)}</td>
-    <td style="font-size:11px;color:var(--txt3)">15% of CARDS + SPARE</td>
-    <td></td><td></td></tr>`;
-}
 
 function spareRow(){
   return `<tr class="total-row" style="background:rgba(20,184,166,.08)!important;border-top:2px solid rgba(20,184,166,.35)!important">
@@ -3969,10 +3961,7 @@ function updateBomSpare(tbody){
   const cgId='cg'+(tbody.id||'').replace(/\D/g,'');
   const cg=g(cgId); if(!cg) return;
   cg.dataset.spare=sum;
-  // update BOM Engineering Services row (still in BOM table)
   const cards=+(cg.dataset.cards||0);
-  const bomEng=tbody.querySelector('.bom-eng-cell');
-  if(bomEng) bomEng.textContent=fm((cards+sum)*0.80*0.15);
   // update spare display and recalc grand from current manual inputs
   const spEl=g(cgId+'-spare');
   if(spEl) spEl.textContent = sum>0 ? fm(sum) : '—';
@@ -4053,7 +4042,7 @@ function buildBom1(){
   if(r2lb)  { h+=row(n++,r2lb.pn, 'Line — '+r2lb.sh+' 3R Regen Slot 1','LINE',rbSite,1,r2lb.price,'Protection'); a(1,r2lb.price); }
   if(r2lb2) { h+=row(n++,r2lb2.pn,'Line — '+r2lb2.sh+' 3R Regen Slot 2','LINE',rbSite,1,r2lb2.price,'Protection'); a(1,r2lb2.price); }
   if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected — use dropdowns above to configure</td></tr>`;
-  else { h+=totalRow(tot); h+=engServRow(tot); h+=spareRow(); }
+  else { h+=totalRow(tot); h+=spareRow(); }
   g('b1').innerHTML=h;
   costTiles('cg1',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4102,7 +4091,7 @@ function buildBom2(){
   if(rdlb)  { h+=row(n++,rdlb.pn, 'Line — '+rdlb.sh+' 3R Regen Slot 1','LINE','Regen D_'+rdn2,1,rdlb.price, 'Protection'); a(1,rdlb.price); }
   if(rdlb2) { h+=row(n++,rdlb2.pn,'Line — '+rdlb2.sh+' 3R Regen Slot 2','LINE','Regen D_'+rdn2,1,rdlb2.price,'Protection'); a(1,rdlb2.price); }
   if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected — use dropdowns above to configure</td></tr>`;
-  else { h+=totalRow(tot); h+=engServRow(tot); h+=spareRow(); }
+  else { h+=totalRow(tot); h+=spareRow(); }
   g('b2').innerHTML=h;
   costTiles('cg2',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4707,7 +4696,7 @@ function buildBom3(){
   if(klbW) { h+=row(n++,klbW.pn,'Line — '+klbW.sh+' (Working RX)',   'LINE','Sink_'+kn3,  1,klbW.price,''); a(1,klbW.price); }
   if(klbP) { h+=row(n++,klbP.pn,'Line — '+klbP.sh+' (Protection RX)','LINE','Sink_'+kn3,  1,klbP.price,''); a(1,klbP.price); }
   if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected — use dropdowns above to configure</td></tr>`;
-  else { h+=totalRow(tot); h+=engServRow(tot); h+=spareRow(); }
+  else { h+=totalRow(tot); h+=spareRow(); }
   g('b3').innerHTML=h;
   costTiles('cg3',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4754,7 +4743,7 @@ function buildBom4(){
   if(rflb)  { h+=row(n++,rflb.pn, 'Line — '+rflb.sh+' Regen Slot 1','LINE','Regen F_'+rfn4,1,rflb.price,'Protection'); a(1,rflb.price); }
   if(rflb2) { h+=row(n++,rflb2.pn,'Line — '+rflb2.sh+' Regen Slot 2','LINE','Regen F_'+rfn4,1,rflb2.price,'Protection'); a(1,rflb2.price); }
   if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected</td></tr>`;
-  else { h+=totalRow(tot); h+=engServRow(tot); h+=spareRow(); }
+  else { h+=totalRow(tot); h+=spareRow(); }
   g('b4').innerHTML=h;
   costTiles('cg4',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
@@ -4816,7 +4805,7 @@ function buildBom5(){
   if(rhlb)  { h+=row(n++,rhlb.pn, 'Line — '+rhlb.sh+' Regen Slot 1','LINE','Regen H_'+rhn5,1,rhlb.price,'Protection'); a(1,rhlb.price); }
   if(rhlb2) { h+=row(n++,rhlb2.pn,'Line — '+rhlb2.sh+' Regen Slot 2','LINE','Regen H_'+rhn5,1,rhlb2.price,'Protection'); a(1,rhlb2.price); }
   if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected</td></tr>`;
-  else { h+=totalRow(tot); h+=engServRow(tot); h+=spareRow(); }
+  else { h+=totalRow(tot); h+=spareRow(); }
   g('b5').innerHTML=h;
   costTiles('cg5',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
