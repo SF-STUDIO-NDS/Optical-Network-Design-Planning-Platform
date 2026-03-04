@@ -676,7 +676,8 @@ button:focus-visible, .tab:focus-visible { outline: 2px solid var(--blue2); outl
 .cost-tile.ct-total::before { background: linear-gradient(90deg,var(--green2),var(--green)); }
 .cost-tile.ct-eng::before   { background: linear-gradient(90deg,var(--purple2),var(--purple)); }
 .cost-tile.ct-spare::before { background: linear-gradient(90deg,#14b8a6,#0891b2); }
-.cost-tile.ct-grand::before { background: linear-gradient(90deg,#f59e0b,#ef4444); }
+.cost-tile.ct-grand::before    { background: linear-gradient(90deg,#f59e0b,#ef4444); }
+.cost-tile.ct-discount::before { background: linear-gradient(90deg,#f43f5e,#e11d48); }
 .cost-tile-icon {
   width: 38px; height: 38px; border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
@@ -3964,6 +3965,9 @@ function updateBomSpare(tbody){
   if(engEl){ engEl.textContent=fm(engFee); engEl.style.fontSize=sz(engFee)+'px'; }
   const spEl=g(cgId+'-spare');
   if(spEl){ spEl.textContent=fm(sum); spEl.style.fontSize=sz(sum)+'px'; }
+  const discountVal=(cards+sum)*0.8;
+  const dcEl=g(cgId+'-discount');
+  if(dcEl){ dcEl.textContent=fm(discountVal); dcEl.style.fontSize=sz(discountVal)+'px'; }
   const gtEl=g(cgId+'-grand');
   if(gtEl){ gtEl.textContent=fm(total); gtEl.style.fontSize=sz(total)+'px'; }
   const subEl=g(cgId+'-grand-sub');
@@ -3998,6 +4002,12 @@ function costTiles(elId,tribs,lines){
       <div class="cost-lbl">Total — Cards Only</div>
       <div class="cost-val" style="color:var(--green);font-size:${sz(grand)}px">${fm(grand)}</div>
       <div class="cost-sub">excl. chassis &amp; infrastructure</div>
+    </div>
+    <div class="cost-tile ct-discount">
+      <div class="cost-tile-icon" style="background:rgba(244,63,94,.12)">🏷️</div>
+      <div class="cost-lbl">One-off Discount 20%</div>
+      <div class="cost-val" id="${elId}-discount" style="color:#f43f5e;font-size:${sz(grand*0.8)}px">${fm(grand*0.8)}</div>
+      <div class="cost-sub">Cards + Spare × 80%</div>
     </div>
     <div class="cost-tile ct-eng">
       <div class="cost-tile-icon" style="background:var(--purple-bg)">⚙️</div>
