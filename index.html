@@ -3980,7 +3980,7 @@ function recalcGrand(elId, skipEngCalc){
   const spare=+(cg.dataset.spare||0);
   const dcInput=g(elId+'-discount');
   const enInput=g(elId+'-eng');
-  const discountRaw = dcInput ? dcInput.value : '';
+  const discountRaw = dcInput ? dcInput.value.replace(/,/g,'') : '';
   const discountVal = discountRaw !== '' ? +discountRaw||0 : 0;
   const afterDiscount = cards + spare - discountVal;
   // Update Total (include spare part) row
@@ -3993,10 +3993,10 @@ function recalcGrand(elId, skipEngCalc){
     if(discountRaw === ''){
       enInput.value = '';
     } else {
-      enInput.value = afterDiscount > 0 ? +(afterDiscount * 0.15).toFixed(2) : '';
+      enInput.value = afterDiscount > 0 ? (afterDiscount * 0.15).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '';
     }
   }
-  const engVal = enInput ? +enInput.value||0 : 0;
+  const engVal = enInput ? parseFloat((enInput.value||'').replace(/,/g,''))||0 : 0;
   const grandTotal = afterDiscount + engVal;
   const gtEl=g(elId+'-grand');
   if(gtEl) gtEl.textContent = fm(grandTotal);
@@ -4026,9 +4026,9 @@ function costTiles(elId,tribs,lines){
     ${row('cst-total','💰','Total — Cards Only','excl. chassis &amp; infrastructure',`<span style="color:var(--txt1)">${fm(grand)}</span>`)}
     ${row('cst-spare','🔧','Spare Parts','from BOM spare inputs',`<span id="${elId}-spare" style="color:var(--txt1)">—</span>`)}
     ${row('cst-total-spare','📦','Total (include spare part)','Cards Only + Spare Parts',`<span id="${elId}-total-spare" style="color:var(--teal)">${fm(grand)}</span>`)}
-    ${row('cst-discount','🏷️','One-off Discount <span class="cst-manual">(manual)</span>','Cards + Spare',`<span style="color:#f43f5e;font-size:15px;font-weight:700;margin-right:2px">−</span><input class="cst-input" id="${elId}-discount" type="number" min="0" step="0.01" placeholder="0.00" style="color:#f43f5e" oninput="recalcGrand('${elId}')">`)}
+    ${row('cst-discount','🏷️','One-off Discount <span class="cst-manual">(manual)</span>','Cards + Spare',`<div style="display:flex;align-items:center;justify-content:flex-end"><span style="color:#f43f5e;font-size:15px;font-weight:700;margin-right:1px">−$</span><input class="cst-input" id="${elId}-discount" type="text" inputmode="decimal" placeholder="0.00" style="color:#f43f5e" oninput="recalcGrand('${elId}')" onblur="var v=parseFloat(this.value.replace(/,/g,''));if(!isNaN(v)&&this.value.trim()!=='')this.value=v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});recalcGrand('${elId}')"></div>`)}
     ${row('cst-after','💵','After price discount','Spare Parts Total + Cards Only − One-off Discount',`<span id="${elId}-after" style="color:var(--txt1)">—</span>`)}
-    ${row('cst-eng','⚙️','Engineering Services 15% <span class="cst-manual">(manual)</span>','15% of After price discount',`<input class="cst-input" id="${elId}-eng" type="number" min="0" step="0.01" placeholder="0.00" style="color:var(--purple2)" oninput="recalcGrand('${elId}',true)">`)}
+    ${row('cst-eng','⚙️','Engineering Services 15% <span class="cst-manual">(manual)</span>','15% of After price discount',`<div style="display:flex;align-items:center;justify-content:flex-end"><span style="color:var(--purple2);font-size:16px;font-weight:700;margin-right:1px">$</span><input class="cst-input" id="${elId}-eng" type="text" inputmode="decimal" placeholder="0.00" style="color:var(--purple2)" oninput="recalcGrand('${elId}',true)" onblur="var v=parseFloat(this.value.replace(/,/g,''));if(!isNaN(v)&&this.value.trim()!=='')this.value=v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});recalcGrand('${elId}',true)"></div>`)}
     ${row('cst-grand','🧾','Grand Total','After price discount + Engineering Services 15%',`<span id="${elId}-grand" style="color:var(--txt1)">${fm(grand)}</span>`)}
   </tbody></table></div>`;
 }
