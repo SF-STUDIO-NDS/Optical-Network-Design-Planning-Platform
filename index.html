@@ -1114,9 +1114,105 @@ footer {
   #wdm-assignment-grid { grid-template-columns: 1fr !important; }
   .cost-val { font-size: var(--fs-2xl); }
 }
+
+/* ── LOGIN OVERLAY ───────────────────────────── */
+#login-overlay {
+  position: fixed; inset: 0; z-index: 99999;
+  background: #0a1628;
+  display: flex; align-items: center; justify-content: center;
+}
+#login-overlay.hidden { display: none; }
+.login-box {
+  background: #1E293B;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 40px 40px 36px;
+  width: 360px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.55);
+}
+.login-logo {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 28px;
+}
+.login-logo-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg,#0ea5e9,#6366f1);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.login-title { font-size: 17px; font-weight: 700; color: #E2E8F0; }
+.login-subtitle { font-size: 11px; color: #64748B; margin-top: 2px; }
+.login-field { margin-bottom: 16px; }
+.login-field label {
+  display: block; font-size: 12px; font-weight: 600;
+  color: #94A3B8; margin-bottom: 6px; letter-spacing: .4px;
+}
+.login-field input {
+  width: 100%; box-sizing: border-box;
+  background: #0F172A; border: 1px solid #334155;
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 14px; color: #E2E8F0;
+  outline: none; transition: border-color .2s;
+}
+.login-field input:focus { border-color: #38BDF8; }
+.login-btn {
+  width: 100%; padding: 11px;
+  background: linear-gradient(135deg,#0ea5e9,#6366f1);
+  border: none; border-radius: 8px;
+  font-size: 14px; font-weight: 700; color: #fff;
+  cursor: pointer; margin-top: 8px;
+  transition: opacity .2s;
+}
+.login-btn:hover { opacity: .88; }
+.login-error {
+  font-size: 12px; color: #f87171; text-align: center;
+  margin-top: 10px; min-height: 18px;
+}
+.logout-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(248,113,113,.12); border: 1px solid rgba(248,113,113,.30);
+  color: #f87171; border-radius: 8px;
+  padding: 6px 12px; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: background .2s;
+}
+.logout-btn:hover { background: rgba(248,113,113,.22); }
 </style>
 </head>
 <body>
+
+<!-- ══ LOGIN OVERLAY ══ -->
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-icon">
+        <svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 14 Q9 7 14 14 Q19 21 24 14" stroke="white" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <circle cx="4" cy="14" r="2.8" fill="none" stroke="white" stroke-width="1.6"/>
+          <circle cx="4" cy="14" r="1.1" fill="white"/>
+          <circle cx="24" cy="14" r="2.8" fill="none" stroke="white" stroke-width="1.6"/>
+          <circle cx="24" cy="14" r="1.1" fill="white"/>
+          <circle cx="14" cy="14" r="1.5" fill="#7dd3fc"/>
+        </svg>
+      </div>
+      <div>
+        <div class="login-title">Optical Network Platform</div>
+        <div class="login-subtitle">100G / 400G / 800G Coherent · Sign in to continue</div>
+      </div>
+    </div>
+    <form id="login-form" onsubmit="handleLogin(event)">
+      <div class="login-field">
+        <label for="login-user">USERNAME</label>
+        <input type="text" id="login-user" autocomplete="username" placeholder="Enter username" required>
+      </div>
+      <div class="login-field">
+        <label for="login-pass">PASSWORD</label>
+        <input type="password" id="login-pass" autocomplete="current-password" placeholder="Enter password" required>
+      </div>
+      <button type="submit" class="login-btn">Sign In</button>
+      <div class="login-error" id="login-error"></div>
+    </form>
+  </div>
+</div>
 
 <!-- ══ HEADER ══ -->
 <header>
@@ -1157,6 +1253,10 @@ footer {
     <span class="h-badge">v4.0</span>
     <div class="h-pill"><div class="h-dot"></div>LIVE CONFIG</div>
     <div id="clk"></div>
+    <button type="button" class="logout-btn" onclick="handleLogout()" aria-label="ออกจากระบบ">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Logout
+    </button>
   </div>
 </header>
 
@@ -5457,6 +5557,56 @@ function updateWdmSummary(){
     </div>`).join('');
 }
 
+/* ── AUTHENTICATION ──────────────────────────── */
+(function(){
+  const CREDS = { username: 'nds_sf', password: 'nds1234' };
+  const SESSION_KEY = 'ondp_auth';
+
+  function isLoggedIn(){
+    return sessionStorage.getItem(SESSION_KEY) === '1';
+  }
+
+  function showApp(){
+    document.getElementById('login-overlay').classList.add('hidden');
+  }
+
+  function showLogin(){
+    document.getElementById('login-overlay').classList.remove('hidden');
+  }
+
+  window.handleLogin = function(e){
+    e.preventDefault();
+    const user = document.getElementById('login-user').value.trim();
+    const pass = document.getElementById('login-pass').value;
+    const err  = document.getElementById('login-error');
+    if(user === CREDS.username && pass === CREDS.password){
+      sessionStorage.setItem(SESSION_KEY, '1');
+      err.textContent = '';
+      showApp();
+    } else {
+      err.textContent = 'Username หรือ Password ไม่ถูกต้อง';
+      document.getElementById('login-pass').value = '';
+      document.getElementById('login-pass').focus();
+    }
+  };
+
+  window.handleLogout = function(){
+    sessionStorage.removeItem(SESSION_KEY);
+    document.getElementById('login-user').value = '';
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-error').textContent = '';
+    showLogin();
+  };
+
+  // Check session on load
+  if(isLoggedIn()){
+    showApp();
+  }
+  // Focus username field
+  document.addEventListener('DOMContentLoaded', function(){
+    if(!isLoggedIn()) document.getElementById('login-user').focus();
+  });
+})();
 </script>
 
 <!-- ══ GUIDE MODAL ══ -->
