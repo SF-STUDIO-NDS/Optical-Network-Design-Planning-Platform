@@ -4080,15 +4080,25 @@ function recalcGrand(elId, skipEngCalc){
   const spare=+(cg.dataset.spare||0);
   const dcInput=g(elId+'-discount');
   const enInput=g(elId+'-eng');
+
+  // 🟢 เพิ่มส่วนคำนวณส่วนลด 20% อัตโนมัติ (ใส่ค่าลงช่อง discount ถ้าไม่ได้กำลังพิมพ์อยู่)
+  const totalBeforeDiscount = cards + spare;
+  if(dcInput && document.activeElement !== dcInput && totalBeforeDiscount > 0){
+    dcInput.value = (totalBeforeDiscount * 0.20).toFixed(2);
+  }
+
   const discountRaw = dcInput ? dcInput.value.replace(/,/g,'') : '';
   const discountVal = discountRaw !== '' ? +discountRaw||0 : 0;
   const afterDiscount = cards + spare - discountVal;
+
   // Update Total (include spare part) row
   const tsEl=g(elId+'-total-spare');
   if(tsEl) tsEl.textContent = fm(cards + spare);
+
   // Update After price discount row
   const afEl=g(elId+'-after');
   if(afEl) afEl.textContent = discountRaw !== '' ? fm(afterDiscount) : '—';
+
   if(!skipEngCalc && enInput){
     if(discountRaw === ''){
       enInput.value = '';
@@ -4096,6 +4106,7 @@ function recalcGrand(elId, skipEngCalc){
       enInput.value = afterDiscount > 0 ? (afterDiscount * 0.15).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '';
     }
   }
+
   const engVal = enInput ? parseFloat((enInput.value||'').replace(/,/g,''))||0 : 0;
   const grandTotal = afterDiscount + engVal;
   const gtEl=g(elId+'-grand');
