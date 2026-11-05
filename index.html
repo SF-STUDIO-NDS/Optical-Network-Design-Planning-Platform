@@ -1262,25 +1262,21 @@ footer {
 
 <!-- ══ TABS ══ -->
 <div class="tabbar" role="tablist" aria-label="Network design options">
-  <button type="button" class="tab on" role="tab" id="tab-p0" aria-controls="p0" tabindex="0" aria-selected="true" onclick="sw(0)" aria-label="Option 1 — 2R Regenerator">
+  <button type="button" class="tab on" role="tab" id="tab-p0" aria-controls="p0" tabindex="0" aria-selected="true" onclick="sw(0)" aria-label="BKK-NorthEast(Border)">
     <span class="tab-icon">◈</span>
-    Option 1 <span class="tab-badge">2R</span>
+    BKK-NorthEast(Border)
   </button>
-  <button type="button" class="tab" role="tab" id="tab-p1" aria-controls="p1" tabindex="-1" aria-selected="false" onclick="sw(1)" aria-label="Option 2 — 4R Regenerator">
+  <button type="button" class="tab" role="tab" id="tab-p1" aria-controls="p1" tabindex="-1" aria-selected="false" onclick="sw(1)" aria-label="BKK-South(Border)">
     <span class="tab-icon">◈</span>
-    Option 2 <span class="tab-badge">4R</span>
+    BKK-South(Border)
   </button>
-  <button type="button" class="tab regen-none" role="tab" id="tab-p2" aria-controls="p2" tabindex="-1" aria-selected="false" onclick="sw(2)" aria-label="Option 3 — No Regenerator">
+  <button type="button" class="tab regen-none" role="tab" id="tab-p2" aria-controls="p2" tabindex="-1" aria-selected="false" onclick="sw(2)" aria-label="BKK-BKK">
     <span class="tab-icon">◈</span>
-    Option 3 <span class="tab-badge">—</span>
+    BKK-BKK
   </button>
-  <button type="button" class="tab" role="tab" id="tab-p3" aria-controls="p3" tabindex="-1" aria-selected="false" onclick="sw(3)" aria-label="Option 4 — 6R Regenerator">
+  <button type="button" class="tab" role="tab" id="tab-p4" aria-controls="p4" tabindex="-1" aria-selected="false" onclick="sw(4)" aria-label="North(Border)-NorthEast(Border)">
     <span class="tab-icon">◈</span>
-    Option 4 <span class="tab-badge">6R</span>
-  </button>
-  <button type="button" class="tab" role="tab" id="tab-p4" aria-controls="p4" tabindex="-1" aria-selected="false" onclick="sw(4)" aria-label="Option 5 — 8R Regenerator">
-    <span class="tab-icon">◈</span>
-    Option 5 <span class="tab-badge">8R</span>
+    North(Border)-NorthEast(Border)
   </button>
   <div class="tabbar-divider" role="separator"></div>
   <button type="button" class="tab" role="tab" id="tab-p5" aria-controls="p5" tabindex="-1" aria-selected="false" onclick="sw(5)" aria-label="Card Specifications">
@@ -1299,7 +1295,7 @@ footer {
      OPTION 1
 ════════════════════════════════════════════════════ -->
 <div class="pane on" id="p0" role="tabpanel" aria-labelledby="tab-p0" tabindex="0">
-  <div class="sec mb"><div class="sec-dot"></div>Configuration — Option 1 &nbsp;·&nbsp; Source › Regen A (Working) / Regen B (Protection) › Sink</div>
+  <div class="sec mb"><div class="sec-dot"></div>Configuration — BKK-NorthEast(Border) &nbsp;·&nbsp; Source › Regen A (Working) / Regen B (Protection) › Sink</div>
   <div class="cfg-card">
     <div class="cfg-row cfg-opt1">
 
@@ -1432,12 +1428,12 @@ footer {
 
 
   <div id="val1" class="val-panel"></div>
-  <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 1</div>
+  <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — BKK-NorthEast(Border)</div>
   <div id="svc1"></div>
-  <div class="diag-box"><button class="export-btn" onclick="exportPNG('c1','Option1-Topology')">⬇ Export PNG</button><canvas id="c1"></canvas></div>
+  <div class="diag-box"><button class="export-btn" onclick="exportPNG('c1','BKK-NorthEast(Border)-Topology')">⬇ Export PNG</button><canvas id="c1"></canvas></div>
   <div class="canvas-scroll-hint">← หมุนอุปกรณ์หรือขยายหน้าจอเพื่อดู Topology แบบเต็ม →</div>
 
-  <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — Option 1</div>
+  <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — BKK-NorthEast(Border)</div>
   <div class="bom-wrap"><table><thead><tr>
     <th>#</th><th>Part Number</th><th>Description</th><th>Type</th>
     <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Spare (USD)</th>
@@ -1446,7 +1442,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Cost Summary — Cards Only</div>
   <div class="cost-grid" id="cg1"></div>
 
-  <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 1</div>
+  <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — BKK-NorthEast(Border)</div>
   <div class="span-panel">
     <div class="span-panel-title">📐 Span Distance Input</div>
 
@@ -1550,7 +1546,7 @@ footer {
      OPTION 2
 ════════════════════════════════════════════════════ -->
 <div class="pane" id="p1" role="tabpanel" aria-labelledby="tab-p1" tabindex="0" hidden>
-  <div class="sec mb"><div class="sec-dot"></div>Configuration — Option 2 &nbsp;·&nbsp; Source › Regen A/B (Working) / Regen C/D (Protection) › Sink</div>
+  <div class="sec mb"><div class="sec-dot"></div>Configuration — BKK-South(Border) &nbsp;·&nbsp; Source › Regen A/B (Working) / Regen C/D (Protection) › Sink</div>
   <div class="cfg-card">
     <div class="cfg-row cfg-opt2">
 
@@ -1713,12 +1709,12 @@ footer {
 
 
   <div id="val2" class="val-panel"></div>
-  <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 2</div>
+  <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — BKK-South(Border)</div>
   <div id="svc2"></div>
-  <div class="diag-box"><button class="export-btn" onclick="exportPNG('c2','Option2-Topology')">⬇ Export PNG</button><canvas id="c2"></canvas></div>
+  <div class="diag-box"><button class="export-btn" onclick="exportPNG('c2','BKK-South(Border)-Topology')">⬇ Export PNG</button><canvas id="c2"></canvas></div>
   <div class="canvas-scroll-hint">← หมุนอุปกรณ์หรือขยายหน้าจอเพื่อดู Topology แบบเต็ม →</div>
 
-  <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — Option 2</div>
+  <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — BKK-South(Border)</div>
   <div class="bom-wrap"><table><thead><tr>
     <th>#</th><th>Part Number</th><th>Description</th><th>Type</th>
     <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Spare (USD)</th>
@@ -1727,7 +1723,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Cost Summary — Cards Only</div>
   <div class="cost-grid" id="cg2"></div>
 
-  <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 2</div>
+  <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — BKK-South(Border)</div>
   <div class="span-panel">
     <div class="span-panel-title">📐 Span Distance Input</div>
 
@@ -1845,7 +1841,7 @@ footer {
      OPTION 3 — No Regen
 ════════════════════════════════════════════════════ -->
 <div class="pane" id="p2" role="tabpanel" aria-labelledby="tab-p2" tabindex="0" hidden>
-  <div class="sec mb"><div class="sec-dot"></div>Configuration — Option 3 &nbsp;·&nbsp; Source › Sink (No Regeneration)</div>
+  <div class="sec mb"><div class="sec-dot"></div>Configuration — BKK-BKK &nbsp;·&nbsp; Source › Sink (No Regeneration)</div>
   <div class="cfg-card">
     <div class="cfg-row" style="grid-template-columns:1fr 1fr;gap:14px">
 
@@ -1913,12 +1909,12 @@ footer {
   </div>
 
   <div id="val3" class="val-panel"></div>
-  <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 3</div>
+  <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — BKK-BKK</div>
   <div id="svc3"></div>
-  <div class="diag-box"><button class="export-btn" onclick="exportPNG('c3','Option3-Topology')">⬇ Export PNG</button><canvas id="c3"></canvas></div>
+  <div class="diag-box"><button class="export-btn" onclick="exportPNG('c3','BKK-BKK-Topology')">⬇ Export PNG</button><canvas id="c3"></canvas></div>
   <div class="canvas-scroll-hint">← หมุนอุปกรณ์หรือขยายหน้าจอเพื่อดู Topology แบบเต็ม →</div>
 
-  <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — Option 3</div>
+  <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — BKK-BKK</div>
   <div class="bom-wrap"><table><thead><tr>
     <th>#</th><th>Part Number</th><th>Description</th><th>Type</th>
     <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Spare (USD)</th>
@@ -1927,7 +1923,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Cost Summary — Cards Only</div>
   <div class="cost-grid" id="cg3"></div>
 
-  <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 3</div>
+  <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — BKK-BKK</div>
   <div class="span-panel">
     <div class="span-panel-title">📐 Span Distance Input</div>
     <div class="span-grid">
@@ -1984,308 +1980,10 @@ footer {
 </div>
 
 <!-- ════════════════════════════════════════════════════
-     OPTION 4 — 6 Regen
-════════════════════════════════════════════════════ -->
-<div class="pane" id="p3" role="tabpanel" aria-labelledby="tab-p3" tabindex="0" hidden>
-  <div class="sec mb"><div class="sec-dot"></div>Configuration — Option 4 &nbsp;·&nbsp; Source › Regen A/B/C (Working) / Regen D/E/F (Protection) › Sink</div>
-  <div class="cfg-card">
-    <div class="cfg-row" style="grid-template-columns:repeat(8,1fr);gap:14px">
-
-      <div class="site-box" style="border-top:3px solid var(--green2)">
-        <div class="site-label"><div class="site-icon" style="background:var(--green-bg);color:var(--green2)">⬤</div><span style="color:var(--green)">SOURCE</span></div>
-        <div class="ff"><div class="fl">Site Name</div><input type="text" id="d1-sname" class="site-name-input" placeholder="e.g. Bangkok-01" oninput="upd()"></div>
-        <div class="ff"><div class="fl">Chassis</div><select id="d1-sch" onchange="upd()"><option value="M24" selected>OSN9800 M24 (24-slot)</option><option value="U16">OSN9800 U16 (16-slot)</option></select></div>
-        <div class="ff"><div class="fl">Tributary</div>
-          <select id="d1-stb" onchange="upd()">
-            <option value="">— None —</option>
-            <option value="T1">T402 · 1×100GE</option>
-            <option value="T2" selected>T402 · 2×100GE</option>
-            <option value="T3">T402 · 2×100GE · 40km</option>
-            <option value="T4">T404 · 4×100GE</option>
-          </select></div>
-        <div class="ff"><div class="fl">Line — Working</div>
-          <select id="d1-slbw" onchange="upd()">
-            <option value="">— None —</option><option value="N1" selected>N402 · 1×100G</option>
-            <option value="N2">N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-        <div class="ff"><div class="fl">Line — Protection</div>
-          <select id="d1-slbp" onchange="upd()">
-            <option value="">— None —</option><option value="N1" selected>N402 · 1×100G</option>
-            <option value="N2">N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-      </div>
-
-      <div class="site-box" style="border-top:3px solid var(--amber2)">
-        <div class="site-label"><div class="site-icon" style="background:var(--amber-bg);color:var(--amber2)">▲</div><span style="color:var(--amber)">REGEN A — Wk</span></div>
-        <div class="ff"><div class="fl">Site Name</div><input type="text" id="d1-raname" class="site-name-input" placeholder="Site A" oninput="upd()"></div>
-        <div class="ff"><div class="fl">Chassis</div><select id="d1-rach" onchange="upd()"><option value="M24" selected>OSN9800 M24 (24-slot)</option><option value="U16">OSN9800 U16 (16-slot)</option></select></div>
-        <div class="ff"><div class="fl">Line — Slot 1</div>
-          <select id="d1-ralb" onchange="upd()">
-            <option value="">— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2" selected>N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-        <div class="ff"><div class="fl">Line — Slot 2</div>
-          <select id="d1-ralb2" onchange="upd()">
-            <option value="" selected>— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2">N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-      </div>
-
-      <div class="site-box" style="border-top:3px solid var(--amber2)">
-        <div class="site-label"><div class="site-icon" style="background:var(--amber-bg);color:var(--amber2)">▲</div><span style="color:var(--amber)">REGEN B — Wk</span></div>
-        <div class="ff"><div class="fl">Site Name</div><input type="text" id="d1-rbname" class="site-name-input" placeholder="Site B" oninput="upd()"></div>
-        <div class="ff"><div class="fl">Chassis</div><select id="d1-rbch" onchange="upd()"><option value="M24" selected>OSN9800 M24 (24-slot)</option><option value="U16">OSN9800 U16 (16-slot)</option></select></div>
-        <div class="ff"><div class="fl">Line — Slot 1</div>
-          <select id="d1-rblb" onchange="upd()">
-            <option value="">— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2" selected>N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-        <div class="ff"><div class="fl">Line — Slot 2</div>
-          <select id="d1-rblb2" onchange="upd()">
-            <option value="" selected>— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2">N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-      </div>
-
-      <div class="site-box" style="border-top:3px solid var(--amber2)">
-        <div class="site-label"><div class="site-icon" style="background:var(--amber-bg);color:var(--amber2)">▲</div><span style="color:var(--amber)">REGEN C — Wk</span></div>
-        <div class="ff"><div class="fl">Site Name</div><input type="text" id="d1-rcname" class="site-name-input" placeholder="Site C" oninput="upd()"></div>
-        <div class="ff"><div class="fl">Chassis</div><select id="d1-rcch" onchange="upd()"><option value="M24" selected>OSN9800 M24 (24-slot)</option><option value="U16">OSN9800 U16 (16-slot)</option></select></div>
-        <div class="ff"><div class="fl">Line — Slot 1</div>
-          <select id="d1-rclb" onchange="upd()">
-            <option value="">— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2" selected>N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-        <div class="ff"><div class="fl">Line — Slot 2</div>
-          <select id="d1-rclb2" onchange="upd()">
-            <option value="" selected>— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2">N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-      </div>
-
-      <div class="site-box" style="border-top:3px solid var(--purple2)">
-        <div class="site-label"><div class="site-icon" style="background:var(--purple-bg);color:var(--purple2)">▼</div><span style="color:var(--purple)">REGEN D — Pt</span></div>
-        <div class="ff"><div class="fl">Site Name</div><input type="text" id="d1-rdname" class="site-name-input" placeholder="Site D" oninput="upd()"></div>
-        <div class="ff"><div class="fl">Chassis</div><select id="d1-rdch" onchange="upd()"><option value="M24" selected>OSN9800 M24 (24-slot)</option><option value="U16">OSN9800 U16 (16-slot)</option></select></div>
-        <div class="ff"><div class="fl">Line — Slot 1</div>
-          <select id="d1-rdlb" onchange="upd()">
-            <option value="">— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2" selected>N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-        <div class="ff"><div class="fl">Line — Slot 2</div>
-          <select id="d1-rdlb2" onchange="upd()">
-            <option value="" selected>— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2">N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-      </div>
-
-      <div class="site-box" style="border-top:3px solid var(--purple2)">
-        <div class="site-label"><div class="site-icon" style="background:var(--purple-bg);color:var(--purple2)">▼</div><span style="color:var(--purple)">REGEN E — Pt</span></div>
-        <div class="ff"><div class="fl">Site Name</div><input type="text" id="d1-rename" class="site-name-input" placeholder="Site E" oninput="upd()"></div>
-        <div class="ff"><div class="fl">Chassis</div><select id="d1-rech" onchange="upd()"><option value="M24" selected>OSN9800 M24 (24-slot)</option><option value="U16">OSN9800 U16 (16-slot)</option></select></div>
-        <div class="ff"><div class="fl">Line — Slot 1</div>
-          <select id="d1-relb" onchange="upd()">
-            <option value="">— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2" selected>N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-        <div class="ff"><div class="fl">Line — Slot 2</div>
-          <select id="d1-relb2" onchange="upd()">
-            <option value="" selected>— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2">N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-      </div>
-
-      <div class="site-box" style="border-top:3px solid var(--purple2)">
-        <div class="site-label"><div class="site-icon" style="background:var(--purple-bg);color:var(--purple2)">▼</div><span style="color:var(--purple)">REGEN F — Pt</span></div>
-        <div class="ff"><div class="fl">Site Name</div><input type="text" id="d1-rfname" class="site-name-input" placeholder="Site F" oninput="upd()"></div>
-        <div class="ff"><div class="fl">Chassis</div><select id="d1-rfch" onchange="upd()"><option value="M24" selected>OSN9800 M24 (24-slot)</option><option value="U16">OSN9800 U16 (16-slot)</option></select></div>
-        <div class="ff"><div class="fl">Line — Slot 1</div>
-          <select id="d1-rflb" onchange="upd()">
-            <option value="">— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2" selected>N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-        <div class="ff"><div class="fl">Line — Slot 2</div>
-          <select id="d1-rflb2" onchange="upd()">
-            <option value="" selected>— None —</option><option value="N1">N402 · 1×100G</option>
-            <option value="N2">N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-      </div>
-
-      <div class="site-box" style="border-top:3px solid var(--blue2)">
-        <div class="site-label"><div class="site-icon" style="background:var(--blue-bg);color:var(--blue2)">■</div><span style="color:var(--blue)">SINK</span></div>
-        <div class="ff"><div class="fl">Site Name</div><input type="text" id="d1-kname" class="site-name-input" placeholder="e.g. Phuket-01" oninput="upd()"></div>
-        <div class="ff"><div class="fl">Chassis</div><select id="d1-kch" onchange="upd()"><option value="M24" selected>OSN9800 M24 (24-slot)</option><option value="U16">OSN9800 U16 (16-slot)</option></select></div>
-        <div class="ff"><div class="fl">Tributary</div>
-          <select id="d1-ktb" onchange="upd()">
-            <option value="">— None —</option>
-            <option value="T1" selected>T402 · 1×100GE</option>
-            <option value="T2">T402 · 2×100GE</option>
-            <option value="T3">T402 · 2×100GE · 40km</option>
-            <option value="T4">T404 · 4×100GE</option>
-          </select></div>
-        <div class="ff"><div class="fl">Line — Working</div>
-          <select id="d1-klbw" onchange="upd()">
-            <option value="">— None —</option><option value="N1" selected>N402 · 1×100G</option>
-            <option value="N2">N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-        <div class="ff"><div class="fl">Line — Protection</div>
-          <select id="d1-klbp" onchange="upd()">
-            <option value="">— None —</option><option value="N1" selected>N402 · 1×100G</option>
-            <option value="N2">N402 · 2×100G</option><option value="N3">N801 · 1×400G/800G</option><option value="N4">N602 · 2×400G</option>
-          </select></div>
-      </div>
-
-    </div>
-  </div>
-
-  <div id="val4" class="val-panel"></div>
-  <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 4</div>
-  <div id="svc4"></div>
-  <div class="diag-box"><button class="export-btn" onclick="exportPNG('c4','Option4-Topology')">⬇ Export PNG</button><canvas id="c4"></canvas></div>
-  <div class="canvas-scroll-hint">← หมุนอุปกรณ์หรือขยายหน้าจอเพื่อดู Topology แบบเต็ม →</div>
-
-  <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — Option 4</div>
-  <div class="bom-wrap"><table><thead><tr>
-    <th>#</th><th>Part Number</th><th>Description</th><th>Type</th>
-    <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Spare (USD)</th>
-  </tr></thead><tbody id="b4"></tbody></table></div>
-
-  <div class="sec mb"><div class="sec-dot"></div>Cost Summary — Cards Only</div>
-  <div class="cost-grid" id="cg4"></div>
-
-  <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 4</div>
-  <div class="span-panel">
-    <div class="span-panel-title">📐 Span Distance Input</div>
-
-    <!-- MAIN PATH -->
-    <div class="span-path-section">
-      <div class="span-path-title main">🔵 Main Path (Working — Regen A/B/C)</div>
-      <div class="span-grid">
-        <div class="span-item">
-          <div class="span-label">Span 1: Source → Regen A</div>
-          <div class="span-input-wrap">
-            <input type="number" class="span-input" id="sp4a1" value="80" min="1" max="3000" oninput="calcSpan4()">
-            <span class="span-unit">km</span>
-          </div>
-        </div>
-        <div class="span-item">
-          <div class="span-label">Span 2: Regen A → Regen B</div>
-          <div class="span-input-wrap">
-            <input type="number" class="span-input" id="sp4b1" value="80" min="1" max="3000" oninput="calcSpan4()">
-            <span class="span-unit">km</span>
-          </div>
-        </div>
-        <div class="span-item">
-          <div class="span-label">Span 3: Regen B → Regen C</div>
-          <div class="span-input-wrap">
-            <input type="number" class="span-input" id="sp4c1" value="80" min="1" max="3000" oninput="calcSpan4()">
-            <span class="span-unit">km</span>
-          </div>
-        </div>
-        <div class="span-item">
-          <div class="span-label">Span 4: Regen C → Sink</div>
-          <div class="span-input-wrap">
-            <input type="number" class="span-input" id="sp4d1" value="80" min="1" max="3000" oninput="calcSpan4()">
-            <span class="span-unit">km</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="span-path-divider"></div>
-
-    <!-- PROTECTION PATH -->
-    <div class="span-path-section">
-      <div class="span-path-title prot">🟠 Protection Path (Regen D/E/F)</div>
-      <div class="span-grid">
-        <div class="span-item">
-          <div class="span-label">Span 1: Source → Regen D</div>
-          <div class="span-input-wrap">
-            <input type="number" class="span-input" id="sp4a1p" value="80" min="1" max="3000" oninput="calcSpan4()">
-            <span class="span-unit">km</span>
-          </div>
-        </div>
-        <div class="span-item">
-          <div class="span-label">Span 2: Regen D → Regen E</div>
-          <div class="span-input-wrap">
-            <input type="number" class="span-input" id="sp4b1p" value="80" min="1" max="3000" oninput="calcSpan4()">
-            <span class="span-unit">km</span>
-          </div>
-        </div>
-        <div class="span-item">
-          <div class="span-label">Span 3: Regen E → Regen F</div>
-          <div class="span-input-wrap">
-            <input type="number" class="span-input" id="sp4c1p" value="80" min="1" max="3000" oninput="calcSpan4()">
-            <span class="span-unit">km</span>
-          </div>
-        </div>
-        <div class="span-item">
-          <div class="span-label">Span 4: Regen F → Sink</div>
-          <div class="span-input-wrap">
-            <input type="number" class="span-input" id="sp4d1p" value="80" min="1" max="3000" oninput="calcSpan4()">
-            <span class="span-unit">km</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="span-path-divider"></div>
-
-    <!-- COMMON PARAMETERS -->
-    <div class="span-grid">
-      <div class="span-item">
-        <div class="span-label">Fiber Loss Coeff</div>
-        <div class="span-input-wrap">
-          <input type="number" class="span-input" id="lc4" value="0.20" min="0.10" max="0.35" step="0.01" oninput="calcSpan4()">
-          <span class="span-unit">dB/km</span>
-        </div>
-      </div>
-      <div class="span-item">
-        <div class="span-label">Connector Loss/span</div>
-        <div class="span-input-wrap">
-          <input type="number" class="span-input" id="cl4" value="1.0" min="0" max="5" step="0.1" oninput="calcSpan4()">
-          <span class="span-unit">dB</span>
-        </div>
-      </div>
-    </div>
-    <div class="span-results-label">📊 Main Path Results</div>
-    <div class="span-results" id="sr4"></div>
-    <div class="span-results-label" style="margin-top:12px">📊 Protection Path Results</div>
-    <div class="span-results" id="sr4p"></div>
-  </div>
-  <div class="span-panel">
-    <div class="span-panel-title">📊 Link Budget Calculator</div>
-    <div class="lb-grid">
-      <div class="lb-field"><div class="lb-label" title="Transmit Power at line output (dBm)">Tx Power (Line Out)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbtx4" value="0" step="0.5" oninput="calcSpan4()"><span class="lb-unit">dBm</span></div></div>
-      <div class="lb-field"><div class="lb-label" title="Minimum receive power threshold (dBm)">Rx Sensitivity</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbrx4" value="-28" step="0.5" oninput="calcSpan4()"><span class="lb-unit">dBm</span></div></div>
-      <div class="lb-field"><div class="lb-label" title="Gain per EDFA amplifier — ค่าปกติ 15–25 dB">EDFA Gain / Amp</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbag4" value="22" min="0" max="40" step="0.5" oninput="calcSpan4()"><span class="lb-unit">dB</span></div></div>
-      <div class="lb-field"><div class="lb-label" title="Noise Figure: ค่ายิ่งต่ำยิ่งดี — ค่าปกติ 5–8 dB">Noise Figure (NF)</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbnf4" value="5" min="3" max="10" step="0.1" oninput="calcSpan4()"><span class="lb-unit">dB</span></div></div>
-      <div class="lb-field"><div class="lb-label" title="จำนวน EDFA ทั้งหมดใน link">No. of Amplifiers</div><div class="lb-input-wrap"><input type="number" class="lb-input" id="lbna4" value="2" min="0" max="20" step="1" oninput="calcSpan4()"><span class="lb-unit">amps</span></div></div>
-      <div class="lb-field"><div class="lb-label">Channel Spacing</div>
-        <select class="lb-input" id="lbcs4" onchange="calcSpan4()">
-          <option value="50">50 GHz</option>
-          <option value="100">100 GHz</option>
-        </select>
-      </div>
-      <div class="lb-field">
-        <div class="lb-label">Fiber Type</div>
-        <select class="lb-input" id="ft4" onchange="calcSpan4()">
-          <option value="G652D" selected>G.652D — Standard SMF (17 ps/nm/km)</option>
-          <option value="G654E">G.654E — Ultra-low loss (20 ps/nm/km)</option>
-          <option value="G655">G.655 — NZDSF (4.5 ps/nm/km)</option>
-        </select>
-      </div>
-    </div>
-    <div class="lb-results" id="lbr4"></div>
-    <div class="phys-panel" id="phys4"></div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════
      OPTION 5 — 8 Regen
 ════════════════════════════════════════════════════ -->
 <div class="pane" id="p4" role="tabpanel" aria-labelledby="tab-p4" tabindex="0" hidden>
-  <div class="sec mb"><div class="sec-dot"></div>Configuration — Option 5 &nbsp;·&nbsp; Source › Regen A/B/C/D (Working) / Regen E/F/G/H (Protection) › Sink</div>
+  <div class="sec mb"><div class="sec-dot"></div>Configuration — North(Border)-NorthEast(Border) &nbsp;·&nbsp; Source › Regen A/B/C/D (Working) / Regen E/F/G/H (Protection) › Sink</div>
   <div class="cfg-card">
     <div class="cfg-row" style="grid-template-columns:repeat(10,1fr);gap:10px">
 
@@ -2463,12 +2161,12 @@ footer {
   </div>
 
   <div id="val5" class="val-panel"></div>
-  <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — Option 5</div>
+  <div class="sec mb"><div class="sec-dot"></div>Topology Diagram — North(Border)-NorthEast(Border)</div>
   <div id="svc5"></div>
-  <div class="diag-box"><button class="export-btn" onclick="exportPNG('c5','Option5-Topology')">⬇ Export PNG</button><canvas id="c5"></canvas></div>
+  <div class="diag-box"><button class="export-btn" onclick="exportPNG('c5','North(Border)-NorthEast(Border)-Topology')">⬇ Export PNG</button><canvas id="c5"></canvas></div>
   <div class="canvas-scroll-hint">← หมุนอุปกรณ์หรือขยายหน้าจอเพื่อดู Topology แบบเต็ม →</div>
 
-  <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — Option 5</div>
+  <div class="sec mb"><div class="sec-dot"></div>Bill of Materials — North(Border)-NorthEast(Border)</div>
   <div class="bom-wrap"><table><thead><tr>
     <th>#</th><th>Part Number</th><th>Description</th><th>Type</th>
     <th>Site</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit Price (USD)</th><th style="text-align:right">Total (USD)</th><th>Notes</th><th style="text-align:center">Spare (QTY)</th><th style="text-align:right">Spare (USD)</th>
@@ -2477,7 +2175,7 @@ footer {
   <div class="sec mb"><div class="sec-dot"></div>Cost Summary — Cards Only</div>
   <div class="cost-grid" id="cg5"></div>
 
-  <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — Option 5</div>
+  <div class="sec mb"><div class="sec-dot"></div>Fiber Span &amp; Link Budget — North(Border)-NorthEast(Border)</div>
   <div class="span-panel">
     <div class="span-panel-title">📐 Span Distance Input</div>
 
@@ -4520,30 +4218,6 @@ function validate3() {
   }, 'val3');
 }
 
-function validate4() {
-  // Option 4: 3 Working regens (A, B, C), 3 Protection regens (D, E, F)
-  validate({
-    stb:  TB[gv('d1-stb')]  || null,
-    slbW: LB[gv('d1-slbw')] || null,
-    slbP: LB[gv('d1-slbp')] || null,
-    ktb:  TB[gv('d1-ktb')]  || null,
-    klbW: LB[gv('d1-klbw')] || null,
-    klbP: LB[gv('d1-klbp')] || null,
-    stbId:'d1-stb', slbWId:'d1-slbw', slbPId:'d1-slbp',
-    ktbId:'d1-ktb', klbWId:'d1-klbw', klbPId:'d1-klbp',
-    regenWorking: [
-      { lb:LB[gv('d1-ralb')] || null, id:'d1-ralb', name:'Regen A (Working)' },
-      { lb:LB[gv('d1-rblb')] || null, id:'d1-rblb', name:'Regen B (Working)' },
-      { lb:LB[gv('d1-rclb')] || null, id:'d1-rclb', name:'Regen C (Working)' },
-    ],
-    regenProtection: [
-      { lb:LB[gv('d1-rdlb')] || null, id:'d1-rdlb', name:'Regen D (Protection)' },
-      { lb:LB[gv('d1-relb')] || null, id:'d1-relb', name:'Regen E (Protection)' },
-      { lb:LB[gv('d1-rflb')] || null, id:'d1-rflb', name:'Regen F (Protection)' },
-    ],
-  }, 'val4');
-}
-
 function validate5() {
   // Option 5: 4 Working regens (A, B, C, D), 4 Protection regens (E, F, G, H)
   validate({
@@ -4613,104 +4287,6 @@ function draw3(){
   if(ktb)  drawCard(ctx,KX+12+knW+6,kcTop,ktW,kcH,'T402',ktb.label,K.teal2,ktb.ports,'left');
   if(klbW) T(ctx,'Working',   KX+12+knW/2,kcTop+knHalf-2,K.green2,11.5,'center',true);
   if(klbP) T(ctx,'Protection',KX+12+knW/2,kcTop+kcH-2,   K.purple2,11.5,'center',true);
-  if(ktb)  drawClientArrow(ctx,KX+KW,KY+KH/2,'right',K.blue2);
-
-  drawLegend(ctx,W-254,H-70);
-}
-
-function draw4(){
-  const cv=g('c4'); if(!cv) return;
-  const _mob=window.innerWidth<=768; const W=Math.max(cW('c4'),_mob?480:1400), H=_mob?360:520;
-  cv.width=W; cv.height=H;
-  const ctx=cv.getContext('2d');
-  drawBg(ctx,W,H);
-
-  const stb   = TB[gv('d1-stb')]   || null;
-  const slbW  = LB[gv('d1-slbw')]  || null;
-  const slbP  = LB[gv('d1-slbp')]  || null;
-  const ralb  = LB[gv('d1-ralb')]  || null; const ralb2= LB[gv('d1-ralb2')]|| null;
-  const rblb  = LB[gv('d1-rblb')]  || null; const rblb2= LB[gv('d1-rblb2')]|| null;
-  const rclb  = LB[gv('d1-rclb')]  || null; const rclb2= LB[gv('d1-rclb2')]|| null;
-  const rdlb  = LB[gv('d1-rdlb')]  || null; const rdlb2= LB[gv('d1-rdlb2')]|| null;
-  const relb  = LB[gv('d1-relb')]  || null; const relb2= LB[gv('d1-relb2')]|| null;
-  const rflb  = LB[gv('d1-rflb')]  || null; const rflb2= LB[gv('d1-rflb2')]|| null;
-  const ktb   = TB[gv('d1-ktb')]   || null;
-  const klbW  = LB[gv('d1-klbw')]  || null;
-  const klbP  = LB[gv('d1-klbp')]  || null;
-  const sch=gv('d1-sch'), kch=gv('d1-kch');
-
-  const SX=44, SY=60, SW=210, SH=372;
-  const KX=W-44-210, KY=60, KW=210, KH=372;
-  const innerL=SX+SW+12, innerR=KX-12, innerW=innerR-innerL;
-  const colW=innerW/3;
-  const RW=Math.min(175,Math.round(colW*0.75));
-  const RH=218;
-  const gapX=(colW-RW)/2;
-  const RaX=Math.round(innerL+gapX);
-  const RbX=Math.round(innerL+colW+gapX);
-  const RcX=Math.round(innerL+2*colW+gapX);
-  const RdX=RaX, ReX=RbX, RfX=RcX;
-  const RtY=28, RbotY=H-28-RH;
-
-  const sWy=SY+SH*.27, sPy=SY+SH*.73;
-  const kWy=KY+KH*.27, kPy=KY+KH*.73;
-  const rmidT=RtY+RH/2, rmidB=RbotY+RH/2;
-
-  drawFiber(ctx,SX+SW,sWy,RaX,rmidT,K.teal2,false,'λ Working');
-  drawFiber(ctx,RaX+RW,rmidT,RbX,rmidT,K.teal2,false,null);
-  drawFiber(ctx,RbX+RW,rmidT,RcX,rmidT,K.teal2,false,null);
-  drawFiber(ctx,RcX+RW,rmidT,KX,kWy,K.teal2,false,null);
-  drawFiber(ctx,SX+SW,sPy,RdX,rmidB,K.teal2,true,'λ Protection');
-  drawFiber(ctx,RdX+RW,rmidB,ReX,rmidB,K.teal2,true,null);
-  drawFiber(ctx,ReX+RW,rmidB,RfX,rmidB,K.teal2,true,null);
-  drawFiber(ctx,RfX+RW,rmidB,KX,kPy,K.teal2,true,null);
-
-  drawSite(ctx,SX,SY,SW,SH,'SOURCE',CH[sch]||'M24',K.green2,gv('d1-sname'));
-  const cTop=SY+54,cH=(SY+SH-14)-cTop,nHalf=(cH-10)/2;
-  const tW=70,nW=SW-tW-22;
-  if(stb)  drawCard(ctx,SX+8,cTop,tW,cH,'T402',stb.label,K.teal2,stb.ports,'right');
-  if(slbW) drawCard(ctx,SX+8+tW+5,cTop,nW,nHalf,'N402',slbW.label,K.green2,slbW.ports,'right');
-  if(slbP) drawCard(ctx,SX+8+tW+5,cTop+nHalf+10,nW,nHalf,'N402',slbP.label,K.purple2,slbP.ports,'right');
-  if(slbW) T(ctx,'Working',  SX+8+tW+5+nW/2,cTop+nHalf-2,K.green2,12.5,'center',true);
-  if(slbP) T(ctx,'Protection',SX+8+tW+5+nW/2,cTop+cH-2,  K.purple2,12.5,'center',true);
-  if(stb)  drawClientArrow(ctx,SX,SY+SH/2,'left',K.green2);
-
-  function drawRC(x,y,lb1,lb2,col){
-    if(lb1&&lb2){
-      const iH=RH-66,hW=(RW-44)/2;
-      drawCard(ctx,x+14,y+54,hW,iH,'N402',lb1.label,col,lb1.ports,'right');
-      T(ctx,'Slot 1',x+14+hW/2,y+54+iH-3,col,11.5,'center',true);
-      ctx.save(); ctx.strokeStyle=col+'30'; ctx.lineWidth=1; ctx.setLineDash([3,3]);
-      ctx.beginPath(); ctx.moveTo(x+14+hW+8,y+58); ctx.lineTo(x+14+hW+8,y+RH-14); ctx.stroke(); ctx.restore();
-      drawCard(ctx,x+14+hW+16,y+54,hW,iH,'N402',lb2.label,col,lb2.ports,'right');
-      T(ctx,'Slot 2',x+14+hW+16+hW/2,y+54+iH-3,col,11.5,'center',true);
-    } else if(lb1){
-      drawCard(ctx,x+16,y+54,RW-32,RH-66,'N402',lb1.label,col,lb1.ports,'right');
-    }
-  }
-
-  drawSite(ctx,RaX,RtY,RW,RH,'REGEN A',CH[gv('d1-rach')]||'U16',K.green2,gv('d1-raname'));
-  T(ctx,'Working',RaX+RW/2,RtY-15,K.green2,11.5,'center',true); drawRC(RaX,RtY,ralb,ralb2,K.green2);
-  drawSite(ctx,RbX,RtY,RW,RH,'REGEN B',CH[gv('d1-rbch')]||'U16',K.green2,gv('d1-rbname'));
-  T(ctx,'Working',RbX+RW/2,RtY-15,K.green2,11.5,'center',true); drawRC(RbX,RtY,rblb,rblb2,K.green2);
-  drawSite(ctx,RcX,RtY,RW,RH,'REGEN C',CH[gv('d1-rcch')]||'U16',K.green2,gv('d1-rcname'));
-  T(ctx,'Working',RcX+RW/2,RtY-15,K.green2,11.5,'center',true); drawRC(RcX,RtY,rclb,rclb2,K.green2);
-
-  drawSite(ctx,RdX,RbotY,RW,RH,'REGEN D',CH[gv('d1-rdch')]||'U16',K.purple2,gv('d1-rdname'));
-  T(ctx,'Protection',RdX+RW/2,RbotY+RH+15,K.purple2,11.5,'center',true); drawRC(RdX,RbotY,rdlb,rdlb2,K.purple2);
-  drawSite(ctx,ReX,RbotY,RW,RH,'REGEN E',CH[gv('d1-rech')]||'U16',K.purple2,gv('d1-rename'));
-  T(ctx,'Protection',ReX+RW/2,RbotY+RH+15,K.purple2,11.5,'center',true); drawRC(ReX,RbotY,relb,relb2,K.purple2);
-  drawSite(ctx,RfX,RbotY,RW,RH,'REGEN F',CH[gv('d1-rfch')]||'U16',K.purple2,gv('d1-rfname'));
-  T(ctx,'Protection',RfX+RW/2,RbotY+RH+15,K.purple2,11.5,'center',true); drawRC(RfX,RbotY,rflb,rflb2,K.purple2);
-
-  drawSite(ctx,KX,KY,KW,KH,'SINK',CH[kch]||'U16',K.blue2,gv('d1-kname'));
-  const kcTop=KY+54,kcH=(KY+KH-14)-kcTop,knHalf=(kcH-10)/2;
-  const ktW=70,knW=KW-ktW-22;
-  if(klbW) drawCard(ctx,KX+8,kcTop,knW,knHalf,'N402',klbW.label,K.green2,klbW.ports,'left');
-  if(klbP) drawCard(ctx,KX+8,kcTop+knHalf+10,knW,knHalf,'N402',klbP.label,K.purple2,klbP.ports,'left');
-  if(ktb)  drawCard(ctx,KX+8+knW+5,kcTop,ktW,kcH,'T402',ktb.label,K.teal2,ktb.ports,'left');
-  if(klbW) T(ctx,'Working',   KX+8+knW/2,kcTop+knHalf-2,K.green2,12.5,'center',true);
-  if(klbP) T(ctx,'Protection',KX+8+knW/2,kcTop+kcH-2,   K.purple2,12.5,'center',true);
   if(ktb)  drawClientArrow(ctx,KX+KW,KY+KH/2,'right',K.blue2);
 
   drawLegend(ctx,W-254,H-70);
@@ -4824,7 +4400,6 @@ function draw5(){
 }
 
 function svc3(){ svcByOpt(3); }
-function svc4(){ svcByOpt(4); }
 function svc5(){ svcByOpt(5); }
 
 function buildBom3(){
@@ -4850,60 +4425,6 @@ function buildBom3(){
   costTiles('cg3',
     [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
     [{p:slbW?.price,q:slbW?1:0},{p:slbP?.price,q:slbP?1:0},{p:klbW?.price,q:klbW?1:0},{p:klbP?.price,q:klbP?1:0}]);
-}
-
-function buildBom4(){
-  const stb   = TB[gv('d1-stb')]   || null;
-  const slbW  = LB[gv('d1-slbw')]  || null; const slbP  = LB[gv('d1-slbp')]  || null;
-  const ralb  = LB[gv('d1-ralb')]  || null; const ralb2 = LB[gv('d1-ralb2')] || null;
-  const rblb  = LB[gv('d1-rblb')]  || null; const rblb2 = LB[gv('d1-rblb2')] || null;
-  const rclb  = LB[gv('d1-rclb')]  || null; const rclb2 = LB[gv('d1-rclb2')] || null;
-  const rdlb  = LB[gv('d1-rdlb')]  || null; const rdlb2 = LB[gv('d1-rdlb2')] || null;
-  const relb  = LB[gv('d1-relb')]  || null; const relb2 = LB[gv('d1-relb2')] || null;
-  const rflb  = LB[gv('d1-rflb')]  || null; const rflb2 = LB[gv('d1-rflb2')] || null;
-  const ktb   = TB[gv('d1-ktb')]   || null;
-  const klbW  = LB[gv('d1-klbw')]  || null; const klbP  = LB[gv('d1-klbp')]  || null;
-  let h='',n=1,tot=0;
-  const a=(q,p)=>{ if(q&&p) tot+=q*p; };
-  const sn4  = gv('d1-sname')  || '';
-  const kn4  = gv('d1-kname')  || '';
-  const ran4 = gv('d1-raname') || '';
-  const rbn4 = gv('d1-rbname') || '';
-  const rcn4 = gv('d1-rcname') || '';
-  const rdn4 = gv('d1-rdname') || '';
-  const ren4 = gv('d1-rename') || '';
-  const rfn4 = gv('d1-rfname') || '';
-  if(stb)   { h+=row(n++,stb.pn,  'Tributary — '+stb.sh, 'TRIB','Source_'+sn4,1,stb.price,''); a(1,stb.price); }
-  if(slbW)  { h+=row(n++,slbW.pn, 'Line — '+slbW.sh+' Working TX',  'LINE','Source_'+sn4,1,slbW.price,''); a(1,slbW.price); }
-  if(slbP)  { h+=row(n++,slbP.pn, 'Line — '+slbP.sh+' Protection TX','LINE','Source_'+sn4,1,slbP.price,''); a(1,slbP.price); }
-  if(ktb)   { h+=row(n++,ktb.pn,  'Tributary — '+ktb.sh, 'TRIB','Sink_'+kn4,  1,ktb.price,''); a(1,ktb.price); }
-  if(klbW)  { h+=row(n++,klbW.pn, 'Line — '+klbW.sh+' Working RX',  'LINE','Sink_'+kn4,1,klbW.price,''); a(1,klbW.price); }
-  if(klbP)  { h+=row(n++,klbP.pn, 'Line — '+klbP.sh+' Protection RX','LINE','Sink_'+kn4,1,klbP.price,''); a(1,klbP.price); }
-  if(ralb)  { h+=row(n++,ralb.pn, 'Line — '+ralb.sh+' Regen Slot 1','LINE','Regen A_'+ran4,1,ralb.price,'Working'); a(1,ralb.price); }
-  if(ralb2) { h+=row(n++,ralb2.pn,'Line — '+ralb2.sh+' Regen Slot 2','LINE','Regen A_'+ran4,1,ralb2.price,'Working'); a(1,ralb2.price); }
-  if(rblb)  { h+=row(n++,rblb.pn, 'Line — '+rblb.sh+' Regen Slot 1','LINE','Regen B_'+rbn4,1,rblb.price,'Working'); a(1,rblb.price); }
-  if(rblb2) { h+=row(n++,rblb2.pn,'Line — '+rblb2.sh+' Regen Slot 2','LINE','Regen B_'+rbn4,1,rblb2.price,'Working'); a(1,rblb2.price); }
-  if(rclb)  { h+=row(n++,rclb.pn, 'Line — '+rclb.sh+' Regen Slot 1','LINE','Regen C_'+rcn4,1,rclb.price,'Working'); a(1,rclb.price); }
-  if(rclb2) { h+=row(n++,rclb2.pn,'Line — '+rclb2.sh+' Regen Slot 2','LINE','Regen C_'+rcn4,1,rclb2.price,'Working'); a(1,rclb2.price); }
-  if(rdlb)  { h+=row(n++,rdlb.pn, 'Line — '+rdlb.sh+' Regen Slot 1','LINE','Regen D_'+rdn4,1,rdlb.price,'Protection'); a(1,rdlb.price); }
-  if(rdlb2) { h+=row(n++,rdlb2.pn,'Line — '+rdlb2.sh+' Regen Slot 2','LINE','Regen D_'+rdn4,1,rdlb2.price,'Protection'); a(1,rdlb2.price); }
-  if(relb)  { h+=row(n++,relb.pn, 'Line — '+relb.sh+' Regen Slot 1','LINE','Regen E_'+ren4,1,relb.price,'Protection'); a(1,relb.price); }
-  if(relb2) { h+=row(n++,relb2.pn,'Line — '+relb2.sh+' Regen Slot 2','LINE','Regen E_'+ren4,1,relb2.price,'Protection'); a(1,relb2.price); }
-  if(rflb)  { h+=row(n++,rflb.pn, 'Line — '+rflb.sh+' Regen Slot 1','LINE','Regen F_'+rfn4,1,rflb.price,'Protection'); a(1,rflb.price); }
-  if(rflb2) { h+=row(n++,rflb2.pn,'Line — '+rflb2.sh+' Regen Slot 2','LINE','Regen F_'+rfn4,1,rflb2.price,'Protection'); a(1,rflb2.price); }
-  if(!h) h=`<tr><td colspan="11" style="text-align:center;color:var(--txt3);padding:28px;font-size:11px">No cards selected</td></tr>`;
-  else { h+=totalRow(tot); h+=spareRow(); }
-  g('b4').innerHTML=h;
-  costTiles('cg4',
-    [{p:stb?.price,q:stb?1:0},{p:ktb?.price,q:ktb?1:0}],
-    [{p:slbW?.price,q:slbW?1:0},{p:slbP?.price,q:slbP?1:0},
-     {p:ralb?.price,q:ralb?1:0},{p:ralb2?.price,q:ralb2?1:0},
-     {p:rblb?.price,q:rblb?1:0},{p:rblb2?.price,q:rblb2?1:0},
-     {p:rclb?.price,q:rclb?1:0},{p:rclb2?.price,q:rclb2?1:0},
-     {p:rdlb?.price,q:rdlb?1:0},{p:rdlb2?.price,q:rdlb2?1:0},
-     {p:relb?.price,q:relb?1:0},{p:relb2?.price,q:relb2?1:0},
-     {p:rflb?.price,q:rflb?1:0},{p:rflb2?.price,q:rflb2?1:0},
-     {p:klbW?.price,q:klbW?1:0},{p:klbP?.price,q:klbP?1:0}]);
 }
 
 function buildBom5(){
@@ -5003,10 +4524,10 @@ function showToast(msg, ms){
 function _run(fn){ try{ fn(); }catch(_){ /* isolated failure */ } }
 
 function upd(){
-  _run(draw1); _run(draw2); _run(draw3); _run(draw4); _run(draw5);
-  _run(buildBom1); _run(buildBom2); _run(buildBom3); _run(buildBom4); _run(buildBom5);
-  _run(validate1); _run(validate2); _run(validate3); _run(validate4); _run(validate5);
-  _run(svc1); _run(svc2); _run(svc3); _run(svc4); _run(svc5);
+  _run(draw1); _run(draw2); _run(draw3); _run(draw5);
+  _run(buildBom1); _run(buildBom2); _run(buildBom3); _run(buildBom5);
+  _run(validate1); _run(validate2); _run(validate3); _run(validate5);
+  _run(svc1); _run(svc2); _run(svc3); _run(svc5);
 }
 
 /* ── Animation loop — only redraws the active topology canvas ── */
@@ -5024,7 +4545,6 @@ function animLoop(){
         if(n===1) draw1();
         else if(n===2) draw2();
         else if(n===3) draw3();
-        else if(n===4) draw4();
         else if(n===5) draw5();
       }catch(e){ /* silent: draw errors shown via validate result cards */ }
     }
@@ -5042,14 +4562,14 @@ const DELAY = {
 };
 
 function sw(i){
-  document.querySelectorAll('.tab').forEach((t,j)=>{
-    const isActive = j===i;
+  document.querySelectorAll('.tab').forEach(t=>{
+    const isActive = t.id==='tab-p'+i;
     t.classList.toggle('on', isActive);
     t.setAttribute('aria-selected', isActive ? 'true' : 'false');
     t.setAttribute('tabindex', isActive ? '0' : '-1');
   });
-  document.querySelectorAll('.pane').forEach((p,j)=>{
-    const isActive = j===i;
+  document.querySelectorAll('.pane').forEach(p=>{
+    const isActive = p.id==='p'+i;
     p.classList.toggle('on', isActive);
     p.hidden = !isActive;
   });
@@ -5084,7 +4604,7 @@ window.addEventListener('load',()=>{
     syncSourceToSink();
     upd();
     animLoop();
-    calcSpan1(); calcSpan2(); calcSpan3(); calcSpan4(); calcSpan5();
+    calcSpan1(); calcSpan2(); calcSpan3(); calcSpan5();
     initWdm();
   }, DELAY.STARTUP);
 });
@@ -5101,7 +4621,7 @@ document.addEventListener('keydown', e => {
   const next = e.key === 'ArrowLeft'
     ? (cur - 1 + tabs.length) % tabs.length
     : (cur + 1) % tabs.length;
-  sw(next);
+  sw(parseInt(tabs[next].id.replace('tab-p','')));
   tabs[next].focus();
   e.preventDefault();
 });
@@ -5395,7 +4915,6 @@ function calcSpanGeneric(opt, spanIds, protSpanIds){
 function calcSpan1(){ calcSpanGeneric(1,['sp1a1','sp1b1'],['sp1a1p','sp1b1p']); }
 function calcSpan2(){ calcSpanGeneric(2,['sp2a1','sp2b1','sp2c1'],['sp2a1p','sp2b1p','sp2c1p']); }
 function calcSpan3(){ calcSpanGeneric(3,['sp3a1'],[]); }
-function calcSpan4(){ calcSpanGeneric(4,['sp4a1','sp4b1','sp4c1','sp4d1'],['sp4a1p','sp4b1p','sp4c1p','sp4d1p']); }
 function calcSpan5(){ calcSpanGeneric(5,['sp5a1','sp5b1','sp5c1','sp5d1','sp5e1'],['sp5a1p','sp5b1p','sp5c1p','sp5d1p','sp5e1p']); }
 /* ══════════════ GUIDE MODAL ══════════════ */
 function openGuide(){ document.getElementById('guideOverlay').classList.add('open'); }
@@ -5408,7 +4927,6 @@ function syncSourceToSink(){
     ['a1-sch','a1-kch'],['a1-stb','a1-ktb'],['a1-slbw','a1-klbw'],['a1-slbp','a1-klbp'],
     ['b1-sch','b1-kch'],['b1-stb','b1-ktb'],['b1-slbw','b1-klbw'],['b1-slbp','b1-klbp'],
     ['c1-sch','c1-kch'],['c1-stb','c1-ktb'],['c1-slbw','c1-klbw'],['c1-slbp','c1-klbp'],
-    ['d1-sch','d1-kch'],['d1-stb','d1-ktb'],['d1-slbw','d1-klbw'],['d1-slbp','d1-klbp'],
     ['e1-sch','e1-kch'],['e1-stb','e1-ktb'],['e1-slbw','e1-klbw'],['e1-slbp','e1-klbp'],
   ];
   pairs.forEach(([srcId,sinkId])=>{
@@ -5651,35 +5169,28 @@ function updateWdmSummary(){
         <div class="guide-cards">
           <div class="guide-card">
             <div class="guide-card-top">
-              <span class="guide-card-badge" style="background:var(--blue-bg);color:var(--blue2);border:1px solid var(--blue-bd)">Option 1 · 2R</span>
+              <span class="guide-card-badge" style="background:var(--blue-bg);color:var(--blue2);border:1px solid var(--blue-bd)">BKK-NorthEast(Border)</span>
             </div>
             <div class="guide-card-name">Source › 2 Regen › Sink</div>
             <div class="guide-card-desc">Working path ผ่าน Regen A, Protection path ผ่าน Regen B · เหมาะกับ Link ระยะกลาง ที่ต้องการ 1+1 Protection</div>
           </div>
           <div class="guide-card">
             <div class="guide-card-top">
-              <span class="guide-card-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)">Option 2 · 4R</span>
+              <span class="guide-card-badge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)">BKK-South(Border)</span>
             </div>
             <div class="guide-card-name">Source › 4 Regen › Sink</div>
             <div class="guide-card-desc">Working ผ่าน Regen A/B, Protection ผ่าน Regen C/D · รองรับ Link ระยะไกลที่ต้องการ Redundancy สูง</div>
           </div>
           <div class="guide-card">
             <div class="guide-card-top">
-              <span class="guide-card-badge" style="background:var(--amber-bg);color:var(--amber2);border:1px solid var(--amber-bd)">Option 3 · No Regen</span>
+              <span class="guide-card-badge" style="background:var(--amber-bg);color:var(--amber2);border:1px solid var(--amber-bd)">BKK-BKK</span>
             </div>
             <div class="guide-card-name">Direct Source › Sink</div>
             <div class="guide-card-desc">ไม่มี Regenerator · เหมาะกับ Link ระยะสั้นหรือ DCI ที่ Signal ยังอยู่ในระดับดี</div>
           </div>
           <div class="guide-card">
             <div class="guide-card-top">
-              <span class="guide-card-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-bd)">Option 4 · 6R</span>
-            </div>
-            <div class="guide-card-name">Source › 6 Regen › Sink</div>
-            <div class="guide-card-desc">รองรับ Working + Protection แบบ 3+3 Regen · สำหรับ Ultra-Long Haul ที่มีหลาย Span</div>
-          </div>
-          <div class="guide-card">
-            <div class="guide-card-top">
-              <span class="guide-card-badge" style="background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-bd)">Option 5 · 8R</span>
+              <span class="guide-card-badge" style="background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-bd)">North(Border)-NorthEast(Border)</span>
             </div>
             <div class="guide-card-name">Source › 8 Regen › Sink</div>
             <div class="guide-card-desc">Working + Protection แบบ 4+4 Regen · สำหรับโครงข่ายระดับ Backbone ระยะไกลมาก</div>
