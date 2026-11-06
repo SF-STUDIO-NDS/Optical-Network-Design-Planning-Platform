@@ -441,16 +441,10 @@ header {
 }
 .h-left { display: flex; align-items: center; gap: 20px; }
 .h-icon {
-  width: 46px; height: 46px; border-radius: 13px;
-  background: linear-gradient(140deg, #0ea5e9 0%, #6366f1 60%, #a78bfa 100%);
+  width: 72px; height: 46px;
+  background: transparent;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 4px 18px rgba(14,165,233,.45), 0 0 32px rgba(139,92,246,.25);
-  position: relative; overflow: hidden; flex-shrink: 0;
-}
-.h-icon::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.25) 0%, transparent 65%);
+  position: relative; flex-shrink: 0;
 }
 .h-title { font-size: var(--fs-lg); font-weight: 700; color: #fff; letter-spacing: .3px; }
 .h-sub { font-size: var(--fs-xl); color: rgba(255,255,255,.45); font-family: 'Segoe UI Semibold', 'Segoe UI', Consolas, monospace; margin-top: 1px; }
@@ -1016,8 +1010,8 @@ footer {
   /* ── Header ── */
   header { height: auto; min-height: 56px; padding: 8px 12px; flex-wrap: wrap; gap: 6px; }
   .h-left { gap: 10px; }
-  .h-icon { width: 36px; height: 36px; border-radius: 9px; }
-  .h-icon svg { width: 20px; height: 20px; }
+  .h-icon { width: 54px; height: 36px; border-radius: 8px; }
+  .h-icon svg { width: 38px; height: auto; }
   .h-title { font-size: var(--fs-base); letter-spacing: 0; }
   .h-sub { font-size: var(--fs-2xs); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; max-width: 220px; }
   .h-right { gap: 8px; }
@@ -1135,9 +1129,8 @@ footer {
   margin-bottom: 28px;
 }
 .login-logo-icon {
-  width: 44px; height: 44px;
-  background: linear-gradient(135deg,#0ea5e9,#6366f1);
-  border-radius: 12px;
+  width: 68px; height: 44px;
+  background: transparent;
   display: flex; align-items: center; justify-content: center;
 }
 .login-title { font-size: 17px; font-weight: 700; color: #E2E8F0; }
@@ -1185,13 +1178,10 @@ footer {
   <div class="login-box">
     <div class="login-logo">
       <div class="login-logo-icon">
-        <svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 14 Q9 7 14 14 Q19 21 24 14" stroke="white" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-          <circle cx="4" cy="14" r="2.8" fill="none" stroke="white" stroke-width="1.6"/>
-          <circle cx="4" cy="14" r="1.1" fill="white"/>
-          <circle cx="24" cy="14" r="2.8" fill="none" stroke="white" stroke-width="1.6"/>
-          <circle cx="24" cy="14" r="1.1" fill="white"/>
-          <circle cx="14" cy="14" r="1.5" fill="#7dd3fc"/>
+        <svg class="uih-mark" width="48" height="19" viewBox="243 400 514 200" fill="#1237BC" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UIH">
+          <path d="M243 402Q243 400 245 400H293Q295 400 295 402V540Q295 552 307 552H365Q372 552 372 545V402Q372 400 374 400H422Q424 400 424 402V598Q424 600 422 600H300Q243 600 243 540Z"/>
+          <rect x="473" y="400" width="55" height="200" rx="3"/>
+          <path d="M577 402Q577 400 579 400H627Q629 400 629 402V473H705V402Q705 400 707 400H755Q757 400 757 402V598Q757 600 755 600H707Q705 600 705 598V527H629V598Q629 600 627 600H579Q577 600 577 598Z"/>
         </svg>
       </div>
       <div>
@@ -1218,28 +1208,10 @@ footer {
 <header>
   <div class="h-left">
     <div class="h-icon">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Fiber lines (curved paths between nodes) -->
-        <path d="M4 14 Q9 7 14 14 Q19 21 24 14" stroke="white" stroke-width="1.6" stroke-linecap="round" fill="none" opacity="0.55"/>
-        <path d="M4 14 Q9 19 14 14 Q19 9 24 14" stroke="white" stroke-width="1.0" stroke-linecap="round" fill="none" opacity="0.28"/>
-        <!-- Light signal pulse on fiber -->
-        <circle cx="14" cy="14" r="1.5" fill="#7dd3fc" opacity="0.95"/>
-        <!-- Left node -->
-        <circle cx="4" cy="14" r="2.8" fill="none" stroke="white" stroke-width="1.6" opacity="0.85"/>
-        <circle cx="4" cy="14" r="1.1" fill="white" opacity="0.9"/>
-        <!-- Right node -->
-        <circle cx="24" cy="14" r="2.8" fill="none" stroke="white" stroke-width="1.6" opacity="0.85"/>
-        <circle cx="24" cy="14" r="1.1" fill="white" opacity="0.9"/>
-        <!-- Top satellite node -->
-        <circle cx="14" cy="4.5" r="2.2" fill="none" stroke="white" stroke-width="1.4" opacity="0.6"/>
-        <circle cx="14" cy="4.5" r="0.9" fill="white" opacity="0.7"/>
-        <!-- Fiber from top node to center -->
-        <line x1="14" y1="6.7" x2="14" y2="12.5" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/>
-        <!-- Bottom node -->
-        <circle cx="14" cy="23.5" r="2.2" fill="none" stroke="white" stroke-width="1.4" opacity="0.6"/>
-        <circle cx="14" cy="23.5" r="0.9" fill="white" opacity="0.7"/>
-        <!-- Fiber from center to bottom -->
-        <line x1="14" y1="15.5" x2="14" y2="21.3" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/>
+      <svg class="uih-mark" width="52" height="20" viewBox="243 400 514 200" fill="#1237BC" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UIH">
+        <path d="M243 402Q243 400 245 400H293Q295 400 295 402V540Q295 552 307 552H365Q372 552 372 545V402Q372 400 374 400H422Q424 400 424 402V598Q424 600 422 600H300Q243 600 243 540Z"/>
+        <rect x="473" y="400" width="55" height="200" rx="3"/>
+        <path d="M577 402Q577 400 579 400H627Q629 400 629 402V473H705V402Q705 400 707 400H755Q757 400 757 402V598Q757 600 755 600H707Q705 600 705 598V527H629V598Q629 600 627 600H579Q577 600 577 598Z"/>
       </svg>
     </div>
     <div>
